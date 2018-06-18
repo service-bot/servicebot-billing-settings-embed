@@ -1,7 +1,6 @@
 pipeline {
   agent any
   stages {
-     if(env.BRANCH_NAME == 'master'){
         stage('NPM Install') {
           steps {
             sh 'npm install'
@@ -14,6 +13,9 @@ pipeline {
         }
 
         stage('Upload To S3') {
+          when {
+              branch 'master'
+          }
           steps {
             withAWS(credentials: 'aws', region: 'us-east-1') {
               s3Upload(bucket: 'servicebot.io', acl: 'PublicRead', workingDir: 'public/build/', path:'js/', includePathPattern: '**/*')
@@ -21,6 +23,6 @@ pipeline {
             }
           }
         }
-    }
+
   }
 }
