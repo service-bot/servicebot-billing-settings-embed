@@ -1,0 +1,172 @@
+.servicebot--embeddable {
+    font-family: 'Helvetica', sans-serif;
+    font-size: 18px;
+    line-height: 1.6em;
+}
+.servicebot--embeddable h1,
+.servicebot--embeddable h2,
+.servicebot--embeddable h3,
+.servicebot--embeddable h4,
+.servicebot--embeddable h5,
+.servicebot--embeddable h6,
+.servicebot--embeddable p{
+    margin: 0;
+}
+.servicebot--embeddable h4 {
+    font-size: 1.4em;
+}
+.servicebot--embeddable h5 {
+    font-size: 1.2em;
+    font-weight: 300;
+}
+.servicebot--embeddable h6 {
+    font-size: 1em;
+}
+.servicebot--embeddable p, .servicebot--embeddable span {
+    font-size: 0.88em;
+    font-weight: 300;
+    margin-bottom: 12px;
+}
+
+/* Element Specifics */
+.fe--total-price-value, .fe--total-price-value span{
+    font-weight: 600;
+}
+.fe--line-item-price-value span {
+    background: #3095ff;
+    color: #fff;
+    padding: 4px 3px 4px;
+    font-size: 13px;
+    border-radius: 5px;
+    white-space: nowrap;
+}
+
+/* Manage Billing Form Text */
+.servicebot--embeddable .mbf--your-funding-title {
+    display: flex;
+    flex-direction:  row;
+    align-items: center;
+    margin: 10px 0;
+}
+.servicebot--embeddable .mbf--your-funding-title-text {
+    display: block;
+    padding-left: 32px;
+    margin-bottom: 0;
+    font-weight: 600;
+}
+.servicebot--embeddable .mbf--your-funding-title-icon.card.icon {
+    margin-top: -1px;
+}
+.mbf--update-funding-wrapper-icon.keyboard.icon {
+    margin-top: 7px;
+}
+.mbf--update-funding.help-text {
+    padding-left: 33px;
+    color: #8c8c8c;
+}
+
+/* Manage Billing Form Card */
+.mbf--card-wrapper {
+    display: block;
+    height: 178pt;
+    width: 281pt;
+    background: #0f407d;
+    border-radius: 13px;
+    overflow: hidden;
+    position: relative;
+}
+.mbf--card-display {
+    display: block;
+    height: calc(100% - 60%);
+    width: calc(100% - 10%);
+    padding: 35% 5% 5%;
+    color: white;
+}
+.mbf--card-chip {
+    position: absolute;
+    height: 17%;
+    width: 16%;
+    background: #ffffffbf;
+    border-radius: 5px;
+    top: 34%;
+    left: 6%;
+}
+.mbf--card-first-12 {
+    display: flex;
+    margin-right: 10px;
+}
+.mbf--card-first-12 span {
+    width: 12px;
+    height: 12px;
+    background: #ffffffbf;
+    margin: 3px;
+    border-radius: 50%;
+}
+.mbf--card-first-12 span:nth-child(4n) {
+    margin-right: 20px;
+}
+.mbf--card-number-holder {
+    display: flex;
+    align-items: center;
+}
+.mbf--card-last4 {
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: 6px;
+}
+.mbf--card-info-holder {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5% 0;
+}
+.mbf--card-date-holder {
+    letter-spacing: 3px;
+    color: #d2d2d2;
+}
+span.mbf--card-brand {
+    margin: 0;
+    font-size: 40px;
+    display: block;
+    text-transform: capitalize;
+    line-height: 1em;
+}
+.mbf--card-date-holder, .mbf--card-number-holder{
+    text-shadow: 1px 1px 1px #ffffff78;
+}
+/* Manage Billing Form Card -- No Card */
+.mbf--card-wrapper.no-card {
+    background: #a2a2a2;
+}
+
+/* Manage Billing Form -- Services list */
+.mbf--current-services-list {
+    display: flex;
+    margin-top: 15px;
+    padding: 20px;
+    background: #eaeaea;
+    border-radius: 5px;
+}
+.mbf--current-services-item {
+    padding: 20px 15px;
+    background: #fbfbfb;
+    flex-basis: 30%;
+    flex-shrink: 1;
+    border-radius: 5px;
+}
+h6.mbf--current-services-item-title {
+    margin-bottom: 10px;
+}
+.mbf--current-services-list .mbf--current-services-item:first-child {
+    margin-right: 15px;
+}
+.mbf--current-services-list .mbf--current-services-item:last-child {
+    margin-left: 15px;
+}
+.mbf--current-services-item-buttons{
+    margin-top: 15px;
+}
+.mbf--current-services-item-buttons button{
+    margin-right: 15px;
+}

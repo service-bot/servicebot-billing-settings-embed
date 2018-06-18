@@ -1,0 +1,7 @@
+.servicebot--embeddable .rf--form-heading, .rf--summary-heading{
+    border-color: #ededed;
+    background-color: #ededed;
+}
+.servicebot--embeddable .fe--line-item-pricing-wrapper:nth-child(even) {
+    background: #fbfbfb;
+}

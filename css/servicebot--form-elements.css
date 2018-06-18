@@ -1,0 +1,216 @@
+.servicebot--embeddable input {
+    padding: 12px 15px;
+    font-size: 0.9em;
+    border-radius: 5px;
+    border: 1px solid #e6e6e6;
+}
+.servicebot--embeddable .rf--body .form-group {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-left: 4px;
+}
+.servicebot--embeddable .addon-text-widget-input-wrapper{
+    display: flex;
+}
+.servicebot--embeddable .rf--body .form-input-flex {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.servicebot--embeddable .rf--body label.control-label {
+    flex-basis: 30%;
+    color: gray;
+    line-height: 2em;
+    font-size: 16px;
+}
+
+.servicebot--embeddable span.form-error{
+    margin-bottom: 0;
+}
+/* Text input */
+.servicebot--embeddable input.form-control {
+    flex-basis: 70%;
+    flex-grow: 1;
+}
+/* Select list */
+.servicebot--embeddable select.form-control{
+    color: grey;
+    font-size: 16px;
+    font-weight: 300;
+    padding: 8px 10px;
+    border: 1px solid #ebebeb;
+    border-radius: 6px;
+    height: 36px;
+    line-height: 19px;
+    background: white;
+}
+/* Checkboxes */
+.servicebot--embeddable input.hidden.checkbox {
+    display: none;
+}
+.servicebot--embeddable .iconToggleField.slideToggle {
+    width: 20px !important;
+    height: 20px !important;
+    padding: 0;
+    border: 3px solid #cccccc;
+    position: absolute;
+    top: -7px;
+}
+.servicebot--embeddable .iconToggleField.slideToggle:hover {
+    border-color: #2f96ff;
+}
+.servicebot--embeddable .iconToggleField.slideToggle.active {
+    border: 3px solid #2f96ff;
+    background: #fff;
+    margin-right: 11px;
+}
+
+.servicebot--embeddable .iconToggleField.slideToggle.active:before {
+    content: "";
+    color: #2f96ff;
+    position: absolute;
+    margin-left: 2px;
+    margin-top: 4px;
+    width: 12px;
+    height: 6.5px;
+    border-bottom: solid 3px currentColor;
+    border-left: solid 3px currentColor;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+.servicebot--embeddable .request-form-toggle-option-wrapper {
+    display: flex;
+    align-items: center;
+}
+.servicebot--embeddable .request-form-price-adjustment-wrapper {
+    padding-left: 40px;
+    line-height: 45px;
+    font-size: 16px;
+    color: #757576;
+}
+.servicebot--embeddable .request-form-price-adjust-discount, .rf--free-trial-content {
+    background: #3095ff;
+    color: #fff;
+    padding: 4px 6px 4px;
+    line-height: 45px;
+    font-size: 13px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    white-space: nowrap;
+}
+.rf--free-trial-content {
+    display: inline-block;
+    padding: 2px 14px;
+    line-height: 25px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.servicebot--embeddable button.btn-bar.submit-request {
+    width: 100%;
+    padding: 12px;
+    font-size: 20px;
+    background: #3194ff;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+}
+/* Buttons */
+.servicebot--embeddable button.btn-bar.submit-request:hover {
+    background: #007bff;
+    cursor: pointer;
+}
+/* Default Button */
+button, button.btn-default {
+    padding: 7px 12px;
+    border: none;
+    background: #0f407c;
+    color: white;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 300;
+    cursor: pointer;
+}
+/* Stripe Element */
+.StripeElement {
+    margin: 20px 1px;
+    padding: 12px 15px;
+    font-size: 0.9em;
+    border-radius: 5px;
+    border: 1px solid #e6e6e6;
+}
+
+/* Manage Billing Form */
+.mbf--update-funding-wrapper {
+    padding: 15px;
+    margin: 15px 0;
+    background: #eaeaea;
+    border-radius: 5px;
+}
+
+.mbf--update-funding.help-text {
+    margin: 0;
+}
+.btn-default.mbf--btn-update-funding {
+    margin-top: 20px;
+}
+/* Manage Billing Form - Stripe element */
+#mbf--funding-form {
+    margin-bottom: 40px;
+}
+.mbf--funding-form-element .StripeElement {
+    margin: 0;
+    background: white;
+}
+.mbf--funding-form-element .form-group{
+    margin-bottom: 5px;
+}
+button.mf--btn-cancel-update-funding {
+    margin-top: 5px;
+    background: #4f729c;
+}
+button.mf--btn-cancel-update-funding {
+    margin-top: 5px;
+    background: #4f729c;
+}
+form.mbf--funding-personal-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+form.mbf--funding-personal-info .form-input-flex {
+    display: flex;
+}
+form.mbf--funding-personal-info div#card-element {
+    flex-basis: 100%;
+}
+form.mbf--funding-personal-info .form-group:nth-child(2), form.mbf--funding-personal-info .form-group:nth-child(3) {
+    flex-basis: 100%;
+}
+form.mbf--funding-personal-info input[name=name], form.mbf--funding-personal-info input[name=address_line1] {
+    flex-basis: 100%;
+    flex-grow: 1;
+}
+form.mbf--funding-personal-info .form-group:nth-child(3) {
+    flex-basis: 100%;
+}
+form.mbf--funding-personal-info > div {
+    flex-basis: 38%;
+    flex-grow: 1;
+}
+form.mbf--funding-personal-info button[type="submit"] {
+    margin-left: 15px;
+    line-height: 8px;
+    max-height: 43px;
+    margin-top: 1px;
+}
+
+@media only screen and (max-width: 414px) {
+    .rf--free-trial-content{
+        margin-left: 10px;
+    }
+}
