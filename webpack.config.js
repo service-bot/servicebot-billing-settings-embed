@@ -2,9 +2,11 @@ const path = require("path");
 const BUILD_DIR = path.resolve(__dirname, './public/build');
 const APP_DIR = path.resolve(__dirname, './src');
 var webpack = require('webpack');
+const MODE = "production";
 
 let config = async function () {
     return {
+        mode: MODE,
         entry: {
             "servicebot-billing-settings-embed": [ APP_DIR + '/index.js'],
 
@@ -42,6 +44,11 @@ let config = async function () {
         },
         plugins : [
             new webpack.HotModuleReplacementPlugin(),
+            new webpack.DefinePlugin({
+                'process.env': {
+                    NODE_ENV: JSON.stringify(MODE)
+                }
+            })
 
         ]
     }
