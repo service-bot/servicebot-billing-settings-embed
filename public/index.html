@@ -25,10 +25,9 @@
   <body>
   <div id="servicebot-request-form"></div>
   <script src="https://js.stripe.com/v3/"></script>
-  <script src="/build/servicebot-embed.js" type="text/javascript"></script>
+  <script src="/build/servicebot-billing-settings-embed.js" type="text/javascript"></script>
   <script  type="text/javascript">
     Servicebot.BillingSettings({
-        templateId : 1,
         url : "http://localhost:3000",
         selector : document.getElementById('servicebot-request-form'),
         handleResponse : (response) => {
@@ -36,16 +35,8 @@
             //Response function, you can put redirect logic or app integration logic here
         },
         spk: "pk_test_2AlebAqTCykOvGc6WGDO5irD",
-        forceCard : false,
-        type : "request",
-        setPassword: true,
-        propertyOverrides: {
-            "premium" : "Y"
-        },
         disablePlanChange: false,
-        hideSummary: false,
-        hideHeaders: false,
-        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEwMiwiaWF0IjoxNTI4OTEzMjE4LCJleHAiOjE1Mjg5MjQwMTh9.2k8B5vzgtVOGX_RDK0EILrrox1TmKAkbF1ONnBlbFGQ"
+        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEwMiwiaWF0IjoxNTI5NDM5NTU3LCJleHAiOjE1Mjk0NTAzNTd9.NBFlKsVX9SmiPsx4kbIQigz0eIA_gW3pVyvsZANWegQ"
 
     })
   </script>

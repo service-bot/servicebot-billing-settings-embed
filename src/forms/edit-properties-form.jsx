@@ -125,7 +125,6 @@ function ModalEditProperties(props){
                     token={token}
 
                 />
-                <button onClick={props.hide}>Cancel</button>
             </div>
     )
 

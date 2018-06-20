@@ -7,6 +7,8 @@ import '../../css/managed.css';
 import {injectStripe} from "react-stripe-elements";
 import {connect} from "react-redux";
 import {ModalEditProperties} from "./edit-properties-form.jsx"
+import TierChoose from "./TierChooser"
+
 
 class ServicebotManagedBilling extends React.Component {
 
@@ -74,15 +76,16 @@ class ServicebotManagedBilling extends React.Component {
         return request;
     }
 
-    getServicebotDetails() {
+    async getServicebotDetails() {
         let self = this;
-        return Fetcher(`${self.props.url}/api/v1/service-instances/own`, "GET", null, this.getRequest("GET")).then(function (response) {
-            if (!response.error) {
-                self.setState({instances : response});
-            }else{
-                self.setState({error: response.error})
-            }
-        });
+        let instances = await Fetcher(`${self.props.url}/api/v1/service-instances/own`, "GET", null, this.getRequest("GET"));
+        if(!instances.error && instances.length > 0){
+            let template = await Fetcher(`${self.props.url}/api/v1/service-templates/${instances[0].service_id}/request`, "GET", null, this.getRequest("GET"))
+            self.setState({instances, template});
+        }else{
+            self.setState({error: instances.error})
+
+        }
     }
 
     getSPK(){
@@ -245,7 +248,6 @@ class ServicebotManagedBilling extends React.Component {
 
         return (
             <div className="servicebot--embeddable servicebot--manage-billing-form-wrapper custom">
-                {this.state.propEdit && <ModalEditProperties token={this.props.token} url={this.props.url} instance={self.state.currentInstance} hide={this.hidePropEdit}/>}
 
                 <div className="mbf--form-wrapper">
                     {self.state.instances.length > 0 ?
@@ -254,12 +256,15 @@ class ServicebotManagedBilling extends React.Component {
                                 <h4>Account Billing</h4>
                                 {this.getBillingForm()}
                                 <hr/>
+
                                 <h4>Manage Account</h4>
                                 <h5>Your current subscriptions are listed below:</h5>
                                 {self.state.instances.length > 0 ?
                                     <div className="mbf--current-services-list">
-                                        {self.state.instances.map(service => (
+                                        {self.state.instances.map(service => {
+                                            return(
                                             <div className="mbf--current-services-item">
+                                                <TierChoose currentPlan={service.payment_structure_template_id}template={self.state.template}/>
                                                 <div className="mbf--current-services-item-details">
                                                     <h6 className="mbf--current-services-item-title">{service.name}</h6>
                                                     <b><Price value={service.payment_plan.amount} /> / {service.payment_plan.interval}</b><br/>
@@ -273,10 +278,10 @@ class ServicebotManagedBilling extends React.Component {
                                                     <button className="btn btn-default btn-rounded btn-sm m-r-5" style={buttonStyle} onClick={this.requestCancellation.bind(this, service.id)}>Cancel Service</button>
                                                     }
                                                     {service.status === "cancelled" && self.state.funds[0] && <button className="btn btn-default btn-rounded btn-sm m-r-5" style={buttonStyle2} onClick={self.resubscribe(service.id)}>Resubscribe</button>}
-                                                    {!self.props.disablePlanChange && service.references.service_instance_properties.filter(prop => prop.config.pricing).length > 0 && <button onClick={self.showPropEdit(service)}>Change Plan</button>}
                                                 </div>
                                             </div>
-                                        ))}
+                                        )})}
+                                        <ModalEditProperties token={this.props.token} url={this.props.url} instance={self.state.instances[0]} hide={this.hidePropEdit}/>
                                     </div>
                                     :
                                     <div><p>You currently don't have any subscriptions.</p></div>
