@@ -1,6 +1,6 @@
 {
   "name": "servicebot-billing-settings-embed",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "dependencies": {
     "currency-symbol-map": "^4.0.4",
     "lodash": "^4.17.5",
@@ -21,7 +21,7 @@
     "redux-form-validators": "^2.4.3",
     "servicebot-base-form": "0.0.8"
   },
-  "main" : "./dist/index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server",
     "build": "./node_modules/.bin/webpack && ./node_modules/.bin/babel src --out-dir dist",
