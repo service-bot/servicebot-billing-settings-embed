@@ -183,27 +183,33 @@ class TierSelector extends React.Component{
         return (
             <div>
                 <div className="servicebot-billing-type-selector">
-                    {currentInterval && <IntervalPicker changeInterval={this.changeInterval} currentInterval={currentInterval} intervals={intervalArray}/>}
+                    {currentInterval && currentInterval!== "custom" && <IntervalPicker changeInterval={this.changeInterval} currentInterval={currentInterval} intervals={intervalArray}/>}
                 </div>
-                <div className="servicebot-pricing-table">
+                {currentInterval !== "custom" && <div className="servicebot-pricing-table">
                     {currentPlans.map(plan => {
+                        if(plan.interval === "custom"){
+                            return <div></div>
+                        }
                         let props = {
                             pickTier: self.pickTier,
                             key: plan.id,
-                            tier: tiers.find(tier=>tier.id === plan.tier_id),
-                            plan:plan,
+                            tier: tiers.find(tier => tier.id === plan.tier_id),
+                            plan: plan,
                             changePlan: self.props.changePlan(plan.id)
                         }
 
-                        if(plan.id === currentPlan){
+                        if (plan.id === currentPlan) {
                             props.isCurrent = true;
                         }
-                        if(plan.id === selectedPlan){
+                        if (plan.id === selectedPlan) {
                             props.isSelected = true;
                         }
                         return <Tier {...props}/>
                     })}
                 </div>
+                }
+                {currentInterval === "custom" && <p>Enterprise Plan</p>}
+
             </div>
         );
     }
