@@ -42,6 +42,7 @@ const Tier = (props) => {
             <h2 className="_name">{tier.name}</h2>
             <span className="_price">{tierContent}</span>
             {!isSelected && <button onClick={pickTier(plan.id)} className="_select-tier buttons rounded">{tierButton}</button>}
+            {isSelected && !isCurrent && <button onClick={props.changePlan}>Confirm Plan</button>}
             <ul className="_feature-list">
                 {tier.features.map(feature=> {
                     return (<li className="_item">{feature}</li>);
@@ -118,7 +119,7 @@ class TierSelector extends React.Component{
         }
     }
     async componentDidMount() {
-        let {template} = this.props;
+        let {template, currentPlan} = this.props;
         let metricProp = template.references.service_template_properties.find(prop => prop.type === "metric");
         let tiers = template.references.tiers;
         if(metricProp) {
@@ -129,19 +130,16 @@ class TierSelector extends React.Component{
                 return tier
             });
         }
+        let currentInterval = null;
         let paymentPlans = tiers.reduce(( acc, tier) => {
             return acc.concat(tier.references.payment_structure_templates);
         }, []).reduce((acc, plan)=> {
+            if(plan.id == currentPlan){
+                currentInterval = plan.interval;
+            }
             acc[plan.type] = [plan].concat(acc[plan.type] || []);
             return acc;
         }, {});
-        let currentInterval = null;
-        if(paymentPlans.subscription){
-            currentInterval = paymentPlans.subscription.some(sub => sub.interval === "month") ? "month" : paymentPlans.subscription[0].interval;
-        }
-        if(!paymentPlans.one_time && paymentPlans.subscription.every(sub => sub.interval === currentInterval)){
-            currentInterval = null;
-        }
         this.setState({tiers, paymentPlans, currentInterval})
     }
     changeInterval(currentInterval){
@@ -154,6 +152,7 @@ class TierSelector extends React.Component{
         let {tiers, currentInterval, currentPlan, selectedPlan, paymentPlans : {subscription, custom, one_time}} = this.state;
         let currentPlans = custom || [];
         let intervals = new Set([]);
+        console.log("CURRENT", currentPlan);
         let self = this;
         let checkoutConfig = {};
         if(one_time){
@@ -192,7 +191,8 @@ class TierSelector extends React.Component{
                             pickTier: self.pickTier,
                             key: plan.id,
                             tier: tiers.find(tier=>tier.id === plan.tier_id),
-                            plan:plan
+                            plan:plan,
+                            changePlan: self.props.changePlan(plan.id)
                         }
 
                         if(plan.id === currentPlan){

@@ -32,6 +32,7 @@ class ServicebotManagedBilling extends React.Component {
         this.getRequest = this.getRequest.bind(this);
         this.showPropEdit = this.showPropEdit.bind(this);
         this.hidePropEdit = this.hidePropEdit.bind(this);
+        this.changePlan = this.changePlan.bind(this);
 
     }
 
@@ -205,6 +206,30 @@ class ServicebotManagedBilling extends React.Component {
         this.getServicebotDetails();
 
     }
+    changePlan (paymentStructure){
+        let self = this;
+        return async function(e) {
+            let headers = {
+                "Content-Type": "application/json",
+                'Accept': 'application/json'
+            };
+            if (self.props.token) {
+                headers["Authorization"] = `JWT ${self.props.token}`;
+            }
+
+            let request = {
+                method: "POST",
+                headers
+            }
+
+
+            self.setState({loading: true});
+            let updatedInstance = await(await fetch(`${self.props.url}/api/v1/service-instances/${self.state.instances[0].id}/apply-payment-structure/${paymentStructure}`,request)).json();
+            await self.getServicebotDetails();
+            self.setState({loading: false});
+
+        }
+    }
 
     resubscribe(id){
         return async ()=>{
@@ -264,7 +289,7 @@ class ServicebotManagedBilling extends React.Component {
                                         {self.state.instances.map(service => {
                                             return(
                                             <div className="mbf--current-services-item">
-                                                <TierChoose currentPlan={service.payment_structure_template_id}template={self.state.template}/>
+                                                <TierChoose key={"t-" + service.payment_structure_template_id} changePlan={self.changePlan} currentPlan={service.payment_structure_template_id} template={self.state.template}/>
                                                 <div className="mbf--current-services-item-details">
                                                     <h6 className="mbf--current-services-item-title">{service.name}</h6>
                                                     <b><Price value={service.payment_plan.amount} /> / {service.payment_plan.interval}</b><br/>
