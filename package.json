@@ -21,7 +21,7 @@
     "redux-form-validators": "^2.4.3",
     "servicebot-base-form": "0.0.8"
   },
-  "main" : "./dist/index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server",
     "build": "./node_modules/.bin/webpack && ./node_modules/.bin/babel src --out-dir dist",
@@ -37,6 +37,9 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "grunt": "^1.0.3",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-watch": "^1.1.0",
     "webpack": "^4.5.0",
     "webpack-cli": "^2.0.13",
     "webpack-dev-server": "^3.1.1"

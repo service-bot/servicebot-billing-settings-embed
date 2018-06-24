@@ -1,0 +1,48 @@
+.buttons{
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: $font-size - 2;
+  font-weight: 600;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+
+  &.rounded{
+    border-radius: 50px;
+  }
+
+  &._add, &._primary{
+    font-size: $font-size;
+    padding: 14px 24px;
+    background-color: #4C82FC;
+    color: $color-white;
+    border-radius: 1px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.17);
+  }
+
+  &._save, &._success{
+    font-size: $font-size;
+    padding: 14px 24px;
+    background-color: #1ABE98;
+    color: $color-white;
+    border-radius: 1px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.17);
+  }
+
+  &._right{
+    float: right;
+  }
+
+}
+
+.clear{
+  display: block;
+  clear: both;
+}
