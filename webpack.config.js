@@ -2,7 +2,7 @@ const path = require("path");
 const BUILD_DIR = path.resolve(__dirname, './public/build');
 const APP_DIR = path.resolve(__dirname, './src');
 var webpack = require('webpack');
-const MODE = "production";
+const MODE = "development";
 
 let config = async function () {
     return {
@@ -31,6 +31,14 @@ let config = async function () {
                 {
                     test: /\.css$/,
                     loader: "style-loader!css-loader"
+                },
+                {
+                    test: /\.scss$/,
+                    use: [
+                        "style-loader", // creates style nodes from JS strings
+                        "css-loader", // translates CSS into CommonJS
+                        "sass-loader" // compiles Sass to CSS
+                    ]
                 }
             ]
         },
