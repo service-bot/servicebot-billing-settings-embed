@@ -2,11 +2,11 @@ import React from 'react';
 import {ServicebotBaseForm, widgetField} from "servicebot-base-form";
 import {required, url} from 'redux-form-validators'
 import {Field, FieldArray, getFormValues} from 'redux-form'
-import Buttons from "../utilities/buttons.jsx";
+import Buttons from "../utilities/buttons.js";
 import getWidgets from "../core-input-types/client";
 import {getPriceData} from "../core-input-types/client";
 import {connect} from "react-redux";
-import {Price} from '../utilities/price.jsx';
+import {Price} from '../utilities/price.js';
 import {getBasePrice} from "../widget-inputs/handleInputs";
 
 

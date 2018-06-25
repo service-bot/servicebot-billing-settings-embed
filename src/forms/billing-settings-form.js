@@ -3,7 +3,7 @@ import {Elements, injectStripe, CardElement, StripeProvider} from 'react-stripe-
 import {ServicebotBaseForm, inputField} from "servicebot-base-form"
 import {get, has} from "lodash";
 import {Field,} from 'redux-form'
-import Buttons from "../utilities/buttons.jsx";
+import Buttons from "../utilities/buttons.js";
 import {connect} from "react-redux";
 import "../../css/servicebot--form-elements.css";
 

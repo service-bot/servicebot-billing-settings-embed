@@ -3,7 +3,7 @@ import TagsInput from "react-tagsinput"
 
 //todo: all the imports from the main app will result in duplicate code.... need to fix this!
 import handler from "./widgetHandler";
-import WidgetPricingInput from '../../widget-inputs/WidgetPricingInput.jsx';
+import WidgetPricingInput from '../../widget-inputs/WidgetPricingInput.js';
 import PriceAdjustment from '../../widget-inputs/WidgetPriceAdjustment';
 
 
