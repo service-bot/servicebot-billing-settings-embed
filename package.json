@@ -6,9 +6,9 @@
     "lodash": "^4.17.5",
     "object.values": "^1.0.4",
     "react": "^16.3.1",
-    "react-currency-input": "1.3.4",
     "react-dom": "^16.3.1",
     "react-hot-loader": "^4.0.1",
+    "react-number-format": "^3.4.2",
     "react-redux": "^5.0.7",
     "react-s-alert": "^1.4.1",
     "react-scripts": "1.1.4",
@@ -19,7 +19,7 @@
     "redux": "^3.7.2",
     "redux-form": "^7.3.0",
     "redux-form-validators": "^2.4.3",
-    "servicebot-base-form": "0.0.8"
+    "servicebot-base-form": "0.0.12"
   },
   "main": "./dist/index.js",
   "scripts": {
