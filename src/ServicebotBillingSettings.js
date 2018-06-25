@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 // import './App.css';
-import ServicebotManage from "./forms/management-form.jsx"
+import ServicebotManage from "./forms/management-form.js"
 import { Provider } from 'react-redux'
 import { createStore, combineReducers} from 'redux'
 import {reducer as formReducer} from 'redux-form'
-import Load from "./utilities/load.jsx"
+import Load from "./utilities/load.js"
 class App extends Component {
   render() {
 

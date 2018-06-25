@@ -1,12 +1,12 @@
 import React from 'react';
 import {Fetcher} from 'servicebot-base-form';
-import {Price} from '../utilities/price.jsx';
-import DateFormat from "../utilities/date-format.jsx";
-import {BillingForm} from "./billing-settings-form.jsx";
+import {Price} from '../utilities/price.js';
+import DateFormat from "../utilities/date-format.js";
+import {BillingForm} from "./billing-settings-form.js";
 import '../../css/managed.css';
 import {injectStripe} from "react-stripe-elements";
 import {connect} from "react-redux";
-import {ModalEditProperties} from "./edit-properties-form.jsx"
+import {ModalEditProperties} from "./edit-properties-form.js"
 import TierChoose from "./TierChooser"
 
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import Load from '../utilities/load.jsx';
+import Load from './load.js';
 import { connect } from 'react-redux'
 let _ = require("lodash");
 
