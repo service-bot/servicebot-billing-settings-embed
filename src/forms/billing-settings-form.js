@@ -5,7 +5,6 @@ import {get, has} from "lodash";
 import {Field,} from 'redux-form'
 import Buttons from "../utilities/buttons.js";
 import {connect} from "react-redux";
-import "../../css/servicebot--form-elements.css";
 
 class CardSection extends React.Component {
     render() {

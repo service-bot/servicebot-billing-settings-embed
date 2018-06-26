@@ -3,7 +3,6 @@ import {Fetcher} from 'servicebot-base-form';
 import {Price} from '../utilities/price.js';
 import DateFormat from "../utilities/date-format.js";
 import {BillingForm} from "./billing-settings-form.js";
-import '../../css/managed.css';
 import {injectStripe} from "react-stripe-elements";
 import {connect} from "react-redux";
 import {ModalEditProperties} from "./edit-properties-form.js"
