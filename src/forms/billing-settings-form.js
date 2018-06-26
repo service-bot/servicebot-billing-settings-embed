@@ -49,11 +49,11 @@ function BillingInfo(props) {
     return (
         <form className="mbf--funding-personal-info">
             <CardSection/>
-            <Field name="name" type="text" component={inputField} placeholder="Name on the card"/>
-            <Field name="address_line1" type="text" component={inputField} placeholder="Address"/>
-            <Field name="address_city" type="text" component={inputField} placeholder="City"/>
-            <Field name="address_state" type="text" component={inputField} placeholder="State"/>
-            <button onClick={props.handleSubmit} type="submit">Save Card</button>
+            <Field name="name" type="text" component={inputField} placeholder="Name on Card"/>
+            {/*<Field name="address_line1" type="text" component={inputField} placeholder="Address"/>*/}
+            {/*<Field name="address_city" type="text" component={inputField} placeholder="City"/>*/}
+            {/*<Field name="address_state" type="text" component={inputField} placeholder="State"/>*/}
+            <button className="buttons _primary mbf--btn-update-funding-save" onClick={props.handleSubmit} type="submit">Save Card</button>
         </form>
     )
 }
@@ -212,19 +212,38 @@ class CreditCardForm extends React.Component {
                 return (
                     <div className="mbf--card-wrapper">
                         <div className="mbf--card-display">
-                            <div className="mbf--card-chip"/>
                             <div className="mbf--card-number-holder">
-                                <span className="mbf--card-first-12"><span/><span/><span/><span/><span/><span/><span/><span/><span/><span/><span/><span/></span>
-                                <span className="mbf--card-last4">{last4}</span>
-                            </div>
-                            <div className="mbf--card-info-holder">
-                                <div className="mbf--card-date-holder">
+                                <span className="mbf--card-brand">{getBrandIcon()}</span> ending in <span className="mbf--card-last4">{last4}</span>
+                                <span className="mbf--card-date-holder">
+                                    Expires
                                     <span className="mbf--card-exp-month">{exp_month} / </span>
                                     <span className="mbf--card-exp-year">{exp_year}</span>
-                                </div>
-                                <span className="mbf--card-brand">{getBrandIcon()}</span>
+                                </span>
                             </div>
+                            {!this.state.showForm &&
+                            <div className="mbf--update-funding-button-wrapper">
+                                <button className="buttons _primary _rounded mbf--btn-update-funding" onClick={this.showPaymentForm}>Update</button>
+                            </div>
+                            }
                         </div>
+                        {this.state.showForm &&
+                        <div className="mbf--update-funding-wrapper">
+                            <div className="mbf--funding-form-element">
+                                <ServicebotBaseForm
+                                    form={BillingInfo}
+                                    formProps={{...this.props}}
+                                    initialValues={{...this.state.personalInformation}}
+                                    submissionPrep={this.submissionPrep}
+                                    submissionRequest={submissionRequest}
+                                    successMessage={"Fund added successfully"}
+                                    handleResponse={this.handleSuccessResponse}
+                                    handleFailure={this.handleFailureResponse}
+                                    reShowForm={true}
+                                    token={this.props.token} />
+                            </div>
+                            <button className="buttons _text mf--btn-cancel-update-funding" onClick={this.hidePaymentForm}>Cancel</button>
+                        </div>
+                        }
                     </div>
                 )
             }else{
@@ -258,37 +277,8 @@ class CreditCardForm extends React.Component {
 
         return (
             <div id="mbf--funding-form">
-                <h3 className="mbf--your-funding-title">
-                    <div className="mbf--your-funding-title-icon card icon"/>
-                    <span className="mbf--your-funding-title-text">Your credit / debit card</span>
-                </h3>
                 {getAlerts()}
                 {getCard()}
-                {!this.state.showForm &&
-                    <div className="mbf--update-funding-wrapper">
-                        <div className="mbf--update-funding-wrapper-icon keyboard icon"/>
-                        <p className="mbf--update-funding help-text">You can update your payment method by clicking on Update Payment</p>
-                        <button className="btn btn-default btn-rounded mbf--btn-update-funding" onClick={this.showPaymentForm}>Update Payment</button>
-                    </div>
-                }
-                {this.state.showForm &&
-                    <div className="mbf--update-funding-wrapper">
-                        <div className="mbf--funding-form-element">
-                            <ServicebotBaseForm
-                                form={BillingInfo}
-                                formProps={{...this.props}}
-                                initialValues={{...this.state.personalInformation}}
-                                submissionPrep={this.submissionPrep}
-                                submissionRequest={submissionRequest}
-                                successMessage={"Fund added successfully"}
-                                handleResponse={this.handleSuccessResponse}
-                                handleFailure={this.handleFailureResponse}
-                                reShowForm={true}
-                                token={this.props.token} />
-                        </div>
-                        <button className="btn btn-default btn-rounded mf--btn-cancel-update-funding" onClick={this.hidePaymentForm}>Cancel</button>
-                    </div>
-                }
             </div>
         );
     }
