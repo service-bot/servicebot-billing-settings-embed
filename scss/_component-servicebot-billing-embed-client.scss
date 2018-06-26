@@ -1,4 +1,8 @@
+// Import contains partially required styles
+@import "_component-embeddable-pricing.scss";
+
 @mixin embed-text{
+  @include text;
   font-size: 14px;
   color: $color-blue;
 }
@@ -10,8 +14,233 @@
 .servicebot--embeddable{
 
   &.servicebot--manage-billing-form-wrapper{
+    @include embed-text;
+    max-width: $gutter * 51;
 
+    .mbf--form-wrapper{
 
+      h3{
+        text-transform: uppercase;
+        font-weight: 300;
+        margin: 0;
+      }
+
+      .mbf--current-services-list{
+
+        .mbf--current-services-item{
+
+          .servicebot-billing-type-selector{
+            margin: $gutter * 2 auto;
+
+            ._selector{
+
+              ._interval{
+                padding: $gutter / 4 $gutter;
+
+                &._selected{
+                  padding: $gutter / 4 0;
+                }
+              }
+            }
+          }
+
+          .servicebot-pricing-table{
+            border: none;
+
+            ._tier{
+              @include border;
+              border-color: $color-blue;
+              border-radius: 3px;
+              overflow: hidden;
+              margin: $gutter / 2;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: space-between;
+              max-width: calc(100% * (1/3) - 16px);
+
+              &:nth-child(2n - 5){
+                margin: {
+                  left: 0;
+                }
+              }
+
+              &:nth-child(3n){
+                margin: {
+                  left: $gutter / 2;
+                  right: 0;
+                }
+              }
+
+              &._current{
+
+              }
+
+              &._selected{
+
+              }
+
+              ._name{
+                width: 100%;
+                text-transform: uppercase;
+                font-weight: 300;
+              }
+
+              ._price{
+                text-transform: uppercase;
+              }
+
+              ._selected-label{
+                @include button(solid, $color-light-blue-gray, true, $color-black);
+                cursor: default;
+                margin: {
+                  bottom: $gutter * 2;
+                };
+              }
+
+              button{
+                @include button(border, $color-success, true);
+                margin: {
+                  bottom: $gutter * 2;
+                };
+
+                &._select-tier{
+
+                }
+
+                &._confirm-tier{
+                  background: $color-success;
+                  color: $color-white;
+                }
+              }
+
+              ._feature-list{
+                display: none;
+
+                ._item{
+
+                }
+              }
+            }
+
+          }
+
+          .mbf--current-services-item-details{
+
+            .mbf--current-services-item-title{
+
+            }
+          }
+
+        }
+      }
+
+      .service-instance-box-content{
+
+      }
+
+      .mbf--current-services-item-buttons{
+
+        button{
+
+        }
+      }
+
+      #mbf--funding-form{
+
+        .mbf--your-funding-title{
+
+          .mbf--your-funding-title-icon{
+
+            &.card{
+
+            }
+
+            &.icon{
+
+            }
+
+          }
+
+          .mbf--your-funding-title-text{
+
+          }
+        }
+
+        .mbf--card-wrapper{
+
+          .mbf--card-display{
+
+            .mbf--card-chip{
+
+            }
+
+            .mbf--card-number-holder{
+
+              .mbf--card-first-12{
+
+                span{
+
+                }
+              }
+
+              .mbf--card-last4{
+
+              }
+            }
+
+            .mbf--card-info-holder{
+
+              .mbf--card-date-holder{
+
+                .mbf--card-exp-month{
+
+                }
+
+                .mbf--card-exp-year{
+
+                }
+              }
+
+              .mbf--card-brand{
+
+              }
+            }
+          }
+        }
+
+        .mbf--update-funding-wrapper{
+
+          .mbf--update-funding-wrapper-icon{
+
+            &.keyboard{
+
+            }
+
+            &.icon{
+
+            }
+          }
+
+          .mbf--update-funding{
+
+            &.help-text{
+
+            }
+          }
+
+          button{
+
+            &.mbf--btn-update-funding{
+
+            }
+          }
+
+        }
+
+      }
+
+    }
 
   }
 

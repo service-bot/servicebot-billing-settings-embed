@@ -36,13 +36,12 @@ const Tier = (props) => {
     }
     tierButton = "Change Plan"
     return(
-        <div className="_tier">
-            {isCurrent && <span>Current Plan</span>}
-            {isSelected && <span>Selected Plan</span>}
+        <div className={`_tier ${isCurrent ? '_current' : ''} ${isSelected ? '_selected' : ''}`}>
             <h2 className="_name">{tier.name}</h2>
             <span className="_price">{tierContent}</span>
-            {!isSelected && <button onClick={pickTier(plan.id)} className="_select-tier buttons rounded">{tierButton}</button>}
-            {isSelected && !isCurrent && <button onClick={props.changePlan}>Confirm Plan</button>}
+            {isCurrent && <button className="_selected-label buttons rounded" disabled>Current Plan</button>}
+            {!isSelected && !isCurrent && <button onClick={pickTier(plan.id)} className="_select-tier buttons rounded">{tierButton}</button>}
+            {isSelected && !isCurrent && <button onClick={props.changePlan} className="_confirm-tier buttons rounded">Confirm Plan</button>}
             <ul className="_feature-list">
                 {tier.features.map(feature=> {
                     return (<li className="_item">{feature}</li>);
