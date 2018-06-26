@@ -39,7 +39,7 @@
         text-transform: uppercase;
         font-weight: 300;
         margin: {
-          top: $gutter * 3;
+          top: $gutter * 2;
           bottom: $gutter;
         };
 
@@ -118,10 +118,12 @@
                 width: 100%;
                 text-transform: uppercase;
                 font-weight: 300;
+                padding: $gutter * 1.25;
               }
 
               ._price{
                 text-transform: uppercase;
+                margin-bottom: $gutter * 2;
               }
 
               ._interval-name{
@@ -148,7 +150,7 @@
 
                 }
 
-                &._confirm-tier, &:hover{
+                &._confirm-tier, &._select-tier:hover{
                   @include defaultTransition;
                   background: $color-success;
                   color: $color-white;
