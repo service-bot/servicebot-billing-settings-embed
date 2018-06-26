@@ -1,0 +1,156 @@
+/* Embeddable Pricing Table Styling */
+
+.servicebot-billing-type-selector{
+  @include font;
+  color: #9B9B9B;
+  font-size: 12px;
+  font-weight: 300;
+  max-width: $gutter*30.5;
+  margin: $gutter*3 auto;
+
+  ul._selector{
+    @include resetUl;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: $gutter/4;
+    border-radius: 16px;
+    background-color: rgba(229,234,245,0.2);
+    box-shadow: inset 0 1px 3px 0 rgba(0,0,0,0.1);
+
+    li._interval{
+
+      &:hover{
+        cursor: pointer;
+      }
+
+      &._selected{
+        color: $color-white;
+        background-color: #0033A0;
+        box-shadow: inset 0 1px 3px 0 rgba(0,0,0,0.1), 0 0 4px 0 rgba(76,130,252,0.56);
+        text-align: center;
+        width: 96px;
+        padding: $gutter/4 0;
+        border-radius: 12px;
+      }
+    }
+
+  }
+
+}
+
+.servicebot-pricing-table{
+  @include font;
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  border: 1.2px solid $color-dark-blue;
+  border-radius: 3px;
+  overflow: hidden;
+
+  ._tier{ //each pricing column
+    flex-grow: 1;
+    text-align: center;
+    position: relative;
+    width: calc(100% * (1/4));
+
+    &:after{
+      content: '';
+      position: absolute;
+      box-sizing: border-box;
+      height: calc(100% - 46px - 88px);
+      width: 1px;
+      top: 0;
+      right: 0;
+      transform: translateY(96px);
+      border-right: 1px solid #E5EAF5;
+    }
+
+    ._name{
+      font-size: 18px;
+      font-weight: 600;
+      color: #0033A0;
+      background-color: #E5EAF5;
+      padding: $gutter 0;
+      margin: 0 0 $gutter*3;
+    }
+
+    ._price{
+      display: block;
+      color: #0033A0;
+      font-weight: bold;
+      font-size: 35px;
+      line-height: 40px;
+      margin: 0 0 $gutter*2.5;
+
+      ._interval-name{
+        @include font;
+        color: #6F7F9F;
+        font-size: 14px;
+        font-weight: 300;
+        text-transform: uppercase;
+      }
+    }
+
+    ul._feature-list{
+      @include resetUl;
+
+      ._item{
+        color: rgba(0,0,0,0.7);
+        font-size: 12px;
+        line-height: 16px;
+        max-width: $gutter*11;
+        padding: $gutter*1.5 0;
+        margin: auto;
+        position: relative;
+
+        &:after{
+          content: '';
+          position: absolute;
+          width: $gutter*7;
+          border-bottom: 1px solid #DEE3E6;
+          left: 50%;
+          bottom: 0;
+          transform: translate(-50%);
+        }
+
+        &:last-child{
+
+          &:after {
+            visibility: hidden;
+          }
+        }
+      }
+
+    }
+
+    button._select-tier{ //select button
+      @include button(border, true, $color-success);
+      box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);
+      width: 128px;
+    }
+
+  }
+}
+
+.pricing-generated-by {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: flex-end;
+  margin: $gutter/2 0;
+
+  ._text {
+    @include font;
+    color: #95a1ba;
+    font-size: 10px;
+    line-height: 16px;
+    text-align: center;
+  }
+  ._logo{
+    width: 17px;
+    margin: -2px 0 1px 4px;
+    opacity: 0.9;
+  }
+}

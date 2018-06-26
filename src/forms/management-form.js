@@ -3,7 +3,6 @@ import {Fetcher} from 'servicebot-base-form';
 import {Price} from '../utilities/price.js';
 import DateFormat from "../utilities/date-format.js";
 import {BillingForm} from "./billing-settings-form.js";
-import '../../css/managed.css';
 import {injectStripe} from "react-stripe-elements";
 import {connect} from "react-redux";
 import {ModalEditProperties} from "./edit-properties-form.js"
@@ -276,42 +275,41 @@ class ServicebotManagedBilling extends React.Component {
 
                 <div className="mbf--form-wrapper">
                     {self.state.instances.length > 0 ?
-                        <div className="">
+                        <div className="app-content">
+                                {/*todo: style this when it's available or designed */}
                                 {this.getTrialStatus()}
-                                <h4>Account Billing</h4>
-                                {this.getBillingForm()}
-                                <hr/>
-
-                                <h4>Manage Account</h4>
-                                <h5>Your current subscriptions are listed below:</h5>
+                                <h3>Subscriptions</h3>
                                 {self.state.instances.length > 0 ?
                                     <div className="mbf--current-services-list">
                                         {self.state.instances.map(service => {
                                             return(
                                             <div className="mbf--current-services-item">
                                                 <TierChoose key={"t-" + service.payment_structure_template_id} changePlan={self.changePlan} currentPlan={service.payment_structure_template_id} template={self.state.template}/>
-                                                <div className="mbf--current-services-item-details">
-                                                    <h6 className="mbf--current-services-item-title">{service.name}</h6>
-                                                    <b><Price value={service.payment_plan.amount} /> / {service.payment_plan.interval}</b><br/>
-                                                </div>
-                                                <div className="service-instance-box-content">
-                                                    <div>Status: <b>{service.status}</b></div>
-                                                    <div>Purchased: <b><DateFormat date={service.created_at} time/></b></div>
-                                                </div>
-                                                <div className="mbf--current-services-item-buttons">
-                                                    {(service.status === "running" || service.status === "requested" || service.status === "in_progress") &&
-                                                    <button className="btn btn-default btn-rounded btn-sm m-r-5" style={buttonStyle} onClick={this.requestCancellation.bind(this, service.id)}>Cancel Service</button>
-                                                    }
-                                                    {service.status === "cancelled" && self.state.funds[0] && <button className="btn btn-default btn-rounded btn-sm m-r-5" style={buttonStyle2} onClick={self.resubscribe(service.id)}>Resubscribe</button>}
-                                                </div>
+                                                {/*<div className="mbf--current-services-item-details">*/}
+                                                    {/*<h6 className="mbf--current-services-item-title">{service.name}</h6>*/}
+                                                    {/*<b><Price value={service.payment_plan.amount} /> / {service.payment_plan.interval}</b><br/>*/}
+                                                {/*</div>*/}
+                                                {/*<div className="service-instance-box-content">*/}
+                                                    {/*<div>Status: <b>{service.status}</b></div>*/}
+                                                    {/*<div>Purchased: <b><DateFormat date={service.created_at} time/></b></div>*/}
+                                                {/*</div>*/}
+                                                {/*<div className="mbf--current-services-item-buttons">*/}
+                                                    {/*{(service.status === "running" || service.status === "requested" || service.status === "in_progress") &&*/}
+                                                    {/*<button className="btn btn-default btn-rounded btn-sm m-r-5" style={buttonStyle} onClick={this.requestCancellation.bind(this, service.id)}>Cancel Service</button>*/}
+                                                    {/*}*/}
+                                                    {/*{service.status === "cancelled" && self.state.funds[0] && <button className="btn btn-default btn-rounded btn-sm m-r-5" style={buttonStyle2} onClick={self.resubscribe(service.id)}>Resubscribe</button>}*/}
+                                                {/*</div>*/}
                                             </div>
                                         )})}
-                                        <ModalEditProperties token={this.props.token} url={this.props.url} instance={self.state.instances[0]} hide={this.hidePropEdit}/>
+                                        {/*<ModalEditProperties token={this.props.token} url={this.props.url} instance={self.state.instances[0]} hide={this.hidePropEdit}/>*/}
                                     </div>
                                     :
                                     <div><p>You currently don't have any subscriptions.</p></div>
                                 }
+                                <h3>Payment Information</h3>
+                                {this.getBillingForm()}
 
+                                <h3>Subscription Add Ons</h3>
                         </div>
                         :
                         <div className="page-loader">
