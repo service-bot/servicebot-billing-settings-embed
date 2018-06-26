@@ -276,13 +276,9 @@ class ServicebotManagedBilling extends React.Component {
                 <div className="mbf--form-wrapper">
                     {self.state.instances.length > 0 ?
                         <div className="">
+                                {/*todo: style this when it's available or designed */}
                                 {this.getTrialStatus()}
-                                <h4>Account Billing</h4>
-                                {this.getBillingForm()}
-                                <hr/>
-
-                                <h4>Manage Account</h4>
-                                <h5>Your current subscriptions are listed below:</h5>
+                                <h3>Subscriptions</h3>
                                 {self.state.instances.length > 0 ?
                                     <div className="mbf--current-services-list">
                                         {self.state.instances.map(service => {
@@ -310,7 +306,8 @@ class ServicebotManagedBilling extends React.Component {
                                     :
                                     <div><p>You currently don't have any subscriptions.</p></div>
                                 }
-
+                                <h3>Account Billing</h3>
+                                {this.getBillingForm()}
                         </div>
                         :
                         <div className="page-loader">

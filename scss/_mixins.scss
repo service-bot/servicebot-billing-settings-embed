@@ -101,3 +101,8 @@
     border-color: $color-blue;
   }
 }
+
+@mixin resetUl{
+  list-style: none;
+  padding-left: 0;
+}

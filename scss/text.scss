@@ -1,17 +1,26 @@
 /* _section font */
 $section_heading: 16px;
+@mixin font{
+  font-family: "Open Sans", "Arial";
+  color: $color-blue-gray;
+}
 
 @mixin text{
-  color: $color-blue-gray;
+  @include font;
   font-size: 14px;
-  font-family: "Open Sans", "Arial";
 }
 @mixin text_muted{
   @include text;
   color: $color-heading;
   font-size: 12px;
 }
-
+@mixin heading{
+  @include font;
+  color: $color-heading;
+  font-size: 1.2rem;
+  font-weight: normal;
+  margin: 0;
+}
 @mixin sub_heading{
   color: $color-heading;
   line-height: 22px;
