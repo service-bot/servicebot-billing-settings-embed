@@ -90,3 +90,14 @@
     transition: all 300ms linear;
   }
 }
+
+@mixin border{
+
+  border: 1px solid $color-light-blue-gray;
+  box-shadow: inset 1px 1px 3px 0 #CCD1D9;
+  border-radius: 1px;
+
+  &:focus{
+    border-color: $color-blue;
+  }
+}

@@ -36,10 +36,27 @@
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.17);
   }
 
+  &._text{
+    background: none !important;
+    color: $color-blue-gray !important;
+    box-shadow: none !important;
+  }
+
   &._right{
     float: right;
   }
 
+}
+
+.button-wrapper {
+
+  &._center {
+    text-align: center;
+  }
+  &._space-between {
+    display: flex;
+    justify-content: space-around;
+  }
 }
 
 .clear{

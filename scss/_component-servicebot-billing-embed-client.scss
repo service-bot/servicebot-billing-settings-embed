@@ -1,0 +1,18 @@
+@mixin embed-text{
+  font-size: 14px;
+  color: $color-blue;
+}
+@mixin embed-label{
+  @include embed-text;
+  font-weight: 600;
+}
+
+.servicebot--embeddable{
+
+  &.servicebot--manage-billing-form-wrapper{
+
+
+
+  }
+
+}

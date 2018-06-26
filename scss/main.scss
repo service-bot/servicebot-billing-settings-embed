@@ -24,3 +24,6 @@
 img{
   @include text_muted;
 }
+
+/* servicebot-billing-embed client -- for this repo project only! */
+@import "_component-servicebot-billing-embed-client.scss";
