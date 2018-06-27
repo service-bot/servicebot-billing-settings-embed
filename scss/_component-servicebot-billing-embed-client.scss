@@ -346,6 +346,136 @@
 
     }
 
+    .add-on-item-widgets{
+
+      ._add-on-item-widget-wrapper{
+        @include embed-content-box;
+        padding: $gutter;
+
+        & > .form-group > .form-input-flex{
+          flex-basis: 100%;
+        }
+
+        &._add-on-item-0{ //specific item overrides
+
+        }
+
+        .addon-checkbox-widget-default-value-wrapper{
+          width: 100%;
+
+          .iconToggleField{
+            position: relative;
+            border: 1px solid $color-blue;
+            background: white;
+            width: $gutter * 2;
+            height: $gutter * 2;
+            margin-right: $gutter;
+            border-radius: 3px;
+
+            &.active{
+
+              span.itf-icon{
+                color: $color-blue !important;
+                background: none !important;
+                position: absolute;
+                margin-left: 4px;
+                margin-top: 5px;
+                width: 21px;
+                height: 10px;
+                border-bottom: solid 3px currentColor;
+                border-left: solid 3px currentColor;
+                -webkit-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+              }
+            }
+
+            input{
+              display: none;
+            }
+          }
+        }
+
+        .addon-checkbox-widget-default-value{ //widget by type
+          width: 100%;
+          flex-basis: 100%;
+        }
+
+        .addon-options-widget-default-value-wrapper{
+
+          &>.form-input-flex{
+            border: 1px solid $color-blue;
+            border-radius: 3px;
+
+            select{
+              border: none;
+            }
+          }
+
+        }
+
+        .addon-options-widget-default-value-select{
+          width: 100%;
+          border-radius: 0;
+          background: rgba(255,255,255,0.5);
+        }
+
+        .form-group, .form-input-flex{
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+
+          label{
+            color: $color-black;
+            flex-grow: 1;
+            text-transform: capitalize;
+          }
+        }
+
+        .form-input-flex{
+          flex-basis: 50%;
+
+          .request-form-toggle-option-wrapper{
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+
+            .form-group.form-group{
+              width: auto;
+            }
+          }
+
+        }
+
+        .form-error{
+          white-space: nowrap;
+          padding-left: $gutter;
+        }
+
+      }
+
+    }
+
+    .add-on-item-update-submit{
+      display: flex;
+      justify-content: flex-end;
+      padding: {
+        top: $gutter;
+        bottom: $gutter * 2;
+        left: $gutter;
+        right: $gutter;
+      }
+
+      p{
+        color: $color-black;
+        padding-right: $gutter;
+      }
+
+      button{
+        padding: 11.5px $gutter;
+      }
+    }
+
   }
 
 }

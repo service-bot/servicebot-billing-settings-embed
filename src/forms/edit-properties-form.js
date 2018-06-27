@@ -18,7 +18,7 @@ let renderCustomProperty = (props) => {
     }, {});
     return (
        //
-        <div>
+        <div className="add-on-item-widgets">
             {fields.map((customProperty, index) => {
                     if(!formJSON[index].config.pricing){
                         return <div/>
@@ -27,30 +27,38 @@ let renderCustomProperty = (props) => {
                     if(formJSON[index].prompt_user){
 
                         return (
-                            <Field
-                                key={index}
-                                name={`${customProperty}.data.value`}
-                                type={formJSON[index].type}
-                                widget={property.widget}
-                                component={widgetField}
-                                label={formJSON[index].prop_label}
-                                // value={formJSON[index].data.value}
-                                formJSON={formJSON[index]}
-                                configValue={formJSON[index].config}
-                                validate={required()}
-                            />)
-
+                            <div className={`_add-on-item-widget-wrapper _add-on-item-${index}`}>
+                                <Field
+                                    key={index}
+                                    name={`${customProperty}.data.value`}
+                                    type={formJSON[index].type}
+                                    widget={property.widget}
+                                    component={widgetField}
+                                    label={formJSON[index].prop_label}
+                                    // value={formJSON[index].data.value}
+                                    formJSON={formJSON[index]}
+                                    configValue={formJSON[index].config}
+                                    validate={required()}
+                                />
+                            </div>
+                        );
                     }else{
                         if(formJSON[index].data && formJSON[index].data.value){
                             return (
-                                <div className={`form-group form-group-flex`}>
-                                    {(formJSON[index].prop_label && formJSON[index].type !== 'hidden') && <label className="control-label form-label-flex-md">{formJSON[index].prop_label}</label>}
-                                    <div className="form-input-flex">
-                                        <p>{formJSON[index].data.value}</p>
+                                <div className={`_add-on-item-widget-wrapper _add-on-item-${index}`}>
+                                    <div className={`form-group form-group-flex`}>
+                                        {(formJSON[index].prop_label && formJSON[index].type !== 'hidden') &&
+                                        <label className="control-label form-label-flex-md">{formJSON[index].prop_label}</label>}
+                                        <div className="form-input-flex">
+                                            <p>{formJSON[index].data.value}</p>
+                                        </div>
                                     </div>
-                                </div>)
+                                </div>
+                            );
                         }else{
-                            return (<span/>)
+                            return (
+                                <span/>
+                            );
                         }
 
 
@@ -82,11 +90,9 @@ function CustomFieldEditForm(props) {
             <FieldArray name="service_instance_properties" component={renderCustomProperty}
                         formJSON={properties}/>
 
-            <div className="text-right m-t-15">
-                <Buttons btnType="primary" text="Submit" onClick={props.handleSubmit} type="submit" value="submit"/>
-            </div>
-            <div>
-                Total Price: <Price value={priceData.total} /> / {props.instance.payment_plan.interval}
+            <div className="add-on-item-update-submit">
+                <p>Total Price: <Price value={priceData.total} /> / {props.instance.payment_plan.interval}</p>
+                <button className="buttons _primary" onClick={props.handleSubmit} type="submit" value="submit">Submit</button>
             </div>
         </form>
     )
