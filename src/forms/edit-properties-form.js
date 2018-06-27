@@ -91,7 +91,7 @@ function CustomFieldEditForm(props) {
                         formJSON={properties}/>
 
             <div className="add-on-item-update-submit">
-                <p>Total Price: <Price value={priceData.total} /> / {props.instance.payment_plan.interval}</p>
+                <p><label>Total Price:</label><Price value={priceData.total} /> / {props.instance.payment_plan.interval}</p>
                 <button className="buttons _primary" onClick={props.handleSubmit} type="submit" value="submit">Submit</button>
             </div>
         </form>

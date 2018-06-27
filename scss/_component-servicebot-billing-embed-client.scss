@@ -212,6 +212,8 @@
 
         .mbf--card-wrapper{
           @include embed-content-box;
+          transition: height 300ms linear;
+
           position: relative;
 
           .mbf--card-display{
@@ -467,8 +469,21 @@
       }
 
       p{
-        color: $color-black;
+        color: $color-medium-blue-gray;
         padding-right: $gutter;
+      }
+
+      label{
+        font-weight: bold;
+        margin-right: $gutter/2;
+        font-size: 0.9rem;
+        color: $color-black;
+      }
+
+      span{
+        color: $color-blue;
+        font-weight: bold;
+        font-size: 1.02rem;
       }
 
       button{
