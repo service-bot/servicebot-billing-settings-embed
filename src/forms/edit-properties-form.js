@@ -108,7 +108,7 @@ CustomFieldEditForm = connect(mapStateToProps)(CustomFieldEditForm);
 
 
 function ModalEditProperties(props){
-    let {url, token, show, hide, instance, handleSuccessResponse, handleFailureResponse} = props;
+    let {url, token, show, hide, instance, handleSuccessResponse, handleFailureResponse, external} = props;
     let submissionRequest = {
         'method': 'POST',
         'url': `${url}/api/v1/service-instances/${instance.id}/change-properties`
@@ -129,6 +129,7 @@ function ModalEditProperties(props){
                     formName={"edit_properties_form"}
                     formProps={{instance}}
                     token={token}
+                    external={external}
 
                 />
             </div>

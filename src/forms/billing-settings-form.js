@@ -181,6 +181,7 @@ class CreditCardForm extends React.Component {
     }
 
     render() {
+        console.log(this.props.external, "EXT")
         let submissionRequest = {
             'method': 'POST',
             'url': `${this.props.url}/api/v1/funds`,
@@ -239,6 +240,7 @@ class CreditCardForm extends React.Component {
                                     handleResponse={this.handleSuccessResponse}
                                     handleFailure={this.handleFailureResponse}
                                     reShowForm={true}
+                                    external={this.props.external}
                                     token={this.props.token} />
                             </div>
                             <button className="buttons _text mf--btn-cancel-update-funding" onClick={this.hidePaymentForm}>Cancel</button>

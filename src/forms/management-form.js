@@ -178,6 +178,7 @@ class ServicebotManagedBilling extends React.Component {
                         <BillingForm buttonText={buttonText}
                                      handleResponse={self.handleResponse(self.state.instances[0])}
                                      token={self.props.token} spk={self.state.spk}
+                                     external={self.props.external}
                                      submitAPI={`${self.props.url}/${self.state.fund_url}`} />
                     </div>
                     :
@@ -186,6 +187,7 @@ class ServicebotManagedBilling extends React.Component {
                                      buttonText={buttonText}
                                      token={self.props.token}
                                      spk={self.state.spk}
+                                     external={self.props.external}
                                      submitAPI={`${self.props.url}/${self.state.fund_url}`} userFund={fund} />
                     </div>
 
@@ -311,7 +313,7 @@ class ServicebotManagedBilling extends React.Component {
                                 {this.getBillingForm()}
 
                                 <h3>Subscription Add Ons</h3>
-                                <ModalEditProperties token={this.props.token} url={this.props.url} instance={self.state.instances[0]} hide={this.hidePropEdit}/>
+                                <ModalEditProperties external={this.props.external} token={this.props.token} url={this.props.url} instance={self.state.instances[0]} hide={this.hidePropEdit}/>
                         </div>
                         :
                         <div className="page-loader">
