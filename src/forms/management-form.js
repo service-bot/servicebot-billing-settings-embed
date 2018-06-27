@@ -254,7 +254,9 @@ class ServicebotManagedBilling extends React.Component {
             self.props.setLoading(false);
         }
     }
+
     render () {
+
         let self = this;
         if(this.state.error){
             return <p>{this.state.error}</p>
@@ -269,7 +271,7 @@ class ServicebotManagedBilling extends React.Component {
             border: "none",
             color: "#ffffff"
         };
-
+        console.log(self.state.instances);
         return (
             <div className="servicebot--embeddable servicebot--manage-billing-form-wrapper custom">
 
@@ -301,7 +303,6 @@ class ServicebotManagedBilling extends React.Component {
                                                 {/*</div>*/}
                                             </div>
                                         )})}
-                                        {/*<ModalEditProperties token={this.props.token} url={this.props.url} instance={self.state.instances[0]} hide={this.hidePropEdit}/>*/}
                                     </div>
                                     :
                                     <div><p>You currently don't have any subscriptions.</p></div>
@@ -310,6 +311,7 @@ class ServicebotManagedBilling extends React.Component {
                                 {this.getBillingForm()}
 
                                 <h3>Subscription Add Ons</h3>
+                                <ModalEditProperties token={this.props.token} url={this.props.url} instance={self.state.instances[0]} hide={this.hidePropEdit}/>
                         </div>
                         :
                         <div className="page-loader">
