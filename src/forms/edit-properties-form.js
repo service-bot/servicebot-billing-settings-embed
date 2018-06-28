@@ -80,11 +80,12 @@ function CustomFieldEditForm(props) {
         return acc;
 
     }, {});
-
+    let {invalid, submitting} = props;
 
     let properties = props.formJSON.service_instance_properties;
     let basePrice = getBasePrice(props.instance.references.service_instance_properties, handlers, props.instance.payment_plan.amount);
     let priceData = getPriceData(basePrice, properties);
+    console.log(invalid, submitting, "hu")
     return (
         <form>
             <FieldArray name="service_instance_properties" component={renderCustomProperty}
@@ -92,7 +93,7 @@ function CustomFieldEditForm(props) {
 
             <div className="add-on-item-update-submit">
                 <p>Total Price: <Price value={priceData.total} /> / {props.instance.payment_plan.interval}</p>
-                <button className="buttons _primary" onClick={props.handleSubmit} type="submit" value="submit">Submit</button>
+                <button disabled={invalid|| submitting} className="buttons _primary" onClick={props.handleSubmit} type="submit" value="submit">Submit</button>
             </div>
         </form>
     )
@@ -108,7 +109,7 @@ CustomFieldEditForm = connect(mapStateToProps)(CustomFieldEditForm);
 
 
 function ModalEditProperties(props){
-    let {url, token, show, hide, instance, handleSuccessResponse, handleFailureResponse, external} = props;
+    let {url, token, show, refresh, instance, handleSuccessResponse, handleFailureResponse, external} = props;
     let submissionRequest = {
         'method': 'POST',
         'url': `${url}/api/v1/service-instances/${instance.id}/change-properties`
@@ -124,12 +125,13 @@ function ModalEditProperties(props){
                     initialValues={{"service_instance_properties" : instance.references.service_instance_properties}}
                     submissionRequest={submissionRequest}
                     successMessage={"Properties edited successfully"}
-                    handleResponse={hide}
+                    handleResponse={refresh}
                     // handleFailure={handleFailureResponse}
                     formName={"edit_properties_form"}
                     formProps={{instance}}
                     token={token}
                     external={external}
+                    reShowForm={true}
 
                 />
             </div>

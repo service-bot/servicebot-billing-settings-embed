@@ -46,6 +46,7 @@ class BillingForm extends React.Component {
 
 function BillingInfo(props) {
     console.log(props);
+    let {invalid, submitting, pristine} = props;
     return (
         <form className="mbf--funding-personal-info">
             <CardSection/>
@@ -53,7 +54,7 @@ function BillingInfo(props) {
             {/*<Field name="address_line1" type="text" component={inputField} placeholder="Address"/>*/}
             {/*<Field name="address_city" type="text" component={inputField} placeholder="City"/>*/}
             {/*<Field name="address_state" type="text" component={inputField} placeholder="State"/>*/}
-            <button className="buttons _primary mbf--btn-update-funding-save" onClick={props.handleSubmit} type="submit">Save Card</button>
+            <button      disabled={invalid|| submitting || pristine} className="buttons _primary mbf--btn-update-funding-save" onClick={props.handleSubmit} type="submit">Save Card</button>
         </form>
     )
 }

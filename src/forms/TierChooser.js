@@ -151,7 +151,6 @@ class TierSelector extends React.Component{
         let {tiers, currentInterval, currentPlan, selectedPlan, paymentPlans : {subscription, custom, one_time}} = this.state;
         let currentPlans = custom || [];
         let intervals = new Set([]);
-        console.log("CURRENT", currentPlan);
         let self = this;
         let checkoutConfig = {};
         if(one_time){
@@ -194,7 +193,7 @@ class TierSelector extends React.Component{
                             key: plan.id,
                             tier: tiers.find(tier => tier.id === plan.tier_id),
                             plan: plan,
-                            changePlan: self.props.changePlan(plan.id)
+                            changePlan: self.props.changePlan(plan.id),
                         }
 
                         if (plan.id === currentPlan) {

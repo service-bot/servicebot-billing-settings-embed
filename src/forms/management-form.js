@@ -273,6 +273,9 @@ class ServicebotManagedBilling extends React.Component {
             border: "none",
             color: "#ffffff"
         };
+
+        let metricProp = self.state.template && self.state.template.references.service_template_properties.find(prop => prop.type === "metric");
+
         console.log(self.state.instances);
         return (
             <div className="servicebot--embeddable servicebot--manage-billing-form-wrapper custom">
@@ -312,8 +315,12 @@ class ServicebotManagedBilling extends React.Component {
                                 <h3>Payment Information</h3>
                                 {this.getBillingForm()}
 
+                            {metricProp && <div>
+                                <h3>Usage</h3>
+                                <span>{metricProp.config.unit}: {metricProp.data.value}</span>
+                            </div>}
                                 <h3>Subscription Add Ons</h3>
-                                <ModalEditProperties external={this.props.external} token={this.props.token} url={this.props.url} instance={self.state.instances[0]} hide={this.hidePropEdit}/>
+                                <ModalEditProperties external={this.props.external} token={this.props.token} url={this.props.url} instance={self.state.instances[0]} refresh={this.hidePropEdit}/>
                         </div>
                         :
                         <div className="page-loader">
