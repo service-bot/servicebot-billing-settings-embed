@@ -13,7 +13,7 @@
 @mixin embed-content-box{
   border-radius: 2px;
   background-color: #F9FCFF;
-  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.1);
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.05);
   margin: $gutter 0;
   padding: $gutter * 1.5 $gutter;
 }
@@ -28,16 +28,18 @@
 }
 
 .servicebot--embeddable{
+  @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
 
   &.servicebot--manage-billing-form-wrapper{
     @include embed-text;
     max-width: $gutter * 51;
+    margin: auto;
 
     .mbf--form-wrapper{
 
       h3{
         text-transform: uppercase;
-        font-weight: 300;
+        font-weight: 600;
         margin: {
           top: $gutter * 2;
           bottom: $gutter;
@@ -59,9 +61,21 @@
 
               ._interval{
                 padding: $gutter / 4 $gutter;
+                border-radius: 12px;
+                @include defaultTransition(150ms);
+
+                &:hover{
+                  background-color: $color-light-blue-gray;
+                  @include defaultTransition(150ms);
+                }
 
                 &._selected{
                   padding: $gutter / 4 0;
+
+                  &:hover{
+                    background-color: $color-blue;
+                    @include defaultTransition(150ms);
+                  }
                 }
               }
             }
@@ -69,6 +83,12 @@
 
           .servicebot-pricing-table{
             border: none;
+            justify-content: flex-start;
+
+            @include breakpoint(iPhone){
+              flex-direction: column;
+              overflow: visible;
+            }
 
             ._tier{
               @include border;
@@ -82,7 +102,7 @@
               justify-content: space-between;
               max-width: calc(100% * (1/3) - 16px);
 
-              &:nth-child(2n - 5){
+              &:nth-child(1){
                 margin: {
                   left: 0;
                 }
@@ -95,6 +115,13 @@
                 }
               }
 
+              &:nth-child(3n + 1){
+                margin: {
+                  left: 0;
+                  right: $gutter / 2;
+                }
+              }
+
               &._current{
 
               }
@@ -103,10 +130,15 @@
                 color: $color-white;
                 background-color: $color-blue;
                 box-shadow: none;
-                transition: all 300ms;
+                transition: all 550ms;
 
                 ._price, ._interval-name{
                   color: $color-white;
+                  font-weight: 600;
+                  letter-spacing: 1.5px;
+                }
+                ._interval-name{
+                  font-weight: 100;
                 }
               }
 
@@ -117,7 +149,7 @@
               ._name{
                 width: 100%;
                 text-transform: uppercase;
-                font-weight: 300;
+                font-weight: 600;
                 padding: $gutter * 1.25;
               }
 
@@ -147,7 +179,7 @@
                 };
 
                 &._select-tier{
-
+                  @include defaultTransition(150ms);
                 }
 
                 &._confirm-tier, &._select-tier:hover{
@@ -163,6 +195,12 @@
                 ._item{
 
                 }
+              }
+
+              @include breakpoint(iPhone){
+                max-width: 100%;
+                width: 100%;
+                margin: $gutter/2 0 !important;
               }
             }
 
@@ -232,6 +270,10 @@
                 margin-right: $gutter;
                 text-transform: uppercase;
                 font-weight: 600;
+
+                @include breakpoint(iPhone){
+                    display: block;
+                }
               }
 
               .mbf--card-last4{
@@ -267,6 +309,10 @@
 
             #card-element, .form-group{
               flex-basis: 46%;
+
+              @include breakpoint(iPhone){
+                flex-basis: 100%;
+              }
             }
 
             #card-element{
@@ -366,28 +412,41 @@
           width: 100%;
 
           .iconToggleField{
+            cursor: pointer;
             position: relative;
             border: 1px solid $color-blue;
             background: white;
             width: $gutter * 2;
             height: $gutter * 2;
-            margin-right: $gutter;
             border-radius: 3px;
 
-            &.active{
+            span.itf-icon{
+              color: $color-light-blue-gray !important;
+              background: none !important;
+              position: absolute;
+              margin-left: 4px;
+              margin-top: 5px;
+              width: 21px;
+              height: 10px;
+              border-bottom: solid 3px currentColor;
+              border-left: solid 3px currentColor;
+              -webkit-transform: rotate(-45deg);
+              transform: rotate(-45deg);
+              @include defaultTransition(150ms);
+            }
 
-              span.itf-icon{
+            &:hover{
+              span.itf-icon {
+                color: $color-title-container-border !important;
+                border-color: currentColor !important;
+                @include defaultTransition(150ms);
+              }
+            }
+
+            &.active{
+              span.itf-icon {
                 color: $color-blue !important;
-                background: none !important;
-                position: absolute;
-                margin-left: 4px;
-                margin-top: 5px;
-                width: 21px;
-                height: 10px;
-                border-bottom: solid 3px currentColor;
-                border-left: solid 3px currentColor;
-                -webkit-transform: rotate(-45deg);
-                transform: rotate(-45deg);
+                @include defaultTransition(150ms);
               }
             }
 
@@ -400,9 +459,35 @@
         .addon-checkbox-widget-default-value{ //widget by type
           width: 100%;
           flex-basis: 100%;
+
+          ._label_wrapper{
+            display: flex;
+            flex-direction: column;
+          }
+
+          ._price-adjustment-label{
+            margin-top: $gutter / 2;
+          }
         }
 
         .addon-options-widget-default-value-wrapper{
+
+          ._value-label{
+
+          }
+
+          ._value-input-wrapper{
+            flex-basis: 50%;
+            background: $color-white;
+
+            ._value-select{
+              width: 100%;
+              background: $color-white;
+              padding: 0 $gutter;
+              font-size: 0.90rem;
+              margin: 0 $gutter;
+            }
+          }
 
           &>.form-input-flex{
             border: 1px solid $color-blue;
@@ -435,7 +520,7 @@
         }
 
         .form-input-flex{
-          flex-basis: 50%;
+          flex-basis: auto;
 
           .request-form-toggle-option-wrapper{
             display: flex;
@@ -459,38 +544,50 @@
     }
 
     .add-on-item-update-submit{
+      @include embed-content-box;
       display: flex;
-      justify-content: flex-end;
-      padding: {
-        top: $gutter;
-        bottom: $gutter * 2;
-        left: $gutter;
-        right: $gutter;
-      }
+      justify-content: space-between;
+      align-items: center;
 
       p{
         color: $color-medium-blue-gray;
-        padding-right: $gutter;
+        margin: 0;
       }
 
       label{
         font-weight: bold;
         margin-right: $gutter/2;
-        font-size: 0.9rem;
+        font-size: 1rem;
         color: $color-black;
+        text-transform: capitalize;
       }
 
       span{
         color: $color-blue;
         font-weight: bold;
         font-size: 1.02rem;
+
+        &._per{
+          padding: 0 1px;
+          font-weight: 100;
+        }
+
+        &._unit{
+          font-weight: 100;
+          text-transform: capitalize;
+        }
       }
 
       button{
         padding: 11.5px $gutter;
+        margin-left: $gutter * 3;
       }
     }
 
+  }
+
+  .buttons{
+    text-transform: uppercase;
   }
 
 }
