@@ -46,6 +46,7 @@ class BillingForm extends React.Component {
 
 function BillingInfo(props) {
     console.log(props);
+    let {invalid, submitting, pristine} = props;
     return (
         <form className="mbf--funding-personal-info">
             <CardSection/>
@@ -53,7 +54,7 @@ function BillingInfo(props) {
             {/*<Field name="address_line1" type="text" component={inputField} placeholder="Address"/>*/}
             {/*<Field name="address_city" type="text" component={inputField} placeholder="City"/>*/}
             {/*<Field name="address_state" type="text" component={inputField} placeholder="State"/>*/}
-            <button className="buttons _primary mbf--btn-update-funding-save" onClick={props.handleSubmit} type="submit">Save Card</button>
+            <button      disabled={invalid|| submitting || pristine} className="buttons _primary mbf--btn-update-funding-save" onClick={props.handleSubmit} type="submit">Save Card</button>
         </form>
     )
 }
@@ -181,6 +182,7 @@ class CreditCardForm extends React.Component {
     }
 
     render() {
+        console.log(this.props.external, "EXT")
         let submissionRequest = {
             'method': 'POST',
             'url': `${this.props.url}/api/v1/funds`,
@@ -239,6 +241,7 @@ class CreditCardForm extends React.Component {
                                     handleResponse={this.handleSuccessResponse}
                                     handleFailure={this.handleFailureResponse}
                                     reShowForm={true}
+                                    external={this.props.external}
                                     token={this.props.token} />
                             </div>
                             <button className="buttons _text mf--btn-cancel-update-funding" onClick={this.hidePaymentForm}>Cancel</button>
