@@ -459,6 +459,13 @@
 
     }
 
+    .mbf--subscription-summary-wrapper{
+
+      ._summary{
+        @include embed-content-box
+      };
+    }
+
     .add-on-item-widgets{
 
       ._add-on-item-widget-wrapper{
