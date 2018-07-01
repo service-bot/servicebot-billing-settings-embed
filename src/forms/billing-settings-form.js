@@ -5,6 +5,7 @@ import {get, has} from "lodash";
 import {Field,} from 'redux-form'
 import Buttons from "../utilities/buttons.js";
 import {connect} from "react-redux";
+import creditCardIcon from "../utilities/credit-card-icons.js";
 
 class CardSection extends React.Component {
     render() {
@@ -199,15 +200,10 @@ class CreditCardForm extends React.Component {
             hasCard = true;
             card = this.props.userFund.source.card;
         }
-        let {brand, last4, exp_month, exp_year} = card;
 
-        let getBrandIcon = ()=>{
-            if(brand === 'American Express'){
-                return 'amex';
-            }else{
-                return `${brand.replace(/\s+/g, '-').toLowerCase()}`;
-            }
-        };
+        console.log("current card", card);
+
+        let {brand, last4, exp_month, exp_year} = card;
 
         let getCard = ()=>{
             if(hasCard) {
@@ -215,7 +211,9 @@ class CreditCardForm extends React.Component {
                     <div className="mbf--card-wrapper">
                         <div className="mbf--card-display">
                             <div className="mbf--card-number-holder">
-                                <span className="mbf--card-brand">{getBrandIcon()}</span> ending in <span className="mbf--card-last4">{last4}</span>
+                                <span className="mbf--card-brand">
+                                    {creditCardIcon(brand)}
+                                </span>{brand} ending in <span className="mbf--card-last4">{last4}</span>
                                 <span className="mbf--card-date-holder">
                                     Expires
                                     <span className="mbf--card-exp-month">{exp_month} / </span>
