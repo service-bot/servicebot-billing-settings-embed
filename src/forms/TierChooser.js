@@ -41,7 +41,10 @@ const Tier = (props) => {
             <span className="_price">{tierContent}</span>
             {isCurrent && <button className="_selected-label buttons rounded" disabled>Current Plan</button>}
             {!isSelected && !isCurrent && <button onClick={pickTier(plan.id)} className="_select-tier buttons rounded">{tierButton}</button>}
-            {isSelected && !isCurrent && <button onClick={props.changePlan} className="_confirm-tier buttons rounded">Confirm Plan</button>}
+            <div className="_tier-confirm-wrapper">
+                {isSelected && !isCurrent && <button onClick={props.changePlan} className="_confirm-tier buttons rounded" aria-label="confirm change plan"><span className="icon check"/></button>}
+                {isSelected && !isCurrent && <button onClick={props.changePlan} className="_confirm-tier _cancel-tier buttons rounded" aria-label="cancel change plan"><span className="icon close"/></button>}
+            </div>
             <ul className="_feature-list">
                 {tier.features.map(feature=> {
                     return (<li className="_item">{feature}</li>);

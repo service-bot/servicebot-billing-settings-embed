@@ -176,6 +176,12 @@
                 };
               }
 
+              ._tier-confirm-wrapper{
+                width: 150px;
+                display: flex;
+                justify-content: space-around;
+              }
+
               button{
                 @include defaultTransition;
                 @include button(border, $color-success, true);
@@ -192,6 +198,55 @@
                   background: $color-success;
                   color: $color-white;
                 }
+
+                &._confirm-tier, ._cancel-tier{
+                  position: relative;
+                  height: 31px;
+                  width: 31px;
+                  @include defaultTransition(150ms);
+
+                  .icon.check{
+                    @include _icon_check($color-white);
+                    transform: translate(-50%, -50%) rotate(-45deg);
+                    left: 50%;
+                    top: calc(50% - 2px);
+                  }
+
+                  .icon.close{
+                    @include _icon_close($color-white);
+                    left: calc(50% - 1px);
+                    transform: translate(-50%, -50%);
+                    color: $color-black;
+                    &:after, &:before{
+                      left: 2px;
+                      top: calc(50% + 0.50px);
+                      width: 19px;
+
+                    }
+                  }
+
+                  .icon.check, .icon.close{
+                    margin: auto;
+                  }
+
+                  &:hover{
+                    @include defaultTransition(150ms);
+                  }
+                }
+
+                &._cancel-tier{
+                  background: $color-white;
+                  border: $color-white;
+
+                  &:hover{
+                    background: $color-error;
+
+                    .icon.close{
+                      color: $color-white;
+                    }
+                  }
+                }
+
               }
 
               ._feature-list{
