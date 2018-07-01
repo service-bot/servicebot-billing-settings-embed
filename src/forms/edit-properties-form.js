@@ -20,7 +20,7 @@ let renderCustomProperty = (props) => {
        //
         <div className="add-on-item-widgets">
             {fields.map((customProperty, index) => {
-                    if(!formJSON[index].config.pricing){
+                    if(!formJSON[index].config.pricing || formJSON[index].type === "metric"){
                         return <div/>
                     }
                     let property = widgets[formJSON[index].type];
