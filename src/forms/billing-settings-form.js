@@ -13,18 +13,21 @@ class CardSection extends React.Component {
             <div className="form-group" id="card-element">
                 <CardElement style={{
                     base: {
-                        color: '#32325d',
-                        lineHeight: '24px',
-                        fontFamily: 'Helvetica Neue',
+                        color: '#9B9B9B',
+                        lineHeight: '16px',
+                        fontFamily: 'Open Sans, Helvetica Neue',
                         fontSmoothing: 'antialiased',
-                        fontSize: '16px',
+                        fontSize: '14px',
+                        fontWeight: '300',
+                        background: '#FFFFFF',
                         '::placeholder': {
-                            color: '#aab7c4'
+                            color: '#7f7f7f'
                         }
                     },
                     invalid: {
-                        color: '#fa755a',
-                        iconColor: '#fa755a'
+                        color: '#ff2e2e',
+                        iconColor: '#ff2e2e',
+                        lineHeight: '16px'
                     }
                 }}/>
             </div>
@@ -36,7 +39,9 @@ class BillingForm extends React.Component {
     render() {
         return (
             <StripeProvider apiKey={this.props.spk || "no_public_token"}>
-                <Elements id="payment-form">
+                <Elements fonts={[{
+                    cssSrc: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800"
+                }]} id="payment-form">
                     <CreditCardForm {...this.props}/>
                 </Elements>
             </StripeProvider>
@@ -208,7 +213,7 @@ class CreditCardForm extends React.Component {
         let getCard = ()=>{
             if(hasCard) {
                 return (
-                    <div className="mbf--card-wrapper">
+                    <div className={`mbf--card-wrapper ${this.state.showForm && "show-form"}`}>
                         <div className="mbf--card-display">
                             <div className="mbf--card-number-holder">
                                 <span className="mbf--card-brand">

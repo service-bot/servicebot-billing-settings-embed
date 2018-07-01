@@ -18,6 +18,7 @@
   padding: $gutter * 1.5 $gutter;
 }
 @mixin embed-input-styles{
+  @include text;
   height: 32px;
   background-color: #FFFFFF;
   border: 1px solid #EBF3F9;
@@ -25,6 +26,10 @@
   color: #9B9B9B;
   font-size: 14px;
   line-height: 16px;
+
+  &::placeholder{
+    color: #9B9B9B;
+  }
 }
 
 .servicebot--embeddable{
@@ -171,6 +176,12 @@
                 };
               }
 
+              ._tier-confirm-wrapper{
+                width: 150px;
+                display: flex;
+                justify-content: space-around;
+              }
+
               button{
                 @include defaultTransition;
                 @include button(border, $color-success, true);
@@ -187,6 +198,55 @@
                   background: $color-success;
                   color: $color-white;
                 }
+
+                &._confirm-tier, ._cancel-tier{
+                  position: relative;
+                  height: 31px;
+                  width: 31px;
+                  @include defaultTransition(150ms);
+
+                  .icon.check{
+                    @include _icon_check($color-white);
+                    transform: translate(-50%, -50%) rotate(-45deg);
+                    left: 50%;
+                    top: calc(50% - 2px);
+                  }
+
+                  .icon.close{
+                    @include _icon_close($color-white);
+                    left: calc(50% - 1px);
+                    transform: translate(-50%, -50%);
+                    color: $color-black;
+                    &:after, &:before{
+                      left: 2px;
+                      top: calc(50% + 0.50px);
+                      width: 19px;
+
+                    }
+                  }
+
+                  .icon.check, .icon.close{
+                    margin: auto;
+                  }
+
+                  &:hover{
+                    @include defaultTransition(150ms);
+                  }
+                }
+
+                &._cancel-tier{
+                  background: $color-white;
+                  border: $color-white;
+
+                  &:hover{
+                    background: $color-error;
+
+                    .icon.close{
+                      color: $color-white;
+                    }
+                  }
+                }
+
               }
 
               ._feature-list{
@@ -250,14 +310,19 @@
 
         .mbf--card-wrapper{
           @include embed-content-box;
-          transition: height 300ms linear;
-
+          transition: height 100ms linear;
+          height: 46px;
           position: relative;
+
+          &.show-form{
+            height: 96px;
+          }
 
           .mbf--card-display{
             display: flex;
             justify-content: space-between;
             align-items: center;
+            height: 45px;
 
             .mbf--card-chip{
 
@@ -298,7 +363,7 @@
 
         .mbf--update-funding-wrapper{
           margin: {
-            top: $gutter*2;
+            top: $gutter;
           }
 
           .mbf--funding-personal-info{
@@ -354,7 +419,7 @@
               padding: 11.5px $gutter;
               border-radius: 2px;
               position: absolute;
-              top: $gutter;
+              top: $gutter * 1.5;
               right: $gutter;
             }
             &.mf--btn-cancel-update-funding{
@@ -588,6 +653,10 @@
 
   .buttons{
     text-transform: uppercase;
+  }
+
+  .form-error {
+    color: $color-error;
   }
 
 }
