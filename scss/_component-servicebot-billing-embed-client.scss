@@ -310,14 +310,19 @@
 
         .mbf--card-wrapper{
           @include embed-content-box;
-          transition: height 300ms linear;
-
+          transition: height 100ms linear;
+          height: 46px;
           position: relative;
+
+          &.show-form{
+            height: 96px;
+          }
 
           .mbf--card-display{
             display: flex;
             justify-content: space-between;
             align-items: center;
+            height: 45px;
 
             .mbf--card-chip{
 
@@ -358,7 +363,7 @@
 
         .mbf--update-funding-wrapper{
           margin: {
-            top: $gutter*2;
+            top: $gutter;
           }
 
           .mbf--funding-personal-info{
@@ -414,7 +419,7 @@
               padding: 11.5px $gutter;
               border-radius: 2px;
               position: absolute;
-              top: $gutter;
+              top: $gutter * 1.5;
               right: $gutter;
             }
             &.mf--btn-cancel-update-funding{

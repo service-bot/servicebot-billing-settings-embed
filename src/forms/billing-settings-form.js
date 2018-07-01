@@ -213,7 +213,7 @@ class CreditCardForm extends React.Component {
         let getCard = ()=>{
             if(hasCard) {
                 return (
-                    <div className="mbf--card-wrapper">
+                    <div className={`mbf--card-wrapper ${this.state.showForm && "show-form"}`}>
                         <div className="mbf--card-display">
                             <div className="mbf--card-number-holder">
                                 <span className="mbf--card-brand">
