@@ -30,14 +30,15 @@ let Price = function(props){
 };
 
 let getPrice = (myService, serviceType = null)=>{
+    console.log(myService);
     let serType = myService.type || serviceType;
-    let prefix = getSymbolFromCurrency(myService.currency);
+    let prefix = getSymbolFromCurrency(myService.payment_plan.currency);
 
     if (serType === "subscription"){
         return (
             <span>
-                <Price value={myService.amount} prefix={prefix}/>
-                <span>{myService.interval_count === 1 ? ' /' : ' / ' + myService.interval_count} {' '+myService.interval}</span>
+                <Price value={myService.payment_plan.amount} prefix={prefix}/>
+                <span>{myService.payment_plan.interval_count === 1 ? ' /' : ' / ' + myService.payment_plan.interval_count} {' '+myService.payment_plan.interval}</span>
             </span>
         );
     }else if (serType === "one_time"){
