@@ -285,6 +285,14 @@ class ServicebotManagedBilling extends React.Component {
                         <div className="app-content">
                                 {/*todo: style this when it's available or designed */}
                                 {this.getTrialStatus()}
+                                {metricProp &&
+                                    <div className="mbf--subscription-summary-wrapper">
+                                        <h3>Subscription Summary</h3>
+                                        <div className="_summary">
+                                            <span>{metricProp.config.unit}: {metricProp.data.value}</span>
+                                        </div>
+                                    </div>
+                                }
                                 <h3>Subscriptions</h3>
                                 {self.state.instances.length > 0 ?
                                     <div className="mbf--current-services-list">
@@ -315,10 +323,6 @@ class ServicebotManagedBilling extends React.Component {
                                 <h3>Payment Information</h3>
                                 {this.getBillingForm()}
 
-                            {metricProp && <div>
-                                <h3>Usage</h3>
-                                <span>{metricProp.config.unit}: {metricProp.data.value}</span>
-                            </div>}
                                 <h3>Subscription Add Ons</h3>
                                 <ModalEditProperties external={this.props.external} token={this.props.token} url={this.props.url} instance={self.state.instances[0]} refresh={this.hidePropEdit}/>
                         </div>
