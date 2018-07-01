@@ -37,7 +37,7 @@
 
   &.servicebot--manage-billing-form-wrapper{
     @include embed-text;
-    max-width: $gutter * 51;
+    //max-width: $gutter * 51;
     margin: auto;
 
     .mbf--form-wrapper{
