@@ -15,7 +15,11 @@ const Tier = (props) => {
     }
     if(plan.type === "subscription"){
         if(tier.unit){
-            tierContent = <span>{currency}{tierPrice}/{tier.unit}<span className="_interval-name">/{plan.interval}</span></span>;
+            tierContent = <span>
+                {currency}{tierPrice}
+                <span className="_interval-name">/{plan.interval}</span>
+                <span className="_metered-unit">per {tier.unit}</span>
+            </span>;
         }else{
             tierContent = <span>{currency}{tierPrice}<span className="_interval-name">/{plan.interval}</span></span>;
         }
