@@ -68,6 +68,7 @@
               ._interval{
                 padding: $gutter / 4 $gutter;
                 border-radius: 12px;
+                line-height: 16px;
                 @include defaultTransition(150ms);
 
                 &:hover{

@@ -17,318 +17,328 @@ $zBottom: 0;
 $zMiddle: 200;
 $zTop: 600;
 
-.card-container {
-  box-sizing: border-box;
-  background-image: radial-gradient($blue-light, $blue);
-  border-radius: 0.9375em;
-  display: table-cell;
-  font-size: .3rem;
-  height: 100%;
-  overflow: hidden;
-  text-align: center;
-  vertical-align: middle;
-  width: 100%;
+.mbf--card-brand {
 
-  @media(min-width: 25.625em) { font-size: .4rem; }
-
-  @media(min-width: 47.5em) { font-size: .75rem; }
-
-  @media(min-width: 60.625em) { font-size: 1rem; }
-}
-
-h1 {
-  color: #fff;
-  font-family: $bevan;
-  font-size: 4.75em;
-  font-weight: normal;
-  margin: 0 0 .5em;
-  text-align: center;
-  text-shadow: 0.013em 0.039em 0.132em rgba(0, 0, 0, .6);
-  text-transform: uppercase;
-}
-
-///////////////////////
-//card common styles
-/////////////////////
-.card {
-  background: #fff;
-  border-radius: 0.25em;
-  box-shadow: 0 0.039em 0.132em rgba(0, 0, 0, .4);
-  display: inline-block;
-  font-size: 1em;
-  height: 3em;
-  overflow: hidden;
-  position: relative;
-  margin-right: 1em;
-  vertical-align: middle;
-  width: 4.6em;
-
-  &:nth-of-type(5) { margin-right: 0; }
-}
-
-///////////////
-//visa
-//////////////
-
-$blue-visa: #00579F;
-$yellow-visa: #FBA31B;
-
-.visa {
-  font-family: $sans;
-  font-size: 0.5em;
-  font-style: italic;
-  font-weight: 800;
-  padding: .05em;
-  z-index: $zBottom;
-  box-sizing: border-box;
-
-  //blue and yellow stripe
-  &:before,
-  &:after {
-    background: $blue-visa;
-    border-top-left-radius: 0.1em;
-    border-top-right-radius: 0.1em;
-    content: "";
-    display: block;
-    height: .75em;
-    left: 52%;
-    position: absolute;
-    top: 5%;
-    transform: translate(-50%, 0);
-    width: 96%;
-    z-index: $zMiddle;
-  }
-  //push yellow down
-  &:after {
-    background: $yellow-visa;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom-left-radius: 0.25em;
-    border-bottom-right-radius: 0.25em;
-    bottom: 1.75%;
-    top: auto;
-  }
-  //visa letters
-  p {
-    color: $blue-visa;
-    line-height: 1em;
-    position: relative;
+  .card-container {
+    box-sizing: border-box;
+    background-image: radial-gradient($blue-light, $blue);
+    border-radius: 0.9375em;
+    display: table-cell;
+    font-size: .3rem;
+    height: 100%;
+    overflow: hidden;
     text-align: center;
-    font-size: 1.125em;
+    vertical-align: middle;
+    width: 100%;
 
-    //yellow swoosh
+    @media(min-width: 25.625em) {
+      font-size: .4rem;
+    }
+
+    @media(min-width: 47.5em) {
+      font-size: .75rem;
+    }
+
+    @media(min-width: 60.625em) {
+      font-size: 1rem;
+    }
+  }
+
+  .mbf--card-brand h1 {
+    color: #fff;
+    font-family: $bevan;
+    font-size: 4.75em;
+    font-weight: normal;
+    margin: 0 0 .5em;
+    text-align: center;
+    text-shadow: 0.013em 0.039em 0.132em rgba(0, 0, 0, .6);
+    text-transform: uppercase;
+  }
+
+  ///////////////////////
+  //card common styles
+  /////////////////////
+  .card {
+    background: #fff;
+    border-radius: 0.25em;
+    box-shadow: 0 0.039em 0.132em rgba(0, 0, 0, .4);
+    display: inline-block;
+    font-size: 1em;
+    height: 3em;
+    overflow: hidden;
+    position: relative;
+    margin-right: 1em;
+    vertical-align: middle;
+    width: 4.6em;
+
+    &:nth-of-type(5) {
+      margin-right: 0;
+    }
+  }
+
+  ///////////////
+  //visa
+  //////////////
+
+  $blue-visa: #00579F;
+  $yellow-visa: #FBA31B;
+
+  .visa {
+    font-family: $sans;
+    font-size: 0.5em;
+    font-style: italic;
+    font-weight: 800;
+    padding: .05em;
+    z-index: $zBottom;
+    box-sizing: border-box;
+
+    //blue and yellow stripe
+    &:before,
     &:after {
-      border-top: .1em solid transparent;
-      border-bottom: .1em solid transparent;
-      border-left: .4em solid $yellow-visa;
-      border-radius: 0.0625em;
+      background: $blue-visa;
+      border-top-left-radius: 0.1em;
+      border-top-right-radius: 0.1em;
       content: "";
       display: block;
-      height: 0;
-      left: 25.5%;
+      height: .75em;
+      left: 52%;
       position: absolute;
-      top: 4.25%;
-      transform: rotateZ(189deg);
-      width: 0;
-      z-index: $zTop;
+      top: 5%;
+      transform: translate(-50%, 0);
+      width: 96%;
+      z-index: $zMiddle;
     }
-  }
-}
-
-
-
-///////////////
-// MasterCard
-//////////////
-
-$red-mc: #EF3526;
-$yellow-mc: #FCB836;
-$blue-mc: #0059B3;
-
-.mc {
-  background: $blue-mc;
-  font-size: 0.5em;
-
-  &:before,
-  &:after {
-    background: $red-mc;
-    border-radius: 50%;
-    content: "";
-    display: block;
-    height: 2em;
-    left: 35%;
-    position: absolute;
-    top: 50%;
-    width: 2em;
-    transform: translate(-50%, -50%);
-    z-index: $zMiddle;
-  }
-
-  &:after {
-    background: $yellow-mc;
-    left: 65%;
-  }
-
-  hr {
-    background: $red-mc;
-    border: none;
-    border-top-right-radius: 0.25em;
-    height: .14em;
-    margin: .14em auto;
-    position: relative;
-    top: 25%;
-    width: .65em;
-    z-index: $zTop;
-
-    &:nth-of-type(1),
-    &:nth-of-type(5) { transform: translate(-28%, 0);  }
-
-    &:nth-of-type(2),
-    &:nth-of-type(4){ transform: translate(-10%, 0);  }
-
-    &:nth-of-type(4),
-    &:nth-of-type(5) {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0.25em;
-    }
-
-    &:nth-of-type(3) {
-      border-top-right-radius: 4;
-      border-bottom-right-radius: 0.25em;
-    }
-  }
-
-  p {
-    color: #fff;
-    font-size: .63em;
-    font-weight: 600;
-    text-align: center;
-    line-height: 1.5em;
-    position: relative;
-    text-shadow: 0.0625em 0.0625em 0.0625em rgba(0, 0, 0, 1);
-    top: -.8em;
-    z-index: $zTop;
-  }
-}
-
-
-///////////////
-// AMEX
-//////////////
-$blue-light-AMEX: rgba(126,205,242,1);
-$blue-dark-AMEX: rgba(9,113,188,1);
-
-.amex {
-  background: $blue-dark-AMEX;
-  background-image: radial-gradient(top left, circle farthest-corner, $blue-light-AMEX, $blue-dark-AMEX 60%);
-  font-size: 0.5em;
-  font-weight: 900;
-
-  hr {
-    border: none;
-    border-top: 1px solid rgba(255, 255, 255, .05);
-    margin: .15em 0;
-  }
-
-  .svg {
-    color: #FFF;
-    font-size: .65em;
-    left: 0;
-    position: absolute;
-    top: 0;
-    stroke-width: 1;
-  }
-}
-
-
-///////////////
-// Discover
-//////////////
-$orange-disc: #FF7800;
-.discover {
-  font-size: 0.5em;
-
-  &:after {
-    border-top: .75em solid transparent;
-    border-bottom: 0 solid transparent;
-    border-right: 1.75em solid $orange-disc;
-    bottom: 0;
-    content:"";
-    height: 0;
-    position: absolute;
-    right: 0;
-    width: 0;
-  }
-
-  p {
-    font-size: .8em;
-    font-weight: bold;
-    letter-spacing: .0625em;
-    text-align: center;
-    line-height: 2em;
-    position: relative;
-    text-transform: uppercase;
-    left: 0.5px;
-
+    //push yellow down
     &:after {
-      background: $orange-disc;
+      background: $yellow-visa;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-bottom-left-radius: 0.25em;
+      border-bottom-right-radius: 0.25em;
+      bottom: 1.75%;
+      top: auto;
+    }
+    //visa letters
+    p {
+      color: $blue-visa;
+      line-height: 1em;
+      position: relative;
+      text-align: center;
+      font-size: 1.125em;
+
+      //yellow swoosh
+      &:after {
+        border-top: .1em solid transparent;
+        border-bottom: .1em solid transparent;
+        border-left: .4em solid $yellow-visa;
+        border-radius: 0.0625em;
+        content: "";
+        display: block;
+        height: 0;
+        left: 25.5%;
+        position: absolute;
+        top: 4.25%;
+        transform: rotateZ(189deg);
+        width: 0;
+        z-index: $zTop;
+      }
+    }
+  }
+
+  ///////////////
+  // MasterCard
+  //////////////
+
+  $red-mc: #EF3526;
+  $yellow-mc: #FCB836;
+  $blue-mc: #0059B3;
+
+  .mc {
+    background: $blue-mc;
+    font-size: 0.5em;
+
+    &:before,
+    &:after {
+      background: $red-mc;
       border-radius: 50%;
       content: "";
       display: block;
-      height: .85em;
-      left: 2.6em;
+      height: 2em;
+      left: 35%;
       position: absolute;
-      top: 1.5em;
-      width: .85em;
+      top: 50%;
+      width: 2em;
+      transform: translate(-50%, -50%);
+      z-index: $zMiddle;
+    }
 
-      @media(min-width: 25.625em) {
-        top: .5em;
-        transform: translateY(0.5px);
+    &:after {
+      background: $yellow-mc;
+      left: 65%;
+    }
+
+    hr {
+      background: $red-mc;
+      border: none;
+      border-top-right-radius: 0.25em;
+      height: .14em;
+      margin: .14em auto;
+      position: relative;
+      top: 25%;
+      width: .65em;
+      z-index: $zTop;
+
+      &:nth-of-type(1),
+      &:nth-of-type(5) {
+        transform: translate(-28%, 0);
+      }
+
+      &:nth-of-type(2),
+      &:nth-of-type(4) {
+        transform: translate(-10%, 0);
+      }
+
+      &:nth-of-type(4),
+      &:nth-of-type(5) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0.25em;
+      }
+
+      &:nth-of-type(3) {
+        border-top-right-radius: 4;
+        border-bottom-right-radius: 0.25em;
       }
     }
 
+    p {
+      color: #fff;
+      font-size: .63em;
+      font-weight: 600;
+      text-align: center;
+      line-height: 1.5em;
+      position: relative;
+      text-shadow: 0.0625em 0.0625em 0.0625em rgba(0, 0, 0, 1);
+      top: -.8em;
+      z-index: $zTop;
+    }
+  }
+
+  ///////////////
+  // AMEX
+  //////////////
+  $blue-light-AMEX: rgba(126, 205, 242, 1);
+  $blue-dark-AMEX: rgba(9, 113, 188, 1);
+
+  .amex {
+    background: $blue-dark-AMEX;
+    background-image: radial-gradient(top left, circle farthest-corner, $blue-light-AMEX, $blue-dark-AMEX 60%);
+    font-size: 0.5em;
+    font-weight: 900;
+
+    hr {
+      border: none;
+      border-top: 1px solid rgba(255, 255, 255, .05);
+      margin: .15em 0;
+    }
+
+    .svg {
+      color: #FFF;
+      font-size: .65em;
+      left: 0;
+      position: absolute;
+      top: 0;
+      stroke-width: 1;
+    }
+  }
+
+  ///////////////
+  // Discover
+  //////////////
+  $orange-disc: #FF7800;
+  .discover {
+    font-size: 0.5em;
+
+    &:after {
+      border-top: .75em solid transparent;
+      border-bottom: 0 solid transparent;
+      border-right: 1.75em solid $orange-disc;
+      bottom: 0;
+      content: "";
+      height: 0;
+      position: absolute;
+      right: 0;
+      width: 0;
+    }
+
+    p {
+      font-size: .8em;
+      font-weight: bold;
+      letter-spacing: .0625em;
+      text-align: center;
+      line-height: 2em;
+      position: relative;
+      text-transform: uppercase;
+      left: 0.5px;
+
+      &:after {
+        background: $orange-disc;
+        border-radius: 50%;
+        content: "";
+        display: block;
+        height: .85em;
+        left: 2.6em;
+        position: absolute;
+        top: 1.5em;
+        width: .85em;
+
+        @media(min-width: 25.625em) {
+          top: .5em;
+          transform: translateY(0.5px);
+        }
+      }
+
+    }
+  }
+
+  ///////////////
+  // Back
+  //////////////
+  .back {
+    background: #ccc;
+    font-size: 0.5em;
+    padding: .3em .12em;
+
+    &:before {
+      background: #333;
+      content: "";
+      display: block;
+      height: .6em;
+      width: 100%;
+    }
+
+    &:after {
+      background: #333;
+      border: 0.2em solid #fff;
+      content: "";
+      display: block;
+      height: .55em;
+      margin-left: 0.2em;
+      margin-top: 0.28em;
+      width: 55%;
+    }
+
+    span {
+      background: #333;
+      border: 0.15em solid #fff;
+      display: block;
+      height: .43em;
+      margin-left: .2em;
+      margin-top: .5em;
+      position: absolute;
+      right: .65em;
+      top: 0.95em;
+      width: .55em;
+      z-index: $zBottom;
+    }
   }
 }
-
-///////////////
-// Back
-//////////////
-.back {
-  background: #ccc;
-  font-size: 0.5em;
-  padding: .3em .12em;
-
-  &:before {
-    background: #333;
-    content: "";
-    display: block;
-    height: .6em;
-    width: 100%;
-  }
-
-  &:after {
-    background: #333;
-    border: 0.2em solid #fff;
-    content: "";
-    display: block;
-    height: .55em;
-    margin-left: 0.2em;
-    margin-top: 0.28em;
-    width: 55%;
-  }
-
-  span {
-    background: #333;
-    border: 0.15em solid #fff;
-    display: block;
-    height: .43em;
-    margin-left: .2em;
-    margin-top: .5em;
-    position: absolute;
-    right: .65em;
-    top: 0.95em;
-    width: .55em;
-    z-index: $zBottom;
-  }
-}
-
