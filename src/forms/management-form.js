@@ -1,14 +1,23 @@
 import React from 'react';
 import {Fetcher} from 'servicebot-base-form';
-import {Price} from '../utilities/price.js';
+import {Price, getPrice} from '../utilities/price.js';
 import DateFormat from "../utilities/date-format.js";
 import {BillingForm} from "./billing-settings-form.js";
 import {injectStripe} from "react-stripe-elements";
 import {connect} from "react-redux";
 import {ModalEditProperties} from "./edit-properties-form.js"
 import TierChoose from "./TierChooser"
+import {PriceBreakdown} from "../utilities/widgets";
 
 
+function PriceSummary(props){
+    let {instance, template} = props;
+
+    return <div>
+        <PriceBreakdown inputs={instance.references.service_instance_properties}/>
+        <span>Total: {getPrice(instance)}</span>
+    </div>
+}
 class ServicebotManagedBilling extends React.Component {
 
     constructor(props){
@@ -299,6 +308,9 @@ class ServicebotManagedBilling extends React.Component {
                                         {self.state.instances.map(service => {
                                             return(
                                             <div className="mbf--current-services-item">
+                                                <h3>Subscription Detail</h3>
+                                                <PriceSummary instance={service}/>
+
                                                 <TierChoose key={"t-" + service.payment_structure_template_id} changePlan={self.changePlan} currentPlan={service.payment_structure_template_id} template={self.state.template}/>
                                                 {/*<div className="mbf--current-services-item-details">*/}
                                                     {/*<h6 className="mbf--current-services-item-title">{service.name}</h6>*/}

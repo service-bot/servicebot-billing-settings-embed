@@ -61,7 +61,12 @@ let PriceBreakdown = (props) => {
         acc[widget.type] = widget;
         return acc;
     }, {});
-
+    let map ={
+        add: "+",
+        subtract: "-",
+        "multiply" : "+",
+        "divide": "-"
+    }
     let breakdown = inputs.reduce((acc, input) => {
         if (input.config && input.config.pricing && widgets[input.type].handler.priceHandler) {
             acc.push(<div>{input.prop_label} - {input.config.pricing.operation}
