@@ -315,6 +315,7 @@
           transition: height 100ms linear;
           height: 46px;
           position: relative;
+          box-sizing: content-box;
 
           &.show-form{
             height: 96px;
