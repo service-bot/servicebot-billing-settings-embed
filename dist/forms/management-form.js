@@ -63,13 +63,21 @@ function PriceSummary(props) {
 
     return _react2.default.createElement(
         'div',
-        null,
+        { className: '_items' },
         _react2.default.createElement(_widgets.PriceBreakdown, { inputs: instance.references.service_instance_properties }),
         _react2.default.createElement(
-            'span',
-            null,
-            'Total: ',
-            (0, _price.getPrice)(instance)
+            'p',
+            { className: '_total' },
+            _react2.default.createElement(
+                'span',
+                { className: '_label' },
+                'Total:'
+            ),
+            _react2.default.createElement(
+                'span',
+                { className: '_value' },
+                (0, _price.getPrice)(instance)
+            )
         )
     );
 }
@@ -540,7 +548,7 @@ var ServicebotManagedBilling = function (_React$Component) {
                         'div',
                         { className: 'app-content' },
                         this.getTrialStatus(),
-                        metricProp && _react2.default.createElement(
+                        self.state.instances.length > 0 ? _react2.default.createElement(
                             'div',
                             { className: 'mbf--subscription-summary-wrapper' },
                             _react2.default.createElement(
@@ -550,37 +558,32 @@ var ServicebotManagedBilling = function (_React$Component) {
                             ),
                             _react2.default.createElement(
                                 'div',
-                                { className: '_summary' },
-                                _react2.default.createElement(
-                                    'span',
-                                    null,
-                                    metricProp.config.unit,
-                                    ': ',
-                                    metricProp.data.value
-                                )
+                                { className: 'mbf--current-services-list' },
+                                self.state.instances.map(function (service) {
+                                    return _react2.default.createElement(
+                                        'div',
+                                        { className: 'mbf--current-services-item' },
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'mbf-summary' },
+                                            _react2.default.createElement(
+                                                'p',
+                                                { className: '_heading' },
+                                                'Item'
+                                            ),
+                                            metricProp && _react2.default.createElement(
+                                                'span',
+                                                { className: '_metric' },
+                                                metricProp.data.value,
+                                                ' ',
+                                                metricProp.config.unit
+                                            ),
+                                            _react2.default.createElement(PriceSummary, { instance: service })
+                                        ),
+                                        _react2.default.createElement(_TierChooser2.default, { key: "t-" + service.payment_structure_template_id, changePlan: self.changePlan, currentPlan: service.payment_structure_template_id, template: self.state.template })
+                                    );
+                                })
                             )
-                        ),
-                        _react2.default.createElement(
-                            'h3',
-                            null,
-                            'Subscriptions'
-                        ),
-                        self.state.instances.length > 0 ? _react2.default.createElement(
-                            'div',
-                            { className: 'mbf--current-services-list' },
-                            self.state.instances.map(function (service) {
-                                return _react2.default.createElement(
-                                    'div',
-                                    { className: 'mbf--current-services-item' },
-                                    _react2.default.createElement(
-                                        'h3',
-                                        null,
-                                        'Subscription Detail'
-                                    ),
-                                    _react2.default.createElement(PriceSummary, { instance: service }),
-                                    _react2.default.createElement(_TierChooser2.default, { key: "t-" + service.payment_structure_template_id, changePlan: self.changePlan, currentPlan: service.payment_structure_template_id, template: self.state.template })
-                                );
-                            })
                         ) : _react2.default.createElement(
                             'div',
                             null,
