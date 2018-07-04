@@ -45,7 +45,7 @@ pipeline {
                                       npm run-script build
                                       git add .
                                       git commit -m "Jenkins version bump" | true
-                                      git push origin cleanup-and-styling
+                                      git push origin master
                                       git push origin --tags
                                       echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
                                       npm publish
