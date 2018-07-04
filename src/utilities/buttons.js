@@ -71,7 +71,7 @@ class Buttons extends React.Component {
             style.color = _.get(options, 'button_success_icon_color.value', '#8BC34A');
         }
         return(
-            <span style={style} className="ajax-response success"><i className="fa fa-check-circle"/></span>
+            <span style={style} className="ajax-response success"/>
         )
     }
 
