@@ -107,11 +107,7 @@ var Buttons = function (_React$Component) {
                 var options = this.state.systemOptions;
                 style.color = _.get(options, 'button_success_icon_color.value', '#8BC34A');
             }
-            return _react2.default.createElement(
-                'span',
-                { style: style, className: 'ajax-response success' },
-                _react2.default.createElement('i', { className: 'fa fa-check-circle' })
-            );
+            return _react2.default.createElement('span', { style: style, className: 'ajax-response success' });
         }
     }, {
         key: 'hover',
