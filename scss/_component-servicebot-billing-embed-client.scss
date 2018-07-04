@@ -60,6 +60,93 @@
 
         .mbf--current-services-item{
 
+          .mbf-summary{
+            @include embed-content-box
+
+            ._heading{
+              color: #0033A0;
+              font-size: 14px;
+              font-weight: 600;
+              line-height: 16px;
+              margin-bottom: $gutter*1.5;
+            }
+
+            ._metric{
+              border-radius: 2px;
+              background-color: #CEDEFF;
+              padding: $gutter/4 $gutter/1.5;
+              color: #0033A0;
+              font-size: 16px;
+              line-height: 24px;
+              text-align: center;
+            }
+
+            ._items{
+              display: flex;
+              flex-direction: column;
+
+              &>div{
+                border-bottom: 1px solid #ebebeb;
+                padding: $gutter 0;
+              }
+
+              & *{
+                line-height: 25px;
+                align-items: center;
+              }
+
+              ._item{
+                display: flex;
+                justify-content: space-between;
+                margin: $gutter/2.5 0;
+
+                ._label{
+                  color: #6F7F9F;
+                  font-size: 16px;
+                }
+                ._value_wrap{
+
+                  ._prefix{
+                    color: #0033A0;
+                    font-size: 16px;
+                    font-weight: 600;
+                    padding-right: $gutter;
+                  }
+                  ._value{
+                    color: #0033A0;
+                    font-size: 20px;
+                    font-weight: 600;
+                  }
+
+                }
+              }
+
+              ._total{
+                display: flex;
+                justify-content: space-between;
+                margin-top: $gutter*1.5;
+
+                ._label{
+                  font-weight: 600;
+                  font-size: 14px;
+                }
+                ._value{
+                  font-size: 20px;
+                  font-weight: 300;
+                  text-transform: capitalize;
+
+                  ._price-value{
+                    font-weight: 600;
+                  }
+                }
+
+              }
+
+            }
+
+
+          }
+
           .servicebot-billing-type-selector{
             margin: $gutter * 2 auto;
 
@@ -477,6 +564,7 @@
 
         & > .form-group > .form-input-flex{
           flex-basis: 100%;
+          flex-grow: 0;
         }
 
         &._add-on-item-0{ //specific item overrides
@@ -586,6 +674,7 @@
           flex-direction: row;
           align-items: center;
           justify-content: space-between;
+          flex-grow: 0;
 
           label{
             color: $color-black;

@@ -25,7 +25,7 @@ let Price = function(props){
     let price = formatMoney((props.value/100).toFixed(2),',','.');
     let prefix = props.prefix || '$';
     return(
-        <span>{prefix + price}</span>
+        <span className="_price-value">{prefix + price}</span>
     );
 };
 
@@ -36,7 +36,7 @@ let getPrice = (myService, serviceType = null)=>{
 
     if (serType === "subscription"){
         return (
-            <span>
+            <span className="_unit">
                 <Price value={myService.payment_plan.amount} prefix={prefix}/>
                 <span>{myService.payment_plan.interval_count === 1 ? ' /' : ' / ' + myService.payment_plan.interval_count} {' '+myService.payment_plan.interval}</span>
             </span>
