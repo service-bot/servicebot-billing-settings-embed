@@ -46,6 +46,7 @@
   .form-group.form-group-flex {
     width: 100%;
     flex-direction: $direction;
+    margin: 0 !important;
 
     @if($direction == 'column') {
       .form-label-flex-md{
