@@ -114,13 +114,27 @@ var PriceBreakdown = function PriceBreakdown(props) {
     var breakdown = inputs.reduce(function (acc, input) {
         if (input.config && input.config.pricing && widgets[input.type].handler.priceHandler) {
             acc.push(_react2.default.createElement(
-                "div",
-                null,
-                input.prop_label,
-                " - ",
-                input.config.pricing.operation,
-                "- ",
-                widgets[input.type].handler.priceHandler(input.data, input.config)
+                "p",
+                { className: "_item" },
+                _react2.default.createElement(
+                    "span",
+                    { className: "_label" },
+                    input.prop_label
+                ),
+                _react2.default.createElement(
+                    "span",
+                    { className: "_value_wrap" },
+                    _react2.default.createElement(
+                        "span",
+                        { className: "_prefix" },
+                        map[input.config.pricing.operation]
+                    ),
+                    _react2.default.createElement(
+                        "span",
+                        { className: "_value" },
+                        widgets[input.type].handler.priceHandler(input.data, input.config)
+                    )
+                )
             ));
         }
         return acc;

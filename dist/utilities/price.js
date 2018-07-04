@@ -39,7 +39,7 @@ var Price = function Price(props) {
     var prefix = props.prefix || '$';
     return _react2.default.createElement(
         'span',
-        null,
+        { className: '_price-value' },
         prefix + price
     );
 };
@@ -54,7 +54,7 @@ var getPrice = function getPrice(myService) {
     if (serType === "subscription") {
         return _react2.default.createElement(
             'span',
-            null,
+            { className: '_unit' },
             _react2.default.createElement(Price, { value: myService.payment_plan.amount, prefix: prefix }),
             _react2.default.createElement(
                 'span',
