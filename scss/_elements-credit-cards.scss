@@ -101,12 +101,12 @@ $zTop: 600;
       content: "";
       display: block;
       height: .75em;
-      left: 52%;
-      position: absolute;
+      left: 0.5px;
       top: 5%;
-      transform: translate(-50%, 0);
+      position: absolute;
       width: 96%;
       z-index: $zMiddle;
+      //transform: translate(-50%, 0);
     }
     //push yellow down
     &:after {
@@ -121,10 +121,11 @@ $zTop: 600;
     //visa letters
     p {
       color: $blue-visa;
-      line-height: 1em;
       position: relative;
       text-align: center;
-      font-size: 1.125em;
+      font-size: 1.125em !important;
+      line-height: 2.785em !important;
+      margin: 0 !important;
 
       //yellow swoosh
       &:after {
@@ -135,9 +136,9 @@ $zTop: 600;
         content: "";
         display: block;
         height: 0;
-        left: 25.5%;
         position: absolute;
-        top: 4.25%;
+        top: 7px;
+        left: 5px;
         transform: rotateZ(189deg);
         width: 0;
         z-index: $zTop;

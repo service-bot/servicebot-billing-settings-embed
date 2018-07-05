@@ -13,10 +13,12 @@ import {PriceBreakdown} from "../utilities/widgets";
 function PriceSummary(props){
     let {instance, template} = props;
 
-    return <div>
-        <PriceBreakdown inputs={instance.references.service_instance_properties}/>
-        <span>Total: {getPrice(instance)}</span>
-    </div>
+    return (
+        <div className="_items">
+            <PriceBreakdown inputs={instance.references.service_instance_properties}/>
+            <p className="_total"><span className="_label">Total:</span><span className="_value">{getPrice(instance)}</span></p>
+        </div>
+    );
 }
 class ServicebotManagedBilling extends React.Component {
 
@@ -294,41 +296,37 @@ class ServicebotManagedBilling extends React.Component {
                         <div className="app-content">
                                 {/*todo: style this when it's available or designed */}
                                 {this.getTrialStatus()}
-                                {metricProp &&
+                                {self.state.instances.length > 0 ?
                                     <div className="mbf--subscription-summary-wrapper">
                                         <h3>Subscription Summary</h3>
-                                        <div className="_summary">
-                                            <span>{metricProp.config.unit}: {metricProp.data.value}</span>
-                                        </div>
-                                    </div>
-                                }
-                                <h3>Subscriptions</h3>
-                                {self.state.instances.length > 0 ?
-                                    <div className="mbf--current-services-list">
-                                        {self.state.instances.map(service => {
-                                            return(
-                                            <div className="mbf--current-services-item">
-                                                <h3>Subscription Detail</h3>
-                                                <PriceSummary instance={service}/>
-
-                                                <TierChoose key={"t-" + service.payment_structure_template_id} changePlan={self.changePlan} currentPlan={service.payment_structure_template_id} template={self.state.template}/>
-                                                {/*<div className="mbf--current-services-item-details">*/}
-                                                    {/*<h6 className="mbf--current-services-item-title">{service.name}</h6>*/}
-                                                    {/*<b><Price value={service.payment_plan.amount} /> / {service.payment_plan.interval}</b><br/>*/}
-                                                {/*</div>*/}
-                                                {/*<div className="service-instance-box-content">*/}
-                                                    {/*<div>Status: <b>{service.status}</b></div>*/}
-                                                    {/*<div>Purchased: <b><DateFormat date={service.created_at} time/></b></div>*/}
-                                                {/*</div>*/}
-                                                {/*<div className="mbf--current-services-item-buttons">*/}
-                                                    {/*{(service.status === "running" || service.status === "requested" || service.status === "in_progress") &&*/}
-                                                    {/*<button className="btn btn-default btn-rounded btn-sm m-r-5" style={buttonStyle} onClick={this.requestCancellation.bind(this, service.id)}>Cancel Service</button>*/}
-                                                    {/*}*/}
-                                                    {/*{service.status === "cancelled" && self.state.funds[0] && <button className="btn btn-default btn-rounded btn-sm m-r-5" style={buttonStyle2} onClick={self.resubscribe(service.id)}>Resubscribe</button>}*/}
-                                                {/*</div>*/}
+                                            <div className="mbf--current-services-list">
+                                                {self.state.instances.map(service => {
+                                                    return(
+                                                    <div className="mbf--current-services-item">
+                                                        <div className="mbf-summary">
+                                                            <p className="_heading">Item</p>
+                                                            {metricProp && <span className="_metric">{metricProp.data.value} {metricProp.config.unit}</span>}
+                                                            <PriceSummary instance={service}/>
+                                                        </div>
+                                                        <TierChoose key={"t-" + service.payment_structure_template_id} changePlan={self.changePlan} currentPlan={service.payment_structure_template_id} template={self.state.template}/>
+                                                        {/*<div className="mbf--current-services-item-details">*/}
+                                                            {/*<h6 className="mbf--current-services-item-title">{service.name}</h6>*/}
+                                                            {/*<b><Price value={service.payment_plan.amount} /> / {service.payment_plan.interval}</b><br/>*/}
+                                                        {/*</div>*/}
+                                                        {/*<div className="service-instance-box-content">*/}
+                                                            {/*<div>Status: <b>{service.status}</b></div>*/}
+                                                            {/*<div>Purchased: <b><DateFormat date={service.created_at} time/></b></div>*/}
+                                                        {/*</div>*/}
+                                                        {/*<div className="mbf--current-services-item-buttons">*/}
+                                                            {/*{(service.status === "running" || service.status === "requested" || service.status === "in_progress") &&*/}
+                                                            {/*<button className="btn btn-default btn-rounded btn-sm m-r-5" style={buttonStyle} onClick={this.requestCancellation.bind(this, service.id)}>Cancel Service</button>*/}
+                                                            {/*}*/}
+                                                            {/*{service.status === "cancelled" && self.state.funds[0] && <button className="btn btn-default btn-rounded btn-sm m-r-5" style={buttonStyle2} onClick={self.resubscribe(service.id)}>Resubscribe</button>}*/}
+                                                        {/*</div>*/}
+                                                    </div>
+                                                )})}
                                             </div>
-                                        )})}
-                                    </div>
+                                        </div>
                                     :
                                     <div><p>You currently don't have any subscriptions.</p></div>
                                 }

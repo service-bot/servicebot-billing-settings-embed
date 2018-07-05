@@ -124,7 +124,7 @@ function ModalEditProperties(props){
 
 
     return (
-            <div className="p-20">
+            <div>
                 <ServicebotBaseForm
                     form={CustomFieldEditForm}
                     //todo: is there a way to not need initial values to reference a prop name? (for array of X cases)

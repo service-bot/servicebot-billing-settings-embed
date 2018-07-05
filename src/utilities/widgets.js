@@ -61,16 +61,22 @@ let PriceBreakdown = (props) => {
         acc[widget.type] = widget;
         return acc;
     }, {});
-    let map ={
+    let map = {
         add: "+",
         subtract: "-",
         "multiply" : "+",
         "divide": "-"
-    }
+    };
     let breakdown = inputs.reduce((acc, input) => {
         if (input.config && input.config.pricing && widgets[input.type].handler.priceHandler) {
-            acc.push(<div>{input.prop_label} - {input.config.pricing.operation}
-                - {widgets[input.type].handler.priceHandler(input.data, input.config)}</div>);
+            acc.push(
+                <p className="_item">
+                    <span className="_label">{input.prop_label}</span>
+                    <span className="_value_wrap">
+                        <span className="_prefix">{map[input.config.pricing.operation]}</span>
+                        <span className="_value">{widgets[input.type].handler.priceHandler(input.data, input.config)}</span>
+                    </span>
+                </p>);
         }
         return acc;
     }, []);
