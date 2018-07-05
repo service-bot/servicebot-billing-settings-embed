@@ -51,7 +51,6 @@ pipeline {
                                       npm publish
                                 '''
                                 }
-
               }
           }
         }
