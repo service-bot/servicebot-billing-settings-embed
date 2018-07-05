@@ -40,7 +40,7 @@ pipeline {
                               sshagent(credentials: ["${gitCredentials}"]){
 
                                 sh '''
-                                      npm version patch -m "Jenkins version bump"
+                                      PACKAGE_VERSION=$(npm version patch -m "Jenkins version bump" | awk '{print substr($1,2); }')
                                       npm install
                                       npm run-script build
                                       git add .
@@ -49,6 +49,8 @@ pipeline {
                                       git push origin --tags
                                       echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
                                       npm publish
+                                      wait-for-package-replication -v $PACKAGE_VERSION -p ''' + getRepo() + '''
+
                                 '''
                                 }
               }
@@ -67,7 +69,6 @@ pipeline {
 
                 sshagent(credentials: ["${gitCredentials}"]){
                  sh '''
-                    wait-for-package-replication -p ''' + getRepo() + '''
                     npm install ''' + getRepo() + '''@latest
                     git add .
                     git commit -m "Jenkins updating version of" ``` + getRepo() + ```
