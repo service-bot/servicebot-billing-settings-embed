@@ -74,7 +74,7 @@ pipeline {
                     wait-for-package-replication -p ''' + getRepo() + '''
                     npm install ''' + getRepo() + '''@latest
                     git add .
-                    git commit -m "Jenkins version bump"
+                    git commit -m "Jenkins updating version of" ``` + getRepo() + ```
                     git push origin tiers
                     '''
               }
