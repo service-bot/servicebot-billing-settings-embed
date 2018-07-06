@@ -422,55 +422,22 @@ var CreditCardForm = function (_React$Component3) {
                         { className: 'mbf--card-wrapper no-card' },
                         _react2.default.createElement(
                             'div',
-                            { className: 'mbf--card-display' },
-                            _react2.default.createElement('div', { className: 'mbf--card-chip' }),
+                            { className: 'mbf--update-funding-wrapper' },
                             _react2.default.createElement(
                                 'div',
-                                { className: 'mbf--card-number-holder' },
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'mbf--card-first-12' },
-                                    _react2.default.createElement('span', null),
-                                    _react2.default.createElement('span', null),
-                                    _react2.default.createElement('span', null),
-                                    _react2.default.createElement('span', null),
-                                    _react2.default.createElement('span', null),
-                                    _react2.default.createElement('span', null),
-                                    _react2.default.createElement('span', null),
-                                    _react2.default.createElement('span', null),
-                                    _react2.default.createElement('span', null),
-                                    _react2.default.createElement('span', null),
-                                    _react2.default.createElement('span', null),
-                                    _react2.default.createElement('span', null)
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'mbf--card-last4' },
-                                    'XXXX'
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'mbf--card-info-holder' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'mbf--card-date-holder' },
-                                    _react2.default.createElement(
-                                        'span',
-                                        { className: 'mbf--card-exp-month' },
-                                        'XX/ '
-                                    ),
-                                    _react2.default.createElement(
-                                        'span',
-                                        { className: 'mbf--card-exp-year' },
-                                        'XXXX'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'mbf--card-brand' },
-                                    'Add Card'
-                                )
+                                { className: 'mbf--funding-form-element' },
+                                _react2.default.createElement(_servicebotBaseForm.ServicebotBaseForm, {
+                                    form: BillingInfo,
+                                    formProps: (0, _extends3.default)({}, _this4.props),
+                                    initialValues: (0, _extends3.default)({}, _this4.state.personalInformation),
+                                    submissionPrep: _this4.submissionPrep,
+                                    submissionRequest: submissionRequest,
+                                    successMessage: "Fund added successfully",
+                                    handleResponse: _this4.handleSuccessResponse,
+                                    handleFailure: _this4.handleFailureResponse,
+                                    reShowForm: true,
+                                    external: _this4.props.external,
+                                    token: _this4.props.token })
                             )
                         )
                     );
