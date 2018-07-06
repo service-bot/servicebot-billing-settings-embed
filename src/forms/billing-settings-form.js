@@ -255,18 +255,20 @@ class CreditCardForm extends React.Component {
             }else{
                 return (
                     <div className="mbf--card-wrapper no-card">
-                        <div className="mbf--card-display">
-                            <div className="mbf--card-chip"/>
-                            <div className="mbf--card-number-holder">
-                                <span className="mbf--card-first-12"><span/><span/><span/><span/><span/><span/><span/><span/><span/><span/><span/><span/></span>
-                                <span className="mbf--card-last4">XXXX</span>
-                            </div>
-                            <div className="mbf--card-info-holder">
-                                <div className="mbf--card-date-holder">
-                                    <span className="mbf--card-exp-month">XX/ </span>
-                                    <span className="mbf--card-exp-year">XXXX</span>
-                                </div>
-                                <span className="mbf--card-brand">Add Card</span>
+                        <div className="mbf--update-funding-wrapper">
+                            <div className="mbf--funding-form-element">
+                                <ServicebotBaseForm
+                                    form={BillingInfo}
+                                    formProps={{...this.props}}
+                                    initialValues={{...this.state.personalInformation}}
+                                    submissionPrep={this.submissionPrep}
+                                    submissionRequest={submissionRequest}
+                                    successMessage={"Fund added successfully"}
+                                    handleResponse={this.handleSuccessResponse}
+                                    handleFailure={this.handleFailureResponse}
+                                    reShowForm={true}
+                                    external={this.props.external}
+                                    token={this.props.token} />
                             </div>
                         </div>
                     </div>
