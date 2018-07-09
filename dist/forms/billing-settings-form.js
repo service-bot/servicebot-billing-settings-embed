@@ -395,7 +395,7 @@ var CreditCardForm = function (_React$Component3) {
                             { className: 'mbf--update-funding-wrapper' },
                             _react2.default.createElement(
                                 'div',
-                                { className: 'mbf--funding-form-element' },
+                                { className: 'mbf--funding-form-element update-card-container' },
                                 _react2.default.createElement(_servicebotBaseForm.ServicebotBaseForm, {
                                     form: BillingInfo,
                                     formProps: (0, _extends3.default)({}, _this4.props),
@@ -419,7 +419,7 @@ var CreditCardForm = function (_React$Component3) {
                 } else {
                     return _react2.default.createElement(
                         'div',
-                        { className: 'mbf--card-wrapper no-card' },
+                        { className: 'add-new-card-container' },
                         _react2.default.createElement(
                             'div',
                             { className: 'mbf--update-funding-wrapper' },
