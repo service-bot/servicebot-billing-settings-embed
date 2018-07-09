@@ -10,6 +10,13 @@ import {Price} from '../utilities/price.js';
 import {getBasePrice} from "../widget-inputs/handleInputs";
 
 
+
+let selectAffectPricing = function(prop){
+    if(!prop.config || !prop.config.pricing || !prop.config.pricing.value){
+        return false;
+    }
+    return Object.values(prop.config.pricing.value).some(price => price != 0)
+}
 let renderCustomProperty = (props) => {
     const {fields, formJSON, meta: {touched, error}} = props;
     let widgets = getWidgets().reduce((acc, widget) => {
@@ -20,37 +27,38 @@ let renderCustomProperty = (props) => {
        //
         <div className="add-on-item-widgets">
             {fields.map((customProperty, index) => {
-                    if(!formJSON[index].config || !formJSON[index].config.pricing || formJSON[index].type === "metric"){
+                let prop = fields.get(index);
+                    if(!prop.config || !prop.config.pricing || prop.type === "metric" || (prop.type === "select" && !selectAffectPricing(prop))){
                         return <div/>
                     }
-                    let property = widgets[formJSON[index].type];
-                    if(formJSON[index].prompt_user){
+                    let property = widgets[prop.type];
+                    if(prop.prompt_user){
 
                         return (
                             <div className={`_add-on-item-widget-wrapper _add-on-item-${index}`}>
                                 <Field
                                     key={index}
                                     name={`${customProperty}.data.value`}
-                                    type={formJSON[index].type}
+                                    type={prop.type}
                                     widget={property.widget}
                                     component={widgetField}
-                                    label={formJSON[index].prop_label}
+                                    label={prop.prop_label}
                                     // value={formJSON[index].data.value}
-                                    formJSON={formJSON[index]}
-                                    configValue={formJSON[index].config}
+                                    formJSON={prop}
+                                    configValue={prop.config}
                                     validate={required()}
                                 />
                             </div>
                         );
                     }else{
-                        if(formJSON[index].data && formJSON[index].data.value){
+                        if(prop.data && prop.data.value){
                             return (
                                 <div className={`_add-on-item-widget-wrapper _add-on-item-${index}`}>
                                     <div className={`form-group form-group-flex`}>
-                                        {(formJSON[index].prop_label && formJSON[index].type !== 'hidden') &&
-                                        <label className="control-label form-label-flex-md">{formJSON[index].prop_label}</label>}
+                                        {(prop.prop_label && prop.type !== 'hidden') &&
+                                        <label className="control-label form-label-flex-md">{prop.prop_label}</label>}
                                         <div className="form-input-flex">
-                                            <p>{formJSON[index].data.value}</p>
+                                            <p>{prop.data.value}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -82,12 +90,17 @@ function CustomFieldEditForm(props) {
     }, {});
     let {invalid, submitting} = props;
 
-    let properties = props.formJSON.service_instance_properties;
+    let properties = props.formJSON.service_instance_properties.filter(prop => {
+        return prop.type !== "select" || selectAffectPricing(prop)
+    });
     let basePrice = getBasePrice(props.instance.references.service_instance_properties, handlers, props.instance.payment_plan.amount);
     let priceData = getPriceData(basePrice, properties);
     console.log(invalid, submitting, "hu")
     return (
         <form>
+            {priceData.length > 0 && <div>
+            <h3>Subscription Add Ons</h3>
+
             <FieldArray name="service_instance_properties" component={renderCustomProperty}
                         formJSON={properties}/>
 
@@ -95,12 +108,13 @@ function CustomFieldEditForm(props) {
                 <p>
                     <label>Total Cost:</label>
                 </p>
-                <p>
+               <p>
                     <Price className="_total-price" value={priceData.total} />
                     <span className="_unit"><span className="_per">/</span>{props.instance.payment_plan.interval}</span>
                     <button disabled={invalid|| submitting} className="buttons _primary" onClick={props.handleSubmit} type="submit" value="submit">Submit</button>
                 </p>
             </div>
+            </div>}
         </form>
     )
 }

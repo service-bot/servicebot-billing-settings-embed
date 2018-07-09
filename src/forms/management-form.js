@@ -317,12 +317,12 @@ class ServicebotManagedBilling extends React.Component {
                                                             {/*<div>Status: <b>{service.status}</b></div>*/}
                                                             {/*<div>Purchased: <b><DateFormat date={service.created_at} time/></b></div>*/}
                                                         {/*</div>*/}
-                                                        {/*<div className="mbf--current-services-item-buttons">*/}
-                                                            {/*{(service.status === "running" || service.status === "requested" || service.status === "in_progress") &&*/}
-                                                            {/*<button className="btn btn-default btn-rounded btn-sm m-r-5" style={buttonStyle} onClick={this.requestCancellation.bind(this, service.id)}>Cancel Service</button>*/}
-                                                            {/*}*/}
-                                                            {/*{service.status === "cancelled" && self.state.funds[0] && <button className="btn btn-default btn-rounded btn-sm m-r-5" style={buttonStyle2} onClick={self.resubscribe(service.id)}>Resubscribe</button>}*/}
-                                                        {/*</div>*/}
+                                                        <div className="mbf--current-services-item-buttons">
+                                                            {(service.status === "running" || service.status === "requested" || service.status === "in_progress") &&
+                                                            <button className="btn btn-default btn-rounded btn-sm m-r-5" style={buttonStyle} onClick={this.requestCancellation.bind(this, service.id)}>Cancel Service</button>
+                                                            }
+                                                            {service.status === "cancelled" && self.state.funds[0] && <button className="btn btn-default btn-rounded btn-sm m-r-5" style={buttonStyle2} onClick={self.resubscribe(service.id)}>Resubscribe</button>}
+                                                        </div>
                                                     </div>
                                                 )})}
                                             </div>
@@ -333,7 +333,6 @@ class ServicebotManagedBilling extends React.Component {
                                 <h3>Payment Information</h3>
                                 {this.getBillingForm()}
 
-                                <h3>Subscription Add Ons</h3>
                                 <ModalEditProperties external={this.props.external} token={this.props.token} url={this.props.url} instance={self.state.instances[0]} refresh={this.hidePropEdit}/>
                         </div>
                         :

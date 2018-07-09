@@ -68,7 +68,7 @@ let PriceBreakdown = (props) => {
         "divide": "-"
     };
     let breakdown = inputs.reduce((acc, input) => {
-        if (input.config && input.config.pricing && widgets[input.type].handler.priceHandler) {
+        if (input.config && input.config.pricing && widgets[input.type].handler.priceHandler && widgets[input.type].handler.priceHandler(input.data, input.config)) {
             acc.push(
                 <p className="_item">
                     <span className="_label">{input.prop_label}</span>
