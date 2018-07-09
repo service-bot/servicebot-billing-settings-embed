@@ -17,6 +17,8 @@ var _client = require("../core-input-types/client");
 
 var _client2 = _interopRequireDefault(_client);
 
+var _price = require("./price");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var values = require('object.values');
@@ -99,8 +101,10 @@ var RenderWidget = function RenderWidget(props) {
 };
 
 var PriceBreakdown = function PriceBreakdown(props) {
-    var inputs = props.inputs;
+    var metricProp = props.metricProp,
+        instance = props.instance;
 
+    var inputs = instance.references.service_instance_properties;
     var widgets = (0, _client2.default)().reduce(function (acc, widget) {
         acc[widget.type] = widget;
         return acc;
@@ -141,12 +145,38 @@ var PriceBreakdown = function PriceBreakdown(props) {
     }, []);
 
     if (breakdown.length == 0) {
-        breakdown = _react2.default.createElement("div", null);
+        return _react2.default.createElement("div", null);
     }
     return _react2.default.createElement(
         "div",
-        null,
-        breakdown
+        { className: "mbf-summary" },
+        _react2.default.createElement(
+            "p",
+            { className: "_heading" },
+            "Items"
+        ),
+        metricProp && _react2.default.createElement(
+            "span",
+            { className: "_metric" },
+            metricProp.data.value,
+            " ",
+            metricProp.config.unit
+        ),
+        breakdown,
+        _react2.default.createElement(
+            "p",
+            { className: "_total" },
+            _react2.default.createElement(
+                "span",
+                { className: "_label" },
+                "Total:"
+            ),
+            _react2.default.createElement(
+                "span",
+                { className: "_value" },
+                (0, _price.getPrice)(instance)
+            )
+        )
     );
 };
 var WidgetList = function WidgetList(props) {
