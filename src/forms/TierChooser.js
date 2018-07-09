@@ -192,7 +192,7 @@ class TierSelector extends React.Component{
                 </div>
                 {currentInterval !== "custom" && <div className="servicebot-pricing-table">
                     {currentPlans.map(plan => {
-                        if(plan.interval === "custom"){
+                        if(plan.type === "custom"){
                             return <div></div>
                         }
                         let props = {
