@@ -15,7 +15,7 @@ function PriceSummary(props){
 
     return (
         <div className="_items">
-            <PriceBreakdown inputs={instance.references.service_instance_properties}/>
+            <PriceBreakdown instance={instance} inputs={instance.references.service_instance_properties}/>
             <p className="_total"><span className="_label">Total:</span><span className="_value">{getPrice(instance)}</span></p>
         </div>
     );
@@ -86,7 +86,24 @@ class ServicebotManagedBilling extends React.Component {
         }
         return request;
     }
+    getSubscriptionStatus(){
+        let instance = this.state.instances[0];
+        if(instance.status === "cancelled"){
+            if(this.state.funds.length === 0 && instance.payment_plan && instance.payment_plan.amount > 0) {
+                return <div>
+                    <p className={"form-help-text"}><strong>Subscription Status: cancelled due to lack of funds</strong></p>
 
+                </div>
+            }else{
+                return <div>
+                    <p className={"form-help-text"}><strong>Subscription Status: cancelled</strong></p>
+                </div>
+            }
+        }else{
+            return <div/>
+        }
+
+    }
     async getServicebotDetails() {
         let self = this;
         let instances = await Fetcher(`${self.props.url}/api/v1/service-instances/own`, "GET", null, this.getRequest("GET"));
@@ -302,12 +319,9 @@ class ServicebotManagedBilling extends React.Component {
                                                 {self.state.instances.map(service => {
                                                     return(
                                                     <div className="mbf--current-services-item">
-                                                        <div className="mbf-summary">
-                                                            <p className="_heading">Item</p>
-                                                            {this.getTrialStatus()}
-                                                            {metricProp && <span className="_metric">{metricProp.data.value} {metricProp.config.unit}</span>}
-                                                            <PriceSummary instance={service}/>
-                                                        </div>
+                                                        {this.getSubscriptionStatus()}
+                                                        {this.getTrialStatus()}
+                                                        <PriceBreakdown metricProp={metricProp} instance={service}/>
                                                         <TierChoose key={"t-" + service.payment_structure_template_id} changePlan={self.changePlan} currentPlan={service.payment_structure_template_id} template={self.state.template}/>
                                                         {/*<div className="mbf--current-services-item-details">*/}
                                                             {/*<h6 className="mbf--current-services-item-title">{service.name}</h6>*/}

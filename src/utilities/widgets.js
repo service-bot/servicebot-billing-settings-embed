@@ -2,6 +2,7 @@ import React from "react";
 import {Field, FormSection} from "redux-form";
 import {inputField, selectField, priceField} from "servicebot-base-form";
 import getWidgets from "../core-input-types/client"
+import {getPrice} from "./price";
 const values = require('object.values');
 if (!Object.values) {
     values.shim();
@@ -56,7 +57,8 @@ let RenderWidget = (props) => {
 
 
 let PriceBreakdown = (props) => {
-    const {inputs} = props;
+    const {metricProp, instance} = props;
+    let inputs = instance.references.service_instance_properties;
     let widgets = getWidgets().reduce((acc, widget) => {
         acc[widget.type] = widget;
         return acc;
@@ -82,12 +84,19 @@ let PriceBreakdown = (props) => {
     }, []);
 
     if (breakdown.length == 0) {
-        breakdown = <div/>
+        return <div/>
     }
     return (
-        <div>
+
+        <div className="mbf-summary">
+            <p className="_heading">Items</p>
+
+            {metricProp && <span className="_metric">{metricProp.data.value} {metricProp.config.unit}</span>}
             {breakdown}
+            <p className="_total"><span className="_label">Total:</span><span className="_value">{getPrice(instance)}</span></p>
+
         </div>
+
     );
 };
 let WidgetList = props => (
