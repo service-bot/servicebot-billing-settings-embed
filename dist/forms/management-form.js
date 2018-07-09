@@ -64,7 +64,7 @@ function PriceSummary(props) {
     return _react2.default.createElement(
         'div',
         { className: '_items' },
-        _react2.default.createElement(_widgets.PriceBreakdown, { inputs: instance.references.service_instance_properties }),
+        _react2.default.createElement(_widgets.PriceBreakdown, { instance: instance, inputs: instance.references.service_instance_properties }),
         _react2.default.createElement(
             'p',
             { className: '_total' },
@@ -210,6 +210,44 @@ var ServicebotManagedBilling = function (_React$Component) {
                 request.body = JSON.stringify(body);
             }
             return request;
+        }
+    }, {
+        key: 'getSubscriptionStatus',
+        value: function getSubscriptionStatus() {
+            var instance = this.state.instances[0];
+            if (instance.status === "cancelled") {
+                if (this.state.funds.length === 0 && instance.payment_plan && instance.payment_plan.amount > 0) {
+                    return _react2.default.createElement(
+                        'div',
+                        null,
+                        _react2.default.createElement(
+                            'p',
+                            { className: "form-help-text" },
+                            _react2.default.createElement(
+                                'strong',
+                                null,
+                                'Subscription Status: cancelled due to lack of funds'
+                            )
+                        )
+                    );
+                } else {
+                    return _react2.default.createElement(
+                        'div',
+                        null,
+                        _react2.default.createElement(
+                            'p',
+                            { className: "form-help-text" },
+                            _react2.default.createElement(
+                                'strong',
+                                null,
+                                'Subscription Status: cancelled'
+                            )
+                        )
+                    );
+                }
+            } else {
+                return _react2.default.createElement('div', null);
+            }
         }
     }, {
         key: 'getServicebotDetails',
@@ -571,24 +609,9 @@ var ServicebotManagedBilling = function (_React$Component) {
                                     return _react2.default.createElement(
                                         'div',
                                         { className: 'mbf--current-services-item' },
-                                        _react2.default.createElement(
-                                            'div',
-                                            { className: 'mbf-summary' },
-                                            _react2.default.createElement(
-                                                'p',
-                                                { className: '_heading' },
-                                                'Item'
-                                            ),
-                                            _this4.getTrialStatus(),
-                                            metricProp && _react2.default.createElement(
-                                                'span',
-                                                { className: '_metric' },
-                                                metricProp.data.value,
-                                                ' ',
-                                                metricProp.config.unit
-                                            ),
-                                            _react2.default.createElement(PriceSummary, { instance: service })
-                                        ),
+                                        _this4.getSubscriptionStatus(),
+                                        _this4.getTrialStatus(),
+                                        _react2.default.createElement(_widgets.PriceBreakdown, { metricProp: metricProp, instance: service }),
                                         _react2.default.createElement(_TierChooser2.default, { key: "t-" + service.payment_structure_template_id, changePlan: self.changePlan, currentPlan: service.payment_structure_template_id, template: self.state.template }),
                                         _react2.default.createElement(
                                             'div',
