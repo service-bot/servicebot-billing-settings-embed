@@ -56,6 +56,11 @@
         }
       }
 
+
+      .form-help-text{
+        font-weight: 400;
+      }
+
       .mbf--current-services-list{
 
         .mbf--current-services-item{
@@ -450,6 +455,10 @@
             }
           }
         }
+        
+        .add-new-card-container{
+          position: relative;
+        }
 
         .mbf--update-funding-wrapper{
           margin: {
@@ -460,14 +469,21 @@
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: flex-start;
+            align-items: flex-start;
 
             #card-element, .form-group{
-              flex-basis: 46%;
+              flex-basis: calc( 50% - 26px );
+              margin-right: $gutter;
+              margin-bottom: $gutter;
 
               @include breakpoint(iPhone){
                 flex-basis: 100%;
               }
+            }
+
+            .form-group:nth-child(2){
+              //padding-left: $gutter;
             }
 
             #card-element{
@@ -503,16 +519,37 @@
             }
           }
 
-          button{
+          .update-card-container {
+            button{
+              &.mbf--btn-update-funding-save{
+                padding: 11.5px $gutter;
+                border-radius: 2px;
+                position: absolute;
+                top: $gutter * 1.5;
+                right: $gutter;
+              }
+              &.mf--btn-cancel-update-funding {
+                right: calc(120px + 16px);
+              }
+            }
+          }
 
-            &.mbf--btn-update-funding-save, &.mf--btn-cancel-update-funding{
+          .add-new-card-container{
+            button{
+              &.mbf--btn-update-funding-save{
+                position: absolute;
+                top: -60px;
+                right: 20px;
+              }
+            }
+          }
+
+          button{
+            &.mf--btn-cancel-update-funding {
               padding: 11.5px $gutter;
               border-radius: 2px;
               position: absolute;
               top: $gutter * 1.5;
-              right: $gutter;
-            }
-            &.mf--btn-cancel-update-funding{
               right: calc(120px + 16px);
             }
           }
