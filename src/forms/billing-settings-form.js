@@ -232,29 +232,29 @@ class CreditCardForm extends React.Component {
                             }
                         </div>
                         {this.state.showForm &&
-                        <div className="mbf--update-funding-wrapper">
-                            <div className="mbf--funding-form-element">
-                                <ServicebotBaseForm
-                                    form={BillingInfo}
-                                    formProps={{...this.props}}
-                                    initialValues={{...this.state.personalInformation}}
-                                    submissionPrep={this.submissionPrep}
-                                    submissionRequest={submissionRequest}
-                                    successMessage={"Fund added successfully"}
-                                    handleResponse={this.handleSuccessResponse}
-                                    handleFailure={this.handleFailureResponse}
-                                    reShowForm={true}
-                                    external={this.props.external}
-                                    token={this.props.token} />
+                            <div className="mbf--update-funding-wrapper">
+                                <div className="mbf--funding-form-element update-card-container">
+                                    <ServicebotBaseForm
+                                        form={BillingInfo}
+                                        formProps={{...this.props}}
+                                        initialValues={{...this.state.personalInformation}}
+                                        submissionPrep={this.submissionPrep}
+                                        submissionRequest={submissionRequest}
+                                        successMessage={"Fund added successfully"}
+                                        handleResponse={this.handleSuccessResponse}
+                                        handleFailure={this.handleFailureResponse}
+                                        reShowForm={true}
+                                        external={this.props.external}
+                                        token={this.props.token} />
+                                </div>
+                                <button className="buttons _text mf--btn-cancel-update-funding" onClick={this.hidePaymentForm}>Cancel</button>
                             </div>
-                            <button className="buttons _text mf--btn-cancel-update-funding" onClick={this.hidePaymentForm}>Cancel</button>
-                        </div>
                         }
                     </div>
                 )
             }else{
                 return (
-                    <div className="mbf--card-wrapper no-card">
+                    <div className={`add-new-card-container`}>
                         <div className="mbf--update-funding-wrapper">
                             <div className="mbf--funding-form-element">
                                 <ServicebotBaseForm

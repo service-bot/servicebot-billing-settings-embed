@@ -320,24 +320,32 @@ var ServicebotManagedBilling = function (_React$Component) {
                             'div',
                             { className: 'trial-notice red' },
                             _react2.default.createElement(
-                                'strong',
-                                null,
-                                trialExpires,
-                                ' left of the trial '
-                            ),
-                            ' and you have no funding source. Your subscription will be deactivated after trial expiration date. If you would like to continue your service, please update your credit/debit card below.'
+                                'p',
+                                { className: "form-help-text" },
+                                _react2.default.createElement(
+                                    'strong',
+                                    null,
+                                    trialExpires,
+                                    ' left of the trial '
+                                ),
+                                ' and you have no funding source. Your subscription will be deactivated after trial expiration date. If you would like to continue your service, please update your credit/debit card below.'
+                            )
                         );
                     } else {
                         return _react2.default.createElement(
                             'div',
                             { className: 'trial-notice blue' },
                             _react2.default.createElement(
-                                'strong',
-                                null,
-                                trialExpires,
-                                ' left of the trial. '
-                            ),
-                            ' The initial payment will be charged once trial expires.'
+                                'p',
+                                { className: "form-help-text" },
+                                _react2.default.createElement(
+                                    'strong',
+                                    null,
+                                    trialExpires,
+                                    ' left of the trial. '
+                                ),
+                                ' The initial payment will be charged once trial expires.'
+                            )
                         );
                     }
                 } else {
@@ -367,7 +375,7 @@ var ServicebotManagedBilling = function (_React$Component) {
                     { className: 'mbf--funding-card-wrapper' },
                     _react2.default.createElement(
                         'h5',
-                        { className: 'mbf--add-funding-message' },
+                        { className: 'form-help-text' },
                         'Add your funding credit/debit card.'
                     ),
                     _react2.default.createElement(_billingSettingsForm.BillingForm, { buttonText: buttonText,
@@ -513,6 +521,7 @@ var ServicebotManagedBilling = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            var _this4 = this;
 
             var self = this;
             if (this.state.error) {
@@ -547,7 +556,6 @@ var ServicebotManagedBilling = function (_React$Component) {
                     self.state.instances.length > 0 ? _react2.default.createElement(
                         'div',
                         { className: 'app-content' },
-                        this.getTrialStatus(),
                         self.state.instances.length > 0 ? _react2.default.createElement(
                             'div',
                             { className: 'mbf--subscription-summary-wrapper' },
@@ -571,6 +579,7 @@ var ServicebotManagedBilling = function (_React$Component) {
                                                 { className: '_heading' },
                                                 'Item'
                                             ),
+                                            _this4.getTrialStatus(),
                                             metricProp && _react2.default.createElement(
                                                 'span',
                                                 { className: '_metric' },

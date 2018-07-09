@@ -153,13 +153,13 @@ class ServicebotManagedBilling extends React.Component {
                 if(self.state.funds.length === 0) {
                     return (
                         <div className="trial-notice red">
-                            <strong>{trialExpires} left of the trial </strong> and you have no funding source. Your subscription will be deactivated after trial expiration date. If you would like to continue your service, please update your credit/debit card below.
+                            <p className={"form-help-text"}><strong>{trialExpires} left of the trial </strong> and you have no funding source. Your subscription will be deactivated after trial expiration date. If you would like to continue your service, please update your credit/debit card below.</p>
                         </div>
                     )
                 } else {
                     return (
                         <div className="trial-notice blue">
-                            <strong>{trialExpires} left of the trial. </strong> The initial payment will be charged once trial expires.
+                            <p className={"form-help-text"}><strong>{trialExpires} left of the trial. </strong> The initial payment will be charged once trial expires.</p>
                         </div>
                     )
                 }
@@ -185,7 +185,7 @@ class ServicebotManagedBilling extends React.Component {
             <div>
                 {self.state.funds.length === 0 || !self.state.funds[0].source ?
                     <div className="mbf--funding-card-wrapper">
-                        <h5 className="mbf--add-funding-message">Add your funding credit/debit card.</h5>
+                        <h5 className="form-help-text">Add your funding credit/debit card.</h5>
                         <BillingForm buttonText={buttonText}
                                      handleResponse={self.handleResponse(self.state.instances[0])}
                                      token={self.props.token} spk={self.state.spk}
@@ -295,7 +295,6 @@ class ServicebotManagedBilling extends React.Component {
                     {self.state.instances.length > 0 ?
                         <div className="app-content">
                                 {/*todo: style this when it's available or designed */}
-                                {this.getTrialStatus()}
                                 {self.state.instances.length > 0 ?
                                     <div className="mbf--subscription-summary-wrapper">
                                         <h3>Subscription Summary</h3>
@@ -305,6 +304,7 @@ class ServicebotManagedBilling extends React.Component {
                                                     <div className="mbf--current-services-item">
                                                         <div className="mbf-summary">
                                                             <p className="_heading">Item</p>
+                                                            {this.getTrialStatus()}
                                                             {metricProp && <span className="_metric">{metricProp.data.value} {metricProp.config.unit}</span>}
                                                             <PriceSummary instance={service}/>
                                                         </div>
