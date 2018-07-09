@@ -589,7 +589,21 @@ var ServicebotManagedBilling = function (_React$Component) {
                                             ),
                                             _react2.default.createElement(PriceSummary, { instance: service })
                                         ),
-                                        _react2.default.createElement(_TierChooser2.default, { key: "t-" + service.payment_structure_template_id, changePlan: self.changePlan, currentPlan: service.payment_structure_template_id, template: self.state.template })
+                                        _react2.default.createElement(_TierChooser2.default, { key: "t-" + service.payment_structure_template_id, changePlan: self.changePlan, currentPlan: service.payment_structure_template_id, template: self.state.template }),
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'mbf--current-services-item-buttons' },
+                                            (service.status === "running" || service.status === "requested" || service.status === "in_progress") && _react2.default.createElement(
+                                                'button',
+                                                { className: 'btn btn-default btn-rounded btn-sm m-r-5', style: buttonStyle, onClick: _this4.requestCancellation.bind(_this4, service.id) },
+                                                'Cancel Service'
+                                            ),
+                                            service.status === "cancelled" && self.state.funds[0] && _react2.default.createElement(
+                                                'button',
+                                                { className: 'btn btn-default btn-rounded btn-sm m-r-5', style: buttonStyle2, onClick: self.resubscribe(service.id) },
+                                                'Resubscribe'
+                                            )
+                                        )
                                     );
                                 })
                             )
@@ -608,11 +622,6 @@ var ServicebotManagedBilling = function (_React$Component) {
                             'Payment Information'
                         ),
                         this.getBillingForm(),
-                        _react2.default.createElement(
-                            'h3',
-                            null,
-                            'Subscription Add Ons'
-                        ),
                         _react2.default.createElement(_editPropertiesForm.ModalEditProperties, { external: this.props.external, token: this.props.token, url: this.props.url, instance: self.state.instances[0], refresh: this.hidePropEdit })
                     ) : _react2.default.createElement(
                         'div',
