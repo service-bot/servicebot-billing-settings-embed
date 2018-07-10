@@ -39,7 +39,8 @@ var _currencySymbolMap2 = _interopRequireDefault(_currencySymbolMap);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Tier = function Tier(props) {
-    var tier = props.tier,
+    var currentPlan = props.currentPlan,
+        tier = props.tier,
         plan = props.plan,
         pickTier = props.pickTier,
         isCurrent = props.isCurrent,
@@ -137,7 +138,7 @@ var Tier = function Tier(props) {
             ),
             isSelected && !isCurrent && _react2.default.createElement(
                 'button',
-                { onClick: props.changePlan, className: '_confirm-tier _cancel-tier buttons rounded', 'aria-label': 'cancel change plan' },
+                { onClick: pickTier(currentPlan), className: '_confirm-tier _cancel-tier buttons rounded', 'aria-label': 'cancel change plan' },
                 _react2.default.createElement('span', { className: 'icon close' })
             )
         ),
@@ -353,6 +354,7 @@ var TierSelector = function (_React$Component) {
                                 return tier.id === plan.tier_id;
                             }),
                             plan: plan,
+                            currentPlan: currentPlan,
                             changePlan: self.props.changePlan(plan.id)
                         };
 
