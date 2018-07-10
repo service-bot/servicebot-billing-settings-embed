@@ -254,6 +254,10 @@ class ServicebotManagedBilling extends React.Component {
             self.props.setLoading(true);
             // self.setState({loading: true});
             let updatedInstance = await(await fetch(`${self.props.url}/api/v1/service-instances/${self.state.instances[0].id}/apply-payment-structure/${paymentStructure}`,request)).json();
+            console.log(updatedInstance, "hello!")
+            if(updatedInstance.error === "This customer has no attached payment source"){
+                self.setState({formError: "Credit/debit card required to switch from free tier to a paid tier"});
+            }
             await self.getServicebotDetails();
             // self.setState({loading: false});
             self.props.setLoading(false);
@@ -333,6 +337,7 @@ class ServicebotManagedBilling extends React.Component {
                                                             {/*<div>Purchased: <b><DateFormat date={service.created_at} time/></b></div>*/}
                                                         {/*</div>*/}
                                                         <div className="mbf--current-services-item-buttons">
+                                                            <span>{this.state.formError}</span>
                                                             {(service.status === "running" || service.status === "requested" || service.status === "in_progress") &&
                                                             <button className="btn btn-default btn-rounded btn-sm m-r-5" style={buttonStyle} onClick={this.requestCancellation.bind(this, service.id)}>Cancel Service</button>
                                                             }
