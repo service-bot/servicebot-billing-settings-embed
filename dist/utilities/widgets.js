@@ -116,7 +116,7 @@ var PriceBreakdown = function PriceBreakdown(props) {
         "divide": "-"
     };
     var breakdown = inputs.reduce(function (acc, input) {
-        if (input.config && input.config.pricing && widgets[input.type].handler.priceHandler && widgets[input.type].handler.priceHandler(input.data, input.config)) {
+        if (input.config && input.config.pricing && widgets[input.type] && widgets[input.type].handler && widgets[input.type].handler.priceHandler && widgets[input.type].handler.priceHandler(input.data, input.config)) {
             acc.push(_react2.default.createElement(
                 "p",
                 { className: "_item" },
