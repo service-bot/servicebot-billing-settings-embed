@@ -4,7 +4,7 @@ import getSymbolFromCurrency from 'currency-symbol-map'
 
 
 const Tier = (props) => {
-    let {tier, plan, pickTier, isCurrent, isSelected} = props;
+    let {currentPlan, tier, plan, pickTier, isCurrent, isSelected} = props;
     let tierContent, tierButton;
     let currency = getSymbolFromCurrency(plan.currency)
     let tierPrice = plan.amount/100;
@@ -47,7 +47,7 @@ const Tier = (props) => {
             {!isSelected && !isCurrent && <button onClick={pickTier(plan.id)} className="_select-tier buttons rounded">{tierButton}</button>}
             <div className="_tier-confirm-wrapper">
                 {isSelected && !isCurrent && <button onClick={props.changePlan} className="_confirm-tier buttons rounded" aria-label="confirm change plan"><span className="icon check"/></button>}
-                {isSelected && !isCurrent && <button onClick={props.changePlan} className="_confirm-tier _cancel-tier buttons rounded" aria-label="cancel change plan"><span className="icon close"/></button>}
+                {isSelected && !isCurrent && <button onClick={pickTier(currentPlan)} className="_confirm-tier _cancel-tier buttons rounded" aria-label="cancel change plan"><span className="icon close"/></button>}
             </div>
             <ul className="_feature-list">
                 {tier.features.map(feature=> {
@@ -200,6 +200,7 @@ class TierSelector extends React.Component{
                             key: plan.id,
                             tier: tiers.find(tier => tier.id === plan.tier_id),
                             plan: plan,
+                            currentPlan,
                             changePlan: self.props.changePlan(plan.id),
                         }
 
