@@ -343,7 +343,7 @@ var TierSelector = function (_React$Component) {
                     'div',
                     { className: 'servicebot-pricing-table' },
                     currentPlans.map(function (plan) {
-                        if (plan.interval === "custom") {
+                        if (plan.type === "custom") {
                             return _react2.default.createElement('div', null);
                         }
                         var props = {
