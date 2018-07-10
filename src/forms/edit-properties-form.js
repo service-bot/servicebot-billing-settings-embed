@@ -88,17 +88,16 @@ function CustomFieldEditForm(props) {
         return acc;
 
     }, {});
-    let {invalid, submitting} = props;
+    let {invalid, submitting, pristine} = props;
 
     let properties = props.formJSON.service_instance_properties.filter(prop => {
         return prop.type !== "select" || selectAffectPricing(prop)
     });
     let basePrice = getBasePrice(props.instance.references.service_instance_properties, handlers, props.instance.payment_plan.amount);
     let priceData = getPriceData(basePrice, properties);
-    console.log(invalid, submitting, "hu")
     return (
         <form>
-            {priceData.length > 0 && <div>
+            {priceData && priceData.adjustments && priceData.adjustments.length > 0 && <div>
             <h3>Subscription Add Ons</h3>
 
             <FieldArray name="service_instance_properties" component={renderCustomProperty}
@@ -111,7 +110,7 @@ function CustomFieldEditForm(props) {
                <p>
                     <Price className="_total-price" value={priceData.total} />
                     <span className="_unit"><span className="_per">/</span>{props.instance.payment_plan.interval}</span>
-                    <button disabled={invalid|| submitting} className="buttons _primary" onClick={props.handleSubmit} type="submit" value="submit">Submit</button>
+                    <button disabled={invalid|| submitting || pristine} className="buttons _primary" onClick={props.handleSubmit} type="submit" value="submit">Submit</button>
                 </p>
             </div>
             </div>}
