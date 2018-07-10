@@ -118,7 +118,8 @@ function CustomFieldEditForm(props) {
         return acc;
     }, {});
     var invalid = props.invalid,
-        submitting = props.submitting;
+        submitting = props.submitting,
+        pristine = props.pristine;
 
 
     var properties = props.formJSON.service_instance_properties.filter(function (prop) {
@@ -126,11 +127,10 @@ function CustomFieldEditForm(props) {
     });
     var basePrice = (0, _handleInputs.getBasePrice)(props.instance.references.service_instance_properties, handlers, props.instance.payment_plan.amount);
     var priceData = (0, _client.getPriceData)(basePrice, properties);
-    console.log(invalid, submitting, "hu");
     return _react2.default.createElement(
         'form',
         null,
-        priceData.length > 0 && _react2.default.createElement(
+        priceData && priceData.adjustments && priceData.adjustments.length > 0 && _react2.default.createElement(
             'div',
             null,
             _react2.default.createElement(
@@ -168,7 +168,7 @@ function CustomFieldEditForm(props) {
                     ),
                     _react2.default.createElement(
                         'button',
-                        { disabled: invalid || submitting, className: 'buttons _primary', onClick: props.handleSubmit, type: 'submit', value: 'submit' },
+                        { disabled: invalid || submitting || pristine, className: 'buttons _primary', onClick: props.handleSubmit, type: 'submit', value: 'submit' },
                         'Submit'
                     )
                 )

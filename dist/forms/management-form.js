@@ -226,7 +226,7 @@ var ServicebotManagedBilling = function (_React$Component) {
                             _react2.default.createElement(
                                 'strong',
                                 null,
-                                'Subscription Status: cancelled due to lack of funds'
+                                'Status: cancelled, please update credit/debit card to reactivate'
                             )
                         )
                     );
@@ -240,7 +240,7 @@ var ServicebotManagedBilling = function (_React$Component) {
                             _react2.default.createElement(
                                 'strong',
                                 null,
-                                'Subscription Status: cancelled'
+                                'Status: cancelled'
                             )
                         )
                     );
@@ -473,7 +473,8 @@ var ServicebotManagedBilling = function (_React$Component) {
                                     };
 
 
-                                    self.setState({ loading: true });
+                                    self.props.setLoading(true);
+                                    // self.setState({loading: true});
                                     _context4.next = 6;
                                     return fetch(self.props.url + '/api/v1/service-instances/' + self.state.instances[0].id + '/apply-payment-structure/' + paymentStructure, request);
 
@@ -487,7 +488,8 @@ var ServicebotManagedBilling = function (_React$Component) {
                                     return self.getServicebotDetails();
 
                                 case 11:
-                                    self.setState({ loading: false });
+                                    // self.setState({loading: false});
+                                    self.props.setLoading(false);
 
                                 case 12:
                                 case 'end':
