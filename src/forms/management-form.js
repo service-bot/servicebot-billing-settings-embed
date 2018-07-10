@@ -251,11 +251,12 @@ class ServicebotManagedBilling extends React.Component {
                 headers
             }
 
-
-            self.setState({loading: true});
+            self.props.setLoading(true);
+            // self.setState({loading: true});
             let updatedInstance = await(await fetch(`${self.props.url}/api/v1/service-instances/${self.state.instances[0].id}/apply-payment-structure/${paymentStructure}`,request)).json();
             await self.getServicebotDetails();
-            self.setState({loading: false});
+            // self.setState({loading: false});
+            self.props.setLoading(false);
 
         }
     }
