@@ -484,14 +484,19 @@ var ServicebotManagedBilling = function (_React$Component) {
 
                                 case 8:
                                     updatedInstance = _context4.sent;
-                                    _context4.next = 11;
+
+                                    console.log(updatedInstance, "hello!");
+                                    if (updatedInstance.error === "This customer has no attached payment source") {
+                                        self.setState({ formError: "Credit/debit card required to switch from free tier to a paid tier" });
+                                    }
+                                    _context4.next = 13;
                                     return self.getServicebotDetails();
 
-                                case 11:
+                                case 13:
                                     // self.setState({loading: false});
                                     self.props.setLoading(false);
 
-                                case 12:
+                                case 14:
                                 case 'end':
                                     return _context4.stop();
                             }
@@ -618,6 +623,11 @@ var ServicebotManagedBilling = function (_React$Component) {
                                         _react2.default.createElement(
                                             'div',
                                             { className: 'mbf--current-services-item-buttons' },
+                                            _react2.default.createElement(
+                                                'span',
+                                                null,
+                                                _this4.state.formError
+                                            ),
                                             (service.status === "running" || service.status === "requested" || service.status === "in_progress") && _react2.default.createElement(
                                                 'button',
                                                 { className: 'btn btn-default btn-rounded btn-sm m-r-5', style: buttonStyle, onClick: _this4.requestCancellation.bind(_this4, service.id) },
