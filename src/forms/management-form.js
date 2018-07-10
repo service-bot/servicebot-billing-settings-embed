@@ -91,12 +91,12 @@ class ServicebotManagedBilling extends React.Component {
         if(instance.status === "cancelled"){
             if(this.state.funds.length === 0 && instance.payment_plan && instance.payment_plan.amount > 0) {
                 return <div>
-                    <p className={"form-help-text"}><strong>Subscription Status: cancelled due to lack of funds</strong></p>
+                    <p className={"form-help-text"}><strong>Status: cancelled, please update credit/debit card to reactivate</strong></p>
 
                 </div>
             }else{
                 return <div>
-                    <p className={"form-help-text"}><strong>Subscription Status: cancelled</strong></p>
+                    <p className={"form-help-text"}><strong>Status: cancelled</strong></p>
                 </div>
             }
         }else{
