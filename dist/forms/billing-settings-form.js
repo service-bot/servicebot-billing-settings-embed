@@ -55,6 +55,10 @@ var _creditCardIcons = require('../utilities/credit-card-icons.js');
 
 var _creditCardIcons2 = _interopRequireDefault(_creditCardIcons);
 
+var _alerts = require('../utilities/alerts.js');
+
+var _alerts2 = _interopRequireDefault(_alerts);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var CardSection = function (_React$Component) {
@@ -446,7 +450,7 @@ var CreditCardForm = function (_React$Component3) {
 
             var getAlerts = function getAlerts() {
                 if (_this4.state.alerts) {
-                    return _react2.default.createElement(Alerts, { type: _this4.state.alerts.type, message: _this4.state.alerts.message,
+                    return _react2.default.createElement(_alerts2.default, { type: _this4.state.alerts.type, message: _this4.state.alerts.message,
                         position: { position: 'fixed', bottom: true }, icon: _this4.state.alerts.icon });
                 }
             };

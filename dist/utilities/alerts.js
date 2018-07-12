@@ -83,7 +83,7 @@ var Alerts = function (_React$Component) {
                 var type = this.state.alert.type;
                 var message = this.state.alert.message;
                 var icon = this.state.alert.icon;
-                var style = {};
+                var style = { color: "red" };
                 if (this.state.position && this.state.position.position == 'fixed') {
                     style.position = 'fixed';
                     style.left = '0px';
@@ -100,13 +100,6 @@ var Alerts = function (_React$Component) {
                 return _react2.default.createElement(
                     'div',
                     { className: 'alert alert-' + type, role: 'alert', style: style },
-                    _react2.default.createElement('i', { className: 'fa fa-' + icon }),
-                    _react2.default.createElement(
-                        'a',
-                        { className: 'btn btn-' + type + ' btn-outline btn-rounded btn-sm pull-right',
-                            onClick: this.props.action || this.dismiss },
-                        this.props.actionName || 'Dismiss'
-                    ),
                     _react2.default.createElement(
                         'span',
                         null,
