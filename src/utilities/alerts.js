@@ -52,7 +52,7 @@ class Alerts extends React.Component {
             let type = this.state.alert.type;
             let message = this.state.alert.message;
             let icon = this.state.alert.icon;
-            let style = {};
+            let style = {color: "red"};
             if( this.state.position && this.state.position.position == 'fixed'){
                 style.position = 'fixed';
                 style.left = '0px';
@@ -68,9 +68,9 @@ class Alerts extends React.Component {
 
             return(
                 <div className={`alert alert-${type}`} role="alert" style={style}>
-                    <i className={`fa fa-${icon}`}/>
-                    <a className={`btn btn-${type} btn-outline btn-rounded btn-sm pull-right`}
-                       onClick={this.props.action || this.dismiss}>{this.props.actionName || 'Dismiss'}</a>
+                    {/*<i className={`fa fa-${icon}`}/>*/}
+                    {/*<a className={`btn btn-${type} btn-outline btn-rounded btn-sm pull-right`}*/}
+                       {/*onClick={this.props.action || this.dismiss}>{this.props.actionName || 'Dismiss'}</a>*/}
                     <span>{message}</span>
                 </div>
             );

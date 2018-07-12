@@ -6,6 +6,7 @@ import {Field,} from 'redux-form'
 import Buttons from "../utilities/buttons.js";
 import {connect} from "react-redux";
 import creditCardIcon from "../utilities/credit-card-icons.js";
+import Alerts from "../utilities/alerts.js"
 
 class CardSection extends React.Component {
     render() {
@@ -60,7 +61,7 @@ function BillingInfo(props) {
             {/*<Field name="address_line1" type="text" component={inputField} placeholder="Address"/>*/}
             {/*<Field name="address_city" type="text" component={inputField} placeholder="City"/>*/}
             {/*<Field name="address_state" type="text" component={inputField} placeholder="State"/>*/}
-            <button      disabled={invalid|| submitting || pristine} className="buttons _primary mbf--btn-update-funding-save" onClick={props.handleSubmit} type="submit">Save Card</button>
+            <button disabled={invalid|| submitting || pristine} className="buttons _primary mbf--btn-update-funding-save" onClick={props.handleSubmit} type="submit">Save Card</button>
         </form>
     )
 }

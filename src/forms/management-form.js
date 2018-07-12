@@ -56,6 +56,7 @@ class ServicebotManagedBilling extends React.Component {
     handleResponse(instance){
         let self = this;
         return async (response)=> {
+            console.log(response);
             self.props.handleResponse && self.props.handleResponse({event: "add_fund",response});
             if(instance.status === "cancelled"){
                 await self.resubscribe(instance.id)();
