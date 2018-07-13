@@ -133,21 +133,22 @@ var ServicebotManagedBilling = function (_React$Component) {
                         while (1) {
                             switch (_context.prev = _context.next) {
                                 case 0:
+                                    console.log(response);
                                     self.props.handleResponse && self.props.handleResponse({ event: "add_fund", response: response });
 
                                     if (!(instance.status === "cancelled")) {
-                                        _context.next = 4;
+                                        _context.next = 5;
                                         break;
                                     }
 
-                                    _context.next = 4;
+                                    _context.next = 5;
                                     return self.resubscribe(instance.id)();
 
-                                case 4:
+                                case 5:
                                     self.getFundingDetails();
                                     self.props.setLoading(false);
 
-                                case 6:
+                                case 7:
                                 case 'end':
                                     return _context.stop();
                             }
