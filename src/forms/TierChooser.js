@@ -1,13 +1,16 @@
 import React from 'react';
 import getSymbolFromCurrency from 'currency-symbol-map'
 
+const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 
 const Tier = (props) => {
     let {currentPlan, tier, plan, pickTier, isCurrent, isSelected} = props;
     let tierContent, tierButton;
-    let currency = getSymbolFromCurrency(plan.currency)
-    let tierPrice = plan.amount/100;
+    let currency = getSymbolFromCurrency(plan.currency);
+    let tierPrice = numberWithCommas(plan.amount/100);
     if(plan.trial_period_days > 0){
         tierButton = "Try for Free"
     }else{
