@@ -340,7 +340,8 @@ class ServicebotManagedBilling extends React.Component {
                                                         <div className="mbf--current-services-item-buttons">
                                                             <span>{this.state.formError}</span>
                                                             {(service.status === "running" || service.status === "requested" || service.status === "in_progress") &&
-                                                            <button className="btn btn-default btn-rounded btn-sm m-r-5" style={buttonStyle} onClick={this.requestCancellation.bind(this, service.id)}>Cancel Service</button>
+                                                            <button className="buttons _right _rounded mbf--btn-cancel-service" style={buttonStyle}
+                                                                    onClick={this.requestCancellation.bind(this, service.id)}>Cancel Service</button>
                                                             }
                                                             {service.status === "cancelled" && self.state.funds[0] && <button className="btn btn-default btn-rounded btn-sm m-r-5" style={buttonStyle2} onClick={self.resubscribe(service.id)}>Resubscribe</button>}
                                                         </div>

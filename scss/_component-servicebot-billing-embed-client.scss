@@ -806,6 +806,10 @@
   .buttons{
     text-transform: uppercase;
   }
+  .mbf--btn-cancel-service{
+    padding: 11.5px $gutter;
+    margin-right: 5px;
+  }
 
   .form-error {
     color: $color-error;
