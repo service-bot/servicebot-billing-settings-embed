@@ -357,7 +357,7 @@ var ServicebotManagedBilling = function (_React$Component) {
                     if (self.state.funds.length === 0) {
                         return _react2.default.createElement(
                             'div',
-                            { className: 'trial-notice red' },
+                            { className: 'sb-trial-notice' },
                             _react2.default.createElement(
                                 'p',
                                 { className: "form-help-text" },
@@ -373,7 +373,7 @@ var ServicebotManagedBilling = function (_React$Component) {
                     } else {
                         return _react2.default.createElement(
                             'div',
-                            { className: 'trial-notice blue' },
+                            { className: 'sb-trial-notice' },
                             _react2.default.createElement(
                                 'p',
                                 { className: "form-help-text" },
@@ -631,7 +631,8 @@ var ServicebotManagedBilling = function (_React$Component) {
                                             ),
                                             (service.status === "running" || service.status === "requested" || service.status === "in_progress") && _react2.default.createElement(
                                                 'button',
-                                                { className: 'btn btn-default btn-rounded btn-sm m-r-5', style: buttonStyle, onClick: _this4.requestCancellation.bind(_this4, service.id) },
+                                                { className: 'buttons _right _rounded mbf--btn-cancel-service', style: buttonStyle,
+                                                    onClick: _this4.requestCancellation.bind(_this4, service.id) },
                                                 'Cancel Service'
                                             ),
                                             service.status === "cancelled" && self.state.funds[0] && _react2.default.createElement(

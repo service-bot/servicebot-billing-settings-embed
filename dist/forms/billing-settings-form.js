@@ -139,9 +139,14 @@ function BillingInfo(props) {
         _react2.default.createElement(CardSection, null),
         _react2.default.createElement(_reduxForm.Field, { name: 'name', type: 'text', component: _servicebotBaseForm.inputField, placeholder: 'Name on Card' }),
         _react2.default.createElement(
-            'button',
-            { disabled: invalid || submitting || pristine, className: 'buttons _primary mbf--btn-update-funding-save', onClick: props.handleSubmit, type: 'submit' },
-            'Save Card'
+            'div',
+            { className: 'mbf--funding-save-button-wrapper' },
+            _react2.default.createElement(
+                'button',
+                { disabled: invalid || submitting || pristine, className: 'buttons _primary mbf--btn-update-funding-save',
+                    onClick: props.handleSubmit, type: 'submit' },
+                'Save Card'
+            )
         )
     );
 }
