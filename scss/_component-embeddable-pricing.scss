@@ -7,8 +7,10 @@
   font-weight: 300;
   max-width: $gutter*30.5;
   margin: $gutter*3 auto;
+  display: flex;
+  justify-content: space-around;
 
-  ul._selector{
+ul._selector{
     @include resetUl;
     display: flex;
     justify-content: space-evenly;
