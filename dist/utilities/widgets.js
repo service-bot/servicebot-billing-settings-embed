@@ -162,19 +162,23 @@ var PriceBreakdown = function PriceBreakdown(props) {
             " ",
             metricProp.config.unit
         ),
-        breakdown,
         _react2.default.createElement(
-            "p",
-            { className: "_total" },
+            "div",
+            { className: "_items" },
+            breakdown,
             _react2.default.createElement(
-                "span",
-                { className: "_label" },
-                "Total:"
-            ),
-            _react2.default.createElement(
-                "span",
-                { className: "_value" },
-                (0, _price.getPrice)(instance)
+                "p",
+                { className: "_total" },
+                _react2.default.createElement(
+                    "span",
+                    { className: "_label" },
+                    "Total:"
+                ),
+                _react2.default.createElement(
+                    "span",
+                    { className: "_value" },
+                    (0, _price.getPrice)(instance)
+                )
             )
         )
     );
