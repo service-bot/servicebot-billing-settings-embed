@@ -61,7 +61,10 @@ function BillingInfo(props) {
             {/*<Field name="address_line1" type="text" component={inputField} placeholder="Address"/>*/}
             {/*<Field name="address_city" type="text" component={inputField} placeholder="City"/>*/}
             {/*<Field name="address_state" type="text" component={inputField} placeholder="State"/>*/}
-            <button disabled={invalid|| submitting || pristine} className="buttons _primary mbf--btn-update-funding-save" onClick={props.handleSubmit} type="submit">Save Card</button>
+            <div className={`mbf--funding-save-button-wrapper`}>
+            <button disabled={invalid|| submitting || pristine} className="buttons _primary mbf--btn-update-funding-save"
+                    onClick={props.handleSubmit} type="submit">Save Card</button>
+            </div>
         </form>
     )
 }

@@ -61,12 +61,27 @@
         font-weight: 400;
       }
 
+      .mbf--funding-card-wrapper{
+        @include embed-content-box;
+
+        .form-help-text{
+          margin-top: 0;
+        }
+
+        .mbf--funding-save-button-wrapper{
+          display: flex;
+          justify-content: flex-end;
+          flex-basis: 100%;
+        }
+
+      }
+
       .mbf--current-services-list{
 
         .mbf--current-services-item{
 
           .mbf-summary{
-            @include embed-content-box
+            @include embed-content-box;
 
             ._heading{
               color: #0033A0;
