@@ -639,7 +639,8 @@ var ServicebotManagedBilling = function (_React$Component) {
                                                 'button',
                                                 { className: 'btn btn-default btn-rounded btn-sm m-r-5', style: buttonStyle2, onClick: self.resubscribe(service.id) },
                                                 'Resubscribe'
-                                            )
+                                            ),
+                                            _react2.default.createElement('div', { className: 'clear' })
                                         )
                                     );
                                 })
