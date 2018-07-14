@@ -170,13 +170,13 @@ class ServicebotManagedBilling extends React.Component {
             if(inTrial) {
                 if(self.state.funds.length === 0) {
                     return (
-                        <div className="trial-notice red">
+                        <div className="sb-trial-notice">
                             <p className={"form-help-text"}><strong>{trialExpires} left of the trial </strong> and you have no funding source. Your subscription will be deactivated after trial expiration date. If you would like to continue your service, please update your credit/debit card below.</p>
                         </div>
                     )
                 } else {
                     return (
-                        <div className="trial-notice blue">
+                        <div className="sb-trial-notice">
                             <p className={"form-help-text"}><strong>{trialExpires} left of the trial. </strong> The initial payment will be charged once trial expires.</p>
                         </div>
                     )
