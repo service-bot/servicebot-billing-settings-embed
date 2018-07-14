@@ -344,6 +344,7 @@ class ServicebotManagedBilling extends React.Component {
                                                                     onClick={this.requestCancellation.bind(this, service.id)}>Cancel Service</button>
                                                             }
                                                             {service.status === "cancelled" && self.state.funds[0] && <button className="btn btn-default btn-rounded btn-sm m-r-5" style={buttonStyle2} onClick={self.resubscribe(service.id)}>Resubscribe</button>}
+                                                            <div className={`clear`}/>
                                                         </div>
                                                     </div>
                                                 )})}
