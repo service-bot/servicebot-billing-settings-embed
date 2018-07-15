@@ -108,6 +108,21 @@
   padding-left: 0;
 }
 
+@mixin fadeInContent{
+  &>div, &>span, &>li{
+    animation: fadeIn 600ms;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}
 
 @mixin breakpoint($point) {
   @if $point == FourK {

@@ -204,6 +204,8 @@
               overflow: visible;
             }
 
+            @include fadeInContent;
+
             ._tier{
               @include border;
               border-color: $color-blue;
@@ -806,9 +808,16 @@
   .buttons{
     text-transform: uppercase;
   }
-  .mbf--btn-cancel-service{
+  .mbf--btn-cancel-service, .mbf--btn-resubscribe-service{
     padding: 11.5px $gutter;
     margin-right: 5px;
+    color: $color-white;
+  }
+  .mbf--btn-cancel-service{
+    background-color: $color-error;
+  }
+  .mbf--btn-resubscribe-service{
+    background-color: $color-blue;
   }
 
   .form-error {
