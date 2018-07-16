@@ -107,11 +107,11 @@ let PriceBreakdown = (props) => {
 
         <div className="mbf-summary">
             <p className="_heading">Items</p>
-
             {metricProp && <span className="_metric">{metricProp.data.value} {metricProp.config.unit}</span>}
+            <div className={`_items`}>
             {breakdown}
             <p className="_total"><span className="_label">Total:</span><span className="_value">{getPrice(instance)}</span></p>
-
+            </div>
         </div>
 
     );

@@ -38,6 +38,10 @@ var _currencySymbolMap2 = _interopRequireDefault(_currencySymbolMap);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var numberWithCommas = function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
 var Tier = function Tier(props) {
     var currentPlan = props.currentPlan,
         tier = props.tier,
@@ -49,7 +53,7 @@ var Tier = function Tier(props) {
     var tierContent = void 0,
         tierButton = void 0;
     var currency = (0, _currencySymbolMap2.default)(plan.currency);
-    var tierPrice = plan.amount / 100;
+    var tierPrice = numberWithCommas(plan.amount / 100);
     if (plan.trial_period_days > 0) {
         tierButton = "Try for Free";
     } else {

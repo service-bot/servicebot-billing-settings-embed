@@ -108,6 +108,21 @@
   padding-left: 0;
 }
 
+@mixin fadeInContent{
+  &>div, &>span, &>li{
+    animation: fadeIn 600ms;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}
 
 @mixin breakpoint($point) {
   @if $point == FourK {
@@ -126,6 +141,6 @@
     @media (max-width: 768px) { @content; }
   }
   @else if $point == iPhone {
-    @media (max-width: 411px) { @content; }
+    @media (max-width: 414px) { @content; }
   }
 }

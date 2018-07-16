@@ -7,8 +7,10 @@
   font-weight: 300;
   max-width: $gutter*30.5;
   margin: $gutter*3 auto;
+  display: flex;
+  justify-content: space-around;
 
-  ul._selector{
+ul._selector{
     @include resetUl;
     display: flex;
     justify-content: space-evenly;
@@ -19,6 +21,11 @@
     box-shadow: inset 0 1px 3px 0 rgba(0,0,0,0.1);
 
     li._interval{
+      margin-right: $gutter;
+
+      &:last-child{
+        margin-right: 0;
+      }
 
       &:hover{
         cursor: pointer;
@@ -29,8 +36,6 @@
         background-color: #0033A0;
         box-shadow: inset 0 1px 3px 0 rgba(0,0,0,0.1), 0 0 4px 0 rgba(76,130,252,0.56);
         text-align: center;
-        width: 96px;
-        padding: $gutter/4 0;
         border-radius: 12px;
       }
     }

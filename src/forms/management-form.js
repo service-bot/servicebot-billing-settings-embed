@@ -170,13 +170,13 @@ class ServicebotManagedBilling extends React.Component {
             if(inTrial) {
                 if(self.state.funds.length === 0) {
                     return (
-                        <div className="trial-notice red">
+                        <div className="sb-trial-notice">
                             <p className={"form-help-text"}><strong>{trialExpires} left of the trial </strong> and you have no funding source. Your subscription will be deactivated after trial expiration date. If you would like to continue your service, please update your credit/debit card below.</p>
                         </div>
                     )
                 } else {
                     return (
-                        <div className="trial-notice blue">
+                        <div className="sb-trial-notice">
                             <p className={"form-help-text"}><strong>{trialExpires} left of the trial. </strong> The initial payment will be charged once trial expires.</p>
                         </div>
                     )
@@ -297,16 +297,6 @@ class ServicebotManagedBilling extends React.Component {
         if(this.state.error){
             return <p>{this.state.error}</p>
         }
-        let buttonStyle = {
-            backgroundColor: "#d32f2f",
-            border: "none",
-            color: "#ffffff"
-        };
-        let buttonStyle2 = {
-            backgroundColor: "#0054d3",
-            border: "none",
-            color: "#ffffff"
-        };
 
         let metricProp = self.state.template && self.state.template.references.service_template_properties.find(prop => prop.type === "metric");
 
@@ -340,9 +330,13 @@ class ServicebotManagedBilling extends React.Component {
                                                         <div className="mbf--current-services-item-buttons">
                                                             <span>{this.state.formError}</span>
                                                             {(service.status === "running" || service.status === "requested" || service.status === "in_progress") &&
-                                                            <button className="btn btn-default btn-rounded btn-sm m-r-5" style={buttonStyle} onClick={this.requestCancellation.bind(this, service.id)}>Cancel Service</button>
+                                                            <button className="buttons _right _rounded mbf--btn-cancel-service"
+                                                                    onClick={this.requestCancellation.bind(this, service.id)}>Cancel Service</button>
                                                             }
-                                                            {service.status === "cancelled" && self.state.funds[0] && <button className="btn btn-default btn-rounded btn-sm m-r-5" style={buttonStyle2} onClick={self.resubscribe(service.id)}>Resubscribe</button>}
+                                                            {service.status === "cancelled" && self.state.funds[0] &&
+                                                            <button className="buttons _right _rounded mbf--btn-resubscribe-service"
+                                                                    onClick={self.resubscribe(service.id)}>Resubscribe</button>}
+                                                            <div className={`clear`}/>
                                                         </div>
                                                     </div>
                                                 )})}

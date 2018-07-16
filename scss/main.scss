@@ -15,11 +15,11 @@
 @import "_component-tier";
 @import "_component-forms-offering";
 @import "_component-embeddables";
-@import "_component-embeddables-checkout";
+//@import "_component-embeddables-checkout";
 
 /* layout components */
-@import "_layout-nav";
-@import "_layout-content";
+//@import "_layout-nav";
+//@import "_layout-content";
 
 img{
   @include text_muted;
