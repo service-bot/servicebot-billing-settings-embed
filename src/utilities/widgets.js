@@ -2,7 +2,8 @@ import React from "react";
 import {Field, FormSection} from "redux-form";
 import {inputField, selectField, priceField} from "servicebot-base-form";
 import getWidgets from "../core-input-types/client"
-import {getPrice} from "./price";
+import {getPrice, Price} from "./price";
+import {getBasePrice} from "../widget-inputs/handleInputs";
 const values = require('object.values');
 if (!Object.values) {
     values.shim();
@@ -63,25 +64,41 @@ let PriceBreakdown = (props) => {
         acc[widget.type] = widget;
         return acc;
     }, {});
+
+    let handlers = getWidgets().reduce((acc, widget) => {
+        acc[widget.type] = widget.handler;
+        return acc;
+
+    }, {});
+
     let map = {
         add: "+",
         subtract: "-",
         "multiply" : "+",
         "divide": "-"
     };
+    let basePrice = getBasePrice(instance.references.service_instance_properties, handlers, instance.payment_plan.amount);
     let breakdown = inputs.reduce((acc, input) => {
         if (input.config && input.config.pricing && widgets[input.type] && widgets[input.type].handler && widgets[input.type].handler.priceHandler && widgets[input.type].handler.priceHandler(input.data, input.config)) {
+            let price = widgets[input.type].handler.priceHandler(input.data, input.config)
+
             acc.push(
                 <p className="_item">
                     <span className="_label">{input.prop_label}</span>
                     <span className="_value_wrap">
                         <span className="_prefix">{map[input.config.pricing.operation]}</span>
-                        <span className="_value">{widgets[input.type].handler.priceHandler(input.data, input.config)}</span>
+                        <span className="_value"><Price value={price} currency={instance.payment_plan.currency}/></span>
                     </span>
                 </p>);
         }
         return acc;
-    }, []);
+    }, [(                <p className="_item">
+        <span className="_label">Base price</span>
+        <span className="_value_wrap">
+                        <span className="_prefix">+</span>
+                        <span className="_value"><Price value={basePrice} currency={instance.payment_plan.currency}/></span>
+                    </span>
+    </p>)]);
 
     if (breakdown.length == 0) {
         return <div/>

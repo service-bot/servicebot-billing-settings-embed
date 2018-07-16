@@ -23,7 +23,7 @@ function formatMoney(price, c, d, t){
 
 let Price = function(props){
     let price = formatMoney((props.value/100).toFixed(2),',','.');
-    let prefix = props.prefix || '$';
+    let prefix = props.prefix || (props.currency && getSymbolFromCurrency(props.currency)) || '$';
     return(
         <span className="_price-value">{prefix + price}</span>
     );
