@@ -177,7 +177,7 @@ var PriceBreakdown = function PriceBreakdown(props) {
         )
     )]);
 
-    if (breakdown.length == 0) {
+    if (breakdown.length == 1) {
         return _react2.default.createElement("div", null);
     }
     return _react2.default.createElement(
@@ -195,23 +195,19 @@ var PriceBreakdown = function PriceBreakdown(props) {
             " ",
             metricProp.config.unit
         ),
+        breakdown,
         _react2.default.createElement(
-            "div",
-            { className: "_items" },
-            breakdown,
+            "p",
+            { className: "_total" },
             _react2.default.createElement(
-                "p",
-                { className: "_total" },
-                _react2.default.createElement(
-                    "span",
-                    { className: "_label" },
-                    "Total:"
-                ),
-                _react2.default.createElement(
-                    "span",
-                    { className: "_value" },
-                    (0, _price.getPrice)(instance)
-                )
+                "span",
+                { className: "_label" },
+                "Total:"
+            ),
+            _react2.default.createElement(
+                "span",
+                { className: "_value" },
+                (0, _price.getPrice)(instance)
             )
         )
     );
