@@ -36,7 +36,7 @@ function formatMoney(price, c, d, t) {
 
 var Price = function Price(props) {
     var price = formatMoney((props.value / 100).toFixed(2), ',', '.');
-    var prefix = props.prefix || '$';
+    var prefix = props.prefix || props.currency && (0, _currencySymbolMap2.default)(props.currency) || '$';
     return _react2.default.createElement(
         'span',
         { className: '_price-value' },
