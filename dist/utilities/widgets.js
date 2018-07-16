@@ -19,6 +19,8 @@ var _client2 = _interopRequireDefault(_client);
 
 var _price = require("./price");
 
+var _handleInputs = require("../widget-inputs/handleInputs");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var values = require('object.values');
@@ -109,14 +111,23 @@ var PriceBreakdown = function PriceBreakdown(props) {
         acc[widget.type] = widget;
         return acc;
     }, {});
+
+    var handlers = (0, _client2.default)().reduce(function (acc, widget) {
+        acc[widget.type] = widget.handler;
+        return acc;
+    }, {});
+
     var map = {
         add: "+",
         subtract: "-",
         "multiply": "+",
         "divide": "-"
     };
+    var basePrice = (0, _handleInputs.getBasePrice)(instance.references.service_instance_properties, handlers, instance.payment_plan.amount);
     var breakdown = inputs.reduce(function (acc, input) {
         if (input.config && input.config.pricing && widgets[input.type] && widgets[input.type].handler && widgets[input.type].handler.priceHandler && widgets[input.type].handler.priceHandler(input.data, input.config)) {
+            var price = widgets[input.type].handler.priceHandler(input.data, input.config);
+
             acc.push(_react2.default.createElement(
                 "p",
                 { className: "_item" },
@@ -136,13 +147,35 @@ var PriceBreakdown = function PriceBreakdown(props) {
                     _react2.default.createElement(
                         "span",
                         { className: "_value" },
-                        widgets[input.type].handler.priceHandler(input.data, input.config)
+                        _react2.default.createElement(_price.Price, { value: price, currency: instance.payment_plan.currency })
                     )
                 )
             ));
         }
         return acc;
-    }, []);
+    }, [_react2.default.createElement(
+        "p",
+        { className: "_item" },
+        _react2.default.createElement(
+            "span",
+            { className: "_label" },
+            "Base price"
+        ),
+        _react2.default.createElement(
+            "span",
+            { className: "_value_wrap" },
+            _react2.default.createElement(
+                "span",
+                { className: "_prefix" },
+                "+"
+            ),
+            _react2.default.createElement(
+                "span",
+                { className: "_value" },
+                _react2.default.createElement(_price.Price, { value: basePrice, currency: instance.payment_plan.currency })
+            )
+        )
+    )]);
 
     if (breakdown.length == 0) {
         return _react2.default.createElement("div", null);
