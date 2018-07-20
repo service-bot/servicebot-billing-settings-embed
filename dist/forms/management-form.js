@@ -54,6 +54,10 @@ var _TierChooser2 = _interopRequireDefault(_TierChooser);
 
 var _widgets = require('../utilities/widgets');
 
+var _load = require('../utilities/load.js');
+
+var _load2 = _interopRequireDefault(_load);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function PriceSummary(props) {
@@ -656,17 +660,13 @@ var ServicebotManagedBilling = function (_React$Component) {
                         'div',
                         { className: 'page-loader' },
                         _react2.default.createElement(
-                            'div',
-                            { className: 'lds-ellipsis' },
-                            _react2.default.createElement('div', null),
-                            _react2.default.createElement('div', null),
-                            _react2.default.createElement('div', null),
-                            _react2.default.createElement('div', null)
-                        ),
-                        _react2.default.createElement(
-                            'p',
-                            { className: 'page-loader-text' },
-                            'Billing Management'
+                            _load2.default,
+                            null,
+                            _react2.default.createElement(
+                                'p',
+                                { className: 'page-loader-text' },
+                                'Billing Management'
+                            )
                         )
                     )
                 )

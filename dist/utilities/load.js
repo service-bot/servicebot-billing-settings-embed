@@ -41,7 +41,8 @@ var Load = function (_React$Component) {
         _this.state = {
             type: _this.props.type || 'content',
             message: "Loading...",
-            loadState: "loading"
+            loadState: "loading",
+            show: false
         };
         return _this;
     }
@@ -50,57 +51,45 @@ var Load = function (_React$Component) {
         key: "componentDidMount",
         value: function componentDidMount() {
             var self = this;
-            console.log("loading");
-            // if(this.props.timeout !== false ){
-            //     this.timeout = setTimeout(function(){
-            //         // self.setState({message: "There seems to be a problem in processing your request. Please try again.", loadState: "done" });
-            //     }, this.props.timeout || 10000);
-            // }
+            var _props = this.props,
+                timeout = _props.timeout,
+                delayed = _props.delayed,
+                show = _props.show;
+
+
+            if (delayed !== false) {
+                this.delayed = setTimeout(function () {
+                    self.setState({
+                        show: true
+                    });
+                }, 300);
+            }
+
+            if (this.props.timeout !== false) {
+                this.timeout = setTimeout(function () {
+                    self.setState({ message: "There seems to be a problem in processing your request. Please try again.", loadState: "done" });
+                }, this.props.timeout || 10000);
+            }
         }
     }, {
         key: "componentWillUnmount",
         value: function componentWillUnmount() {
-            console.log("unloading");
             clearTimeout(this.timeout);
+            clearTimeout(this.delayed);
         }
     }, {
         key: "render",
         value: function render() {
+            var _state = this.state,
+                timeout = _state.timeout,
+                delayed = _state.delayed,
+                show = _state.show,
+                loading = _state.loading;
 
-            var style = {};
-            var loadingStyle = {};
-            if (this.state.type == 'content' || this.state.type == 'dataform') {
-                if (this.state.loadState == 'loading') {
-                    loadingStyle = {
-                        position: 'absolute',
-                        top: '50%',
-                        left: '47%',
-                        transform: 'translate(-50%,-50%)',
-                        height: '80px',
-                        width: '80px',
-                        zIndex: 999999
-                    };
-                }
-            } else if (this.state.type == 'button') {
-                if (this.state.loadState == 'loading') {
-                    loadingStyle = {
-                        height: '20px',
-                        width: '20px'
-                    };
-                }
-            } else if (this.state.type == 'avatar') {
-                if (this.state.loadState == 'loading') {
-                    loadingStyle = {
-                        height: '83px',
-                        width: '83px'
-                    };
-                }
-            }
-            console.log("loading:", this.props.loading);
-            if (this.props.loading) {
+            if (show && loading) {
                 return _react2.default.createElement(
                     "div",
-                    { className: "page-loader" },
+                    { className: "loader" },
                     _react2.default.createElement(
                         "div",
                         { className: "lds-ellipsis" },
@@ -108,7 +97,8 @@ var Load = function (_React$Component) {
                         _react2.default.createElement("div", null),
                         _react2.default.createElement("div", null),
                         _react2.default.createElement("div", null)
-                    )
+                    ),
+                    this.props.children
                 );
             } else {
                 return _react2.default.createElement("div", null);
