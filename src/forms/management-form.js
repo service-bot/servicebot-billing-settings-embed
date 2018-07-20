@@ -8,7 +8,7 @@ import {connect} from "react-redux";
 import {ModalEditProperties} from "./edit-properties-form.js"
 import TierChoose from "./TierChooser"
 import {PriceBreakdown} from "../utilities/widgets";
-
+import Load from "../utilities/load.js";
 
 function PriceSummary(props){
     let {instance, template} = props;
@@ -352,8 +352,9 @@ class ServicebotManagedBilling extends React.Component {
                         </div>
                         :
                         <div className="page-loader">
-                            <div className="lds-ellipsis"><div/><div/><div/><div/></div>
-                            <p className="page-loader-text">Billing Management</p>
+                            <Load>
+                                <p className="page-loader-text">Billing Management</p>
+                            </Load>
                         </div>
                     }
                 </div>
