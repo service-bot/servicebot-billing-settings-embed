@@ -145,6 +145,8 @@
             ._total{
               display: flex;
               justify-content: space-between;
+              border-top: 1px solid #e2e9ef;
+              padding-top: $gutter;
               margin-top: $gutter*1.5;
 
               ._label{
