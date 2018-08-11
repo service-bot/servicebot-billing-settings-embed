@@ -25,6 +25,14 @@
     border-radius: 50px;
   }
 }
+@mixin disabledBtn() {
+  @include defaultTransition(300);
+  &:disabled, &[disabled] {
+    background-color: #ccc;
+    cursor: default;
+    @include defaultTransition(300);
+  }
+}
 
 .buttons{
   padding: 6px 12px;
@@ -42,6 +50,10 @@
   border: 1px solid transparent;
   border-radius: 4px;
 
+  &:disabled, &[disabled]{
+    background-color: gray;
+  }
+
   &.rounded{
     border-radius: 50px;
   }
@@ -53,6 +65,8 @@
     color: $color-white;
     border-radius: 1px;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.17);
+
+    @include disabledBtn;
   }
 
   &._save, &._success{
@@ -62,6 +76,8 @@
     color: $color-white;
     border-radius: 1px;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.17);
+
+    @include disabledBtn;
   }
 
   &._text{
