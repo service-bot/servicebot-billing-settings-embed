@@ -1,6 +1,6 @@
 {
   "name": "servicebot-billing-settings-embed",
-  "version": "0.2.55",
+  "version": "0.2.56",
   "dependencies": {
     "currency-symbol-map": "^4.0.4",
     "lodash": "^4.17.5",
