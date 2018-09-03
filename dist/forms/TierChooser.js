@@ -43,6 +43,26 @@ var _ = require('lodash');
 var numberWithCommas = function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
+var intervalNames = {
+    "one_time": "One Time",
+    "month": "Monthly",
+    "year": "Annually",
+    "day": "Daily",
+    "week": "Weekly"
+};
+
+var findMonthlyPrice = function findMonthlyPrice(x, interval) {
+    switch (interval) {
+        case "month":
+            return x;
+        case "day":
+            return x * 30;
+        case "week":
+            return x * 4;
+        case "year":
+            return Math.floor(x / 12);
+    }
+};
 
 var Tier = function Tier(props) {
     var currentPlan = props.currentPlan,
@@ -55,7 +75,7 @@ var Tier = function Tier(props) {
     var tierContent = void 0,
         tierButton = void 0;
     var currency = (0, _currencySymbolMap2.default)(plan.currency);
-    var tierPrice = numberWithCommas(plan.amount / 100);
+    var tierPrice = findMonthlyPrice(numberWithCommas(plan.amount / 100));
     if (plan.trial_period_days > 0) {
         tierButton = "Try for Free";
     } else {
@@ -71,17 +91,23 @@ var Tier = function Tier(props) {
                 _react2.default.createElement(
                     'span',
                     { className: '_interval-name' },
-                    '/',
-                    plan.interval
+                    '/Month'
                 ),
                 _react2.default.createElement(
                     'span',
                     { className: '_metered-unit' },
                     'per ',
                     tier.unit
+                ),
+                plan.interval !== "month" && _react2.default.createElement(
+                    'span',
+                    { className: '_billing-period' },
+                    'Billed ',
+                    intervalNames[plan.interval]
                 )
             );
         } else {
+
             tierContent = _react2.default.createElement(
                 'span',
                 null,
@@ -90,9 +116,15 @@ var Tier = function Tier(props) {
                 _react2.default.createElement(
                     'span',
                     { className: '_interval-name' },
-                    '/',
-                    plan.interval
-                )
+                    '/Month'
+                ),
+                plan.interval !== "month" && _react2.default.createElement(
+                    'span',
+                    { className: '_billing-period' },
+                    'Billed ',
+                    intervalNames[plan.interval]
+                ),
+                _react2.default.createElement('span', null)
             );
         }
         if (plan.amount == 0) {
@@ -191,13 +223,6 @@ var IntervalPicker = function IntervalPicker(props) {
             if (props.currentInterval === interval) {
                 intervalClass += " _selected";
             }
-            var intervalNames = {
-                "one_time": "One Time",
-                "month": "Monthly",
-                "year": "Annually",
-                "day": "Daily",
-                "week": "Weekly"
-            };
 
             return _react2.default.createElement(
                 'li',
