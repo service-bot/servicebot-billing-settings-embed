@@ -141,31 +141,28 @@
 
                 }
               }
-
-              ._total{
-                display: flex;
-                justify-content: space-between;
-                margin-top: $gutter*1.5;
-
-                ._label{
-                  font-weight: 600;
-                  font-size: 14px;
-                }
-                ._value{
-                  font-size: 20px;
-                  font-weight: 300;
-                  text-transform: capitalize;
-
-                  ._price-value{
-                    font-weight: 600;
-                  }
-                }
-
-              }
-
             }
+            ._total{
+              display: flex;
+              justify-content: space-between;
+              border-top: 1px solid #e2e9ef;
+              padding-top: $gutter;
+              margin-top: $gutter*1.5;
 
+              ._label{
+                font-weight: 600;
+                font-size: 14px;
+              }
+              ._value{
+                font-size: 20px;
+                font-weight: 300;
+                text-transform: capitalize;
 
+                ._price-value{
+                  font-weight: 600;
+                }
+              }
+            }
           }
 
           .servicebot-billing-type-selector{

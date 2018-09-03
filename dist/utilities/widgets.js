@@ -195,7 +195,11 @@ var PriceBreakdown = function PriceBreakdown(props) {
             " ",
             metricProp.config.unit
         ),
-        breakdown,
+        _react2.default.createElement(
+            "div",
+            { className: "_items" },
+            breakdown
+        ),
         _react2.default.createElement(
             "p",
             { className: "_total" },

@@ -1,5 +1,6 @@
 import React from 'react';
 import getSymbolFromCurrency from 'currency-symbol-map'
+let _ = require('lodash');
 
 const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -209,7 +210,7 @@ class TierSelector extends React.Component{
                     {currentInterval && currentInterval!== "custom" && <IntervalPicker changeInterval={this.changeInterval} currentInterval={currentInterval} intervals={intervalArray}/>}
                 </div>
                 {currentInterval !== "custom" && <div className="servicebot-pricing-table">
-                    {currentPlans.map(plan => {
+                    {_.sortBy(currentPlans, ['amount', 'id']).map(plan => {
                         if(plan.type === "custom"){
                             return <div></div>
                         }

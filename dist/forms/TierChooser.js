@@ -38,6 +38,8 @@ var _currencySymbolMap2 = _interopRequireDefault(_currencySymbolMap);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var _ = require('lodash');
+
 var numberWithCommas = function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
@@ -347,7 +349,7 @@ var TierSelector = function (_React$Component) {
                 currentInterval !== "custom" && _react2.default.createElement(
                     'div',
                     { className: 'servicebot-pricing-table' },
-                    currentPlans.map(function (plan) {
+                    _.sortBy(currentPlans, ['amount', 'id']).map(function (plan) {
                         if (plan.type === "custom") {
                             return _react2.default.createElement('div', null);
                         }
