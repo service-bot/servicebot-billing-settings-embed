@@ -4,13 +4,33 @@ import getSymbolFromCurrency from 'currency-symbol-map'
 const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+const intervalNames = {
+    "one_time" : "One Time",
+    "month" : "Monthly",
+    "year" : "Annually",
+    "day" : "Daily",
+    "week" : "Weekly"
+};
 
+
+const findMonthlyPrice = (x, interval) => {
+    switch(interval){
+        case "month":
+            return x;
+        case "day":
+            return x * 30
+        case "week":
+            return x * 4
+        case "year":
+            return Math.floor(x/12);
+    }
+}
 
 const Tier = (props) => {
     let {currentPlan, tier, plan, pickTier, isCurrent, isSelected} = props;
     let tierContent, tierButton;
     let currency = getSymbolFromCurrency(plan.currency);
-    let tierPrice = numberWithCommas(plan.amount/100);
+    let tierPrice = findMonthlyPrice(numberWithCommas(plan.amount/100));
     if(plan.trial_period_days > 0){
         tierButton = "Try for Free"
     }else{
@@ -20,11 +40,13 @@ const Tier = (props) => {
         if(tier.unit){
             tierContent = <span>
                 {currency}{tierPrice}
-                <span className="_interval-name">/{plan.interval}</span>
+                <span className="_interval-name">/Month</span>
                 <span className="_metered-unit">per {tier.unit}</span>
+                {plan.interval !== "month" && <span className={`_billing-period`}>Billed {intervalNames[plan.interval]}</span>}
             </span>;
         }else{
-            tierContent = <span>{currency}{tierPrice}<span className="_interval-name">/{plan.interval}</span></span>;
+
+            tierContent = <span>{currency}{tierPrice}<span className="_interval-name">/Month</span>{plan.interval !== "month" && <span className={`_billing-period`}>Billed {intervalNames[plan.interval]}</span>}<span></span></span>;
         }
         if(plan.amount == 0){
             tierContent = "Free";
@@ -92,13 +114,6 @@ const IntervalPicker = (props)=> {
                 if(props.currentInterval === interval){
                     intervalClass+=" _selected";
                 }
-                let intervalNames = {
-                    "one_time" : "One Time",
-                    "month" : "Monthly",
-                    "year" : "Annually",
-                    "day" : "Daily",
-                    "week" : "Weekly"
-                };
 
                 return (<li className={intervalClass} onClick={props.changeInterval(interval)}>{intervalNames[interval]}</li>)
             })
