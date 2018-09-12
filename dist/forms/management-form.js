@@ -137,22 +137,21 @@ var ServicebotManagedBilling = function (_React$Component) {
                         while (1) {
                             switch (_context.prev = _context.next) {
                                 case 0:
-                                    console.log(response);
                                     self.props.handleResponse && self.props.handleResponse({ event: "add_fund", response: response });
 
                                     if (!(instance.status === "cancelled")) {
-                                        _context.next = 5;
+                                        _context.next = 4;
                                         break;
                                     }
 
-                                    _context.next = 5;
+                                    _context.next = 4;
                                     return self.resubscribe(instance.id)();
 
-                                case 5:
+                                case 4:
                                     self.getFundingDetails();
                                     self.props.setLoading(false);
 
-                                case 7:
+                                case 6:
                                 case 'end':
                                     return _context.stop();
                             }
@@ -490,18 +489,17 @@ var ServicebotManagedBilling = function (_React$Component) {
                                 case 8:
                                     updatedInstance = _context4.sent;
 
-                                    console.log(updatedInstance, "hello!");
                                     if (updatedInstance.error === "This customer has no attached payment source") {
                                         self.setState({ formError: "Credit/debit card required to switch from free tier to a paid tier" });
                                     }
-                                    _context4.next = 13;
+                                    _context4.next = 12;
                                     return self.getServicebotDetails();
 
-                                case 13:
+                                case 12:
                                     // self.setState({loading: false});
                                     self.props.setLoading(false);
 
-                                case 14:
+                                case 13:
                                 case 'end':
                                     return _context4.stop();
                             }
@@ -582,11 +580,8 @@ var ServicebotManagedBilling = function (_React$Component) {
                 );
             }
 
-            var metricProp = self.state.template && self.state.template.references.service_template_properties.find(function (prop) {
-                return prop.type === "metric";
-            });
+            // let metricProp = self.state.template && self.state.template.references.service_template_properties.find(prop => prop.type === "metric");
 
-            console.log(self.state.instances);
             return _react2.default.createElement(
                 'div',
                 { className: 'servicebot--embeddable servicebot--manage-billing-form-wrapper custom' },
@@ -608,6 +603,9 @@ var ServicebotManagedBilling = function (_React$Component) {
                                 'div',
                                 { className: 'mbf--current-services-list' },
                                 self.state.instances.map(function (service) {
+                                    var metricProp = service.references.service_instance_properties.find(function (prop) {
+                                        return prop.type === "metric";
+                                    });
                                     return _react2.default.createElement(
                                         'div',
                                         { className: 'mbf--current-services-item' },

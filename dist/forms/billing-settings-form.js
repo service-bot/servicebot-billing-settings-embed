@@ -128,7 +128,6 @@ var BillingForm = function (_React$Component2) {
 }(_react2.default.Component);
 
 function BillingInfo(props) {
-    console.log(props);
     var invalid = props.invalid,
         submitting = props.submitting,
         pristine = props.pristine;
@@ -320,7 +319,6 @@ var CreditCardForm = function (_React$Component3) {
         value: function render() {
             var _this4 = this;
 
-            console.log(this.props.external, "EXT");
             var submissionRequest = {
                 'method': 'POST',
                 'url': this.props.url + '/api/v1/funds'
@@ -339,8 +337,6 @@ var CreditCardForm = function (_React$Component3) {
                 hasCard = true;
                 card = this.props.userFund.source.card;
             }
-
-            console.log("current card", card);
 
             var _card = card,
                 brand = _card.brand,

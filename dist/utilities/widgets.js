@@ -176,45 +176,50 @@ var PriceBreakdown = function PriceBreakdown(props) {
             )
         )
     )]);
-
-    if (breakdown.length == 1) {
+    if (breakdown.length > 1 || metricProp) {
+        return _react2.default.createElement(
+            "div",
+            null,
+            _react2.default.createElement(
+                "div",
+                { className: "mbf-summary" },
+                _react2.default.createElement(
+                    "p",
+                    { className: "_heading" },
+                    "Items"
+                ),
+                metricProp && _react2.default.createElement(
+                    "span",
+                    { className: "_metric" },
+                    metricProp.data.value,
+                    " ",
+                    metricProp.config.unit
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "_items" },
+                    breakdown
+                ),
+                _react2.default.createElement(
+                    "p",
+                    { className: "_total" },
+                    _react2.default.createElement(
+                        "span",
+                        { className: "_label" },
+                        "Total:"
+                    ),
+                    _react2.default.createElement(
+                        "span",
+                        { className: "_value" },
+                        (0, _price.getPrice)(instance)
+                    )
+                )
+            )
+        );
+    } else {
+        //todo: show total price?
         return _react2.default.createElement("div", null);
     }
-    return _react2.default.createElement(
-        "div",
-        { className: "mbf-summary" },
-        _react2.default.createElement(
-            "p",
-            { className: "_heading" },
-            "Items"
-        ),
-        metricProp && _react2.default.createElement(
-            "span",
-            { className: "_metric" },
-            metricProp.data.value,
-            " ",
-            metricProp.config.unit
-        ),
-        _react2.default.createElement(
-            "div",
-            { className: "_items" },
-            breakdown
-        ),
-        _react2.default.createElement(
-            "p",
-            { className: "_total" },
-            _react2.default.createElement(
-                "span",
-                { className: "_label" },
-                "Total:"
-            ),
-            _react2.default.createElement(
-                "span",
-                { className: "_value" },
-                (0, _price.getPrice)(instance)
-            )
-        )
-    );
 };
 var WidgetList = function WidgetList(props) {
     return _react2.default.createElement(_reduxForm.Field, { name: props.name, id: props.name, component: _servicebotBaseForm.selectField,
