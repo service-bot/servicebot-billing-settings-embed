@@ -31,7 +31,7 @@ const Tier = (props) => {
     let {currentPlan, tier, plan, pickTier, isCurrent, isSelected} = props;
     let tierContent, tierButton;
     let currency = getSymbolFromCurrency(plan.currency);
-    let tierPrice = findMonthlyPrice(numberWithCommas(plan.amount/100));
+    let tierPrice = numberWithCommas(findMonthlyPrice(plan.amount, plan.interval)/100);
     if(plan.trial_period_days > 0){
         tierButton = "Try for Free"
     }else{

@@ -52,7 +52,6 @@ class BillingForm extends React.Component {
 }
 
 function BillingInfo(props) {
-    console.log(props);
     let {invalid, submitting, pristine} = props;
     return (
         <form className="mbf--funding-personal-info">
@@ -192,7 +191,6 @@ class CreditCardForm extends React.Component {
     }
 
     render() {
-        console.log(this.props.external, "EXT")
         let submissionRequest = {
             'method': 'POST',
             'url': `${this.props.url}/api/v1/funds`,
@@ -210,7 +208,6 @@ class CreditCardForm extends React.Component {
             card = this.props.userFund.source.card;
         }
 
-        console.log("current card", card);
 
         let {brand, last4, exp_month, exp_year} = card;
 

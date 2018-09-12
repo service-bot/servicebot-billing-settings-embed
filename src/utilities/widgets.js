@@ -99,24 +99,23 @@ let PriceBreakdown = (props) => {
                         <span className="_value"><Price value={basePrice} currency={instance.payment_plan.currency}/></span>
                     </span>
     </p>)]);
+    if (breakdown.length > 1 || metricProp) {
+        return <div>
+            <div className="mbf-summary">
+                <p className="_heading">Items</p>
 
-    if (breakdown.length == 1) {
-        return <div/>
-    }
-    return (
+                {metricProp && <span className="_metric">{metricProp.data.value} {metricProp.config.unit}</span>}
+                <div className={`_items`}>
+                    {breakdown}
+                </div>
+                <p className="_total"><span className="_label">Total:</span><span className="_value">{getPrice(instance)}</span></p>
 
-        <div className="mbf-summary">
-            <p className="_heading">Items</p>
-
-            {metricProp && <span className="_metric">{metricProp.data.value} {metricProp.config.unit}</span>}
-            <div className={`_items`}>
-            {breakdown}
             </div>
-            <p className="_total"><span className="_label">Total:</span><span className="_value">{getPrice(instance)}</span></p>
-
         </div>
-
-    );
+    }else{
+        //todo: show total price?
+        return <div></div>
+    }
 };
 let WidgetList = props => (
     <Field name={props.name} id={props.name} component={selectField}

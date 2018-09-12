@@ -30,7 +30,6 @@ let Price = function(props){
 };
 
 let getPrice = (myService, serviceType = null)=>{
-    console.log(myService);
     let serType = myService.type || serviceType;
     let prefix = getSymbolFromCurrency(myService.payment_plan.currency);
 

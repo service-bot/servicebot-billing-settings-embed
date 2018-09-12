@@ -56,7 +56,6 @@ class ServicebotManagedBilling extends React.Component {
     handleResponse(instance){
         let self = this;
         return async (response)=> {
-            console.log(response);
             self.props.handleResponse && self.props.handleResponse({event: "add_fund",response});
             if(instance.status === "cancelled"){
                 await self.resubscribe(instance.id)();
@@ -255,7 +254,6 @@ class ServicebotManagedBilling extends React.Component {
             self.props.setLoading(true);
             // self.setState({loading: true});
             let updatedInstance = await(await fetch(`${self.props.url}/api/v1/service-instances/${self.state.instances[0].id}/apply-payment-structure/${paymentStructure}`,request)).json();
-            console.log(updatedInstance, "hello!")
             if(updatedInstance.error === "This customer has no attached payment source"){
                 self.setState({formError: "Credit/debit card required to switch from free tier to a paid tier"});
             }
@@ -298,9 +296,8 @@ class ServicebotManagedBilling extends React.Component {
             return <p>{this.state.error}</p>
         }
 
-        let metricProp = self.state.template && self.state.template.references.service_template_properties.find(prop => prop.type === "metric");
+        // let metricProp = self.state.template && self.state.template.references.service_template_properties.find(prop => prop.type === "metric");
 
-        console.log(self.state.instances);
         return (
             <div className="servicebot--embeddable servicebot--manage-billing-form-wrapper custom">
 
@@ -313,6 +310,7 @@ class ServicebotManagedBilling extends React.Component {
                                         <h3>Subscription Summary</h3>
                                             <div className="mbf--current-services-list">
                                                 {self.state.instances.map(service => {
+                                                    let metricProp = service.references.service_instance_properties.find(prop => prop.type === "metric");
                                                     return(
                                                     <div className="mbf--current-services-item">
                                                         {this.getSubscriptionStatus()}
