@@ -47,7 +47,6 @@ var Price = function Price(props) {
 var getPrice = function getPrice(myService) {
     var serviceType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
-    console.log(myService);
     var serType = myService.type || serviceType;
     var prefix = (0, _currencySymbolMap2.default)(myService.payment_plan.currency);
 

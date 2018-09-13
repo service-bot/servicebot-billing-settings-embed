@@ -75,7 +75,7 @@ var Tier = function Tier(props) {
     var tierContent = void 0,
         tierButton = void 0;
     var currency = (0, _currencySymbolMap2.default)(plan.currency);
-    var tierPrice = findMonthlyPrice(numberWithCommas(plan.amount / 100));
+    var tierPrice = numberWithCommas(findMonthlyPrice(plan.amount, plan.interval) / 100);
     if (plan.trial_period_days > 0) {
         tierButton = "Try for Free";
     } else {
