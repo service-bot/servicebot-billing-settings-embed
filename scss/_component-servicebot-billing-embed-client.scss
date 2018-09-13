@@ -270,6 +270,21 @@
                 text-transform: uppercase;
                 margin-bottom: $gutter * 2;
               }
+              ._billing-period {
+                display: block;
+                font-size: 12px;
+                line-height: 18px;
+                font-weight: 100;
+                color: #0033A0;
+                position: absolute;
+                left: 50%;
+                margin-top: 5px;
+                -webkit-transform: translateX(-50%);
+                -moz-transform: translateX(-50%);
+                -ms-transform: translateX(-50%);
+                -o-transform: translateX(-50%);
+                transform: translateX(-50%);
+              }
 
               ._interval-name{
                 letter-spacing: 2px;
