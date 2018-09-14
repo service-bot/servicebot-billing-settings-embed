@@ -2,8 +2,8 @@ const path = require("path");
 const BUILD_DIR = path.resolve(__dirname, './public/build');
 const APP_DIR = path.resolve(__dirname, './src');
 var webpack = require('webpack');
-const MODE = "development";
-
+const ci = require("ci-info");
+const MODE = ci.isCI ? "production" : "development";
 let config = async function () {
     return {
         mode: MODE,
@@ -16,7 +16,7 @@ let config = async function () {
             path: BUILD_DIR,
             publicPath: "/build/",
             filename: '[name].js',
-            library: 'Servicebot',
+            library: ['Servicebot', "BillingSettings"],
             libraryTarget: 'umd',
             umdNamedDefine: true,
 

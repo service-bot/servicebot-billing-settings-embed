@@ -28,14 +28,15 @@
   <script src="/build/servicebot-billing-settings-embed.js" type="text/javascript"></script>
   <script  type="text/javascript">
     Servicebot.BillingSettings({
-        url : "http://localhost:3000",
+        // url : "https://hub.serviceshop.io",
+        url:"http://localhost:3000",
         selector : document.getElementById('servicebot-request-form'),
         handleResponse : (response) => {
             console.log(response);
             //Response function, you can put redirect logic or app integration logic here
         },
         disablePlanChange: false,
-        token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjIsImlhdCI6MTUzMDc0MjMyNywiZXhwIjoxNTMwNzUzMTI3fQ.1oA6sfeP3GEM6T21BAy-SSuC82Cw0FA3kkzxUHeLdD8"
+        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjI5LCJpYXQiOjE1MzY4NDkwNzQsImV4cCI6MTUzNjg1OTg3NH0.LiUrKYwVS7fYoM0qJfc-2gXjsyITweMBxkG_W9BZ0qU"
     })
   </script>
   <noscript>

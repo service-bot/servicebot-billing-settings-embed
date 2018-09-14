@@ -6,11 +6,15 @@ import { AppContainer } from 'react-hot-loader'
 // ReactDOM.render(<App />, document.getElementById('root'));
 
 const BillingSettings = (config) => {
+    if(config.useAsComponent){
+        return <ServicebotBillingSettingsEmbed
+            {...config}
+        />
+    }
     ReactDOM.render(<ServicebotBillingSettingsEmbed {...config} external={true} />, config.selector);
 }
 
 
-export {ServicebotBillingSettingsEmbed, BillingSettings}
 
 if (module.hot) {
     module.hot.accept('./ServicebotBillingSettings.js', () => {
@@ -23,3 +27,5 @@ if (module.hot) {
         );
     });
 }
+
+export default BillingSettings
