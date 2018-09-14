@@ -410,3 +410,4 @@ var TierSelector = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = TierSelector;
+module.exports = exports.default;

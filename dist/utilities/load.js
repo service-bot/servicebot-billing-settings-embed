@@ -115,3 +115,4 @@ function mapStateToProps(state) {
 }
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(Load);
+module.exports = exports.default;

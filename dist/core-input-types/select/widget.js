@@ -219,3 +219,4 @@ var widget = {
 };
 
 exports.default = widget;
+module.exports = exports.default;

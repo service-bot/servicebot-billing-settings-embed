@@ -68,3 +68,4 @@ function Adjustment(props) {
 }
 
 exports.default = Adjustment;
+module.exports = exports.default;

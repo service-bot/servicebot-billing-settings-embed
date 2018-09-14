@@ -103,3 +103,4 @@ var App = function (_Component) {
 }(_react.Component);
 
 exports.default = App;
+module.exports = exports.default;

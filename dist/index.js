@@ -3,7 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.BillingSettings = exports.ServicebotBillingSettingsEmbed = undefined;
 
 var _extends2 = require('babel-runtime/helpers/extends');
 
@@ -28,12 +27,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // ReactDOM.render(<App />, document.getElementById('root'));
 
 var BillingSettings = function BillingSettings(config) {
+    if (config.useAsComponent) {
+        return _react2.default.createElement(_ServicebotBillingSettings2.default, config);
+    }
     _reactDom2.default.render(_react2.default.createElement(_ServicebotBillingSettings2.default, (0, _extends3.default)({}, config, { external: true })), config.selector);
 };
-
-exports.ServicebotBillingSettingsEmbed = _ServicebotBillingSettings2.default;
-exports.BillingSettings = BillingSettings;
-
 
 if (module.hot) {
     module.hot.accept('./ServicebotBillingSettings.js', function () {
@@ -45,3 +43,6 @@ if (module.hot) {
         ), document.getElementById('root'));
     });
 }
+
+exports.default = BillingSettings;
+module.exports = exports.default;
