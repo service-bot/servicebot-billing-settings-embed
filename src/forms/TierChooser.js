@@ -203,6 +203,7 @@ class TierSelector extends React.Component{
             });
             currentPlans = one_time.concat(currentPlans);
         }
+        currentPlans = currentPlans.filter(plan => plan.type !== "custom");
 
         return (
             <div>
