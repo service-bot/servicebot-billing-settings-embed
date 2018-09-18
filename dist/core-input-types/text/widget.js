@@ -30,3 +30,4 @@ var Text = function Text(props) {
 var widget = { widget: Text, type: "text", label: "Text" };
 
 exports.default = widget;
+module.exports = exports.default;

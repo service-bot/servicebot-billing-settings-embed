@@ -118,3 +118,4 @@ var mapStateToProps = function mapStateToProps(state) {
     };
 };
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(WidgetPricingInput);
+module.exports = exports.default;

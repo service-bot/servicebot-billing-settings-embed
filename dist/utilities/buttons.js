@@ -186,3 +186,4 @@ var Buttons = function (_React$Component) {
 exports.default = (0, _reactRedux.connect)(function (state) {
     return { options: state.options };
 })(Buttons);
+module.exports = exports.default;

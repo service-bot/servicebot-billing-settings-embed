@@ -108,3 +108,4 @@ var CreditCardIcon = function CreditCardIcon(brand) {
 };
 
 exports.default = CreditCardIcon;
+module.exports = exports.default;

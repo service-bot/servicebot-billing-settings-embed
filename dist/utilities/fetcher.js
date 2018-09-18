@@ -56,3 +56,4 @@ var Fetcher = function Fetcher(path) {
 };
 // import 'react-s-alert/dist/s-alert-default.css';
 exports.default = Fetcher;
+module.exports = exports.default;

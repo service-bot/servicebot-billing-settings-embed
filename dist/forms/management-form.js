@@ -683,3 +683,4 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 ServicebotManagedBilling = (0, _reactRedux.connect)(null, mapDispatchToProps)(ServicebotManagedBilling);
 exports.default = ServicebotManagedBilling;
+module.exports = exports.default;

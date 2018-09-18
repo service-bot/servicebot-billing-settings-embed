@@ -30,3 +30,4 @@ var SecureString = function SecureString(props) {
 var widget = { widget: SecureString, type: "secure-string", label: "Secure String" };
 
 exports.default = widget;
+module.exports = exports.default;
