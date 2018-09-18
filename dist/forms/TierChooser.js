@@ -362,6 +362,9 @@ var TierSelector = function (_React$Component) {
                 });
                 currentPlans = one_time.concat(currentPlans);
             }
+            currentPlans = currentPlans.filter(function (plan) {
+                return plan.type !== "custom";
+            });
 
             return _react2.default.createElement(
                 'div',
