@@ -1,7 +1,10 @@
 import React from "react";
+import getSymbolFromCurrency from 'currency-symbol-map'
+
 
 function Adjustment(props){
-    let {operation, price} = props;
+    let {operation, price, isText, currency} = props;
+    let currencySymbol = currency ? getSymbolFromCurrency(currency) : "$";
     //todo: make this less hardcoded.
     let message = "";
     if(operation === "add" || operation === "subtract") {
@@ -9,28 +12,32 @@ function Adjustment(props){
     }
     switch(operation) {
         case "add":
-            message = <span>+ ${price}</span>;
+            message = isText? `${currencySymbol}${price} Add-on`: <div>{currencySymbol}{price} <span class="request-form-price-adjust-discount">Add-on</span></div>;
             break;
         case "subtract":
-            message = <span>- ${price}</span>;
+            message = isText? `${currencySymbol}${price} Discount`:<div>${price} <span class="request-form-price-adjust-discount">Discount</span></div>;
 
             break;
         case "multiply" :
-            message = <span>+ ${price}%</span>;
+            message = isText? `${price}% Increase`:<div>${price}% <span className="request-form-price-adjust-increase">Increase</span></div>;
 
             break;
         case "divide" :
-            message = <span>- ${price}%</span>;
+            message = isText? `${price}% Discount`:<div>${price}% <span class="request-form-price-adjust-decrease">Discount</span></div>;
             break;
         default :
             message = ` -- ${operation} : ${price}`;
             break;
     }
+    if(isText){
+        return message;
+    }
     return (
-        <span className="_price-adjustment-label">
+        <div className="request-form-price-adjustment-wrapper">
             {message}
-        </span>
+        </div>
     );
+
 }
 
 export default Adjustment;

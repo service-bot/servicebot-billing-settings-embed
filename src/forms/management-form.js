@@ -9,6 +9,7 @@ import {ModalEditProperties} from "./edit-properties-form.js"
 import TierChoose from "./TierChooser"
 import {PriceBreakdown} from "../utilities/widgets";
 import Load from "../utilities/load.js";
+import Invoices from "../Invoices"
 
 function PriceSummary(props){
     let {instance, template} = props;
@@ -51,6 +52,7 @@ class ServicebotManagedBilling extends React.Component {
         self.getSPK();
         self.getServicebotDetails();
         self.getFundingDetails();
+        self.getInvoices();
     }
 
     handleResponse(instance){
@@ -65,6 +67,10 @@ class ServicebotManagedBilling extends React.Component {
 
         }
 
+    }
+    async getInvoices(){
+        let invoices = await Fetcher(`${this.props.url}/api/v1/invoices/own`, null, null, this.getRequest());
+        this.setState({invoices})
     }
     async getFundingDetails(){
         let funds = await Fetcher(`${this.props.url}/api/v1/funds/own`, null, null, this.getRequest());
@@ -310,21 +316,15 @@ class ServicebotManagedBilling extends React.Component {
                                         <h3>Subscription Summary</h3>
                                             <div className="mbf--current-services-list">
                                                 {self.state.instances.map(service => {
+                                                    let tier = self.state.template.references.tiers.find(tier => tier.id === service.references.payment_structure_templates[0].tier_id);
+                                                    console.log(tier);
                                                     let metricProp = service.references.service_instance_properties.find(prop => prop.type === "metric");
                                                     return(
                                                     <div className="mbf--current-services-item">
                                                         {this.getSubscriptionStatus()}
                                                         {this.getTrialStatus()}
-                                                        <PriceBreakdown metricProp={metricProp} instance={service}/>
+                                                        <PriceBreakdown tier={tier} metricProp={metricProp} instance={service}/>
                                                         <TierChoose key={"t-" + service.payment_structure_template_id} changePlan={self.changePlan} currentPlan={service.payment_structure_template_id} template={self.state.template}/>
-                                                        {/*<div className="mbf--current-services-item-details">*/}
-                                                            {/*<h6 className="mbf--current-services-item-title">{service.name}</h6>*/}
-                                                            {/*<b><Price value={service.payment_plan.amount} /> / {service.payment_plan.interval}</b><br/>*/}
-                                                        {/*</div>*/}
-                                                        {/*<div className="service-instance-box-content">*/}
-                                                            {/*<div>Status: <b>{service.status}</b></div>*/}
-                                                            {/*<div>Purchased: <b><DateFormat date={service.created_at} time/></b></div>*/}
-                                                        {/*</div>*/}
                                                         <div className="mbf--current-services-item-buttons">
                                                             <span>{this.state.formError}</span>
                                                             {(service.status === "running" || service.status === "requested" || service.status === "in_progress") &&
@@ -347,6 +347,7 @@ class ServicebotManagedBilling extends React.Component {
                                 {this.getBillingForm()}
 
                                 <ModalEditProperties external={this.props.external} token={this.props.token} url={this.props.url} instance={self.state.instances[0]} refresh={this.hidePropEdit}/>
+                                <Invoices invoices={this.state.invoices}/>
                         </div>
                         :
                         <div className="page-loader">

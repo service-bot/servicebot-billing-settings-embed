@@ -58,7 +58,7 @@ let RenderWidget = (props) => {
 
 
 let PriceBreakdown = (props) => {
-    const {metricProp, instance} = props;
+    const {metricProp, instance,tier} = props;
     let inputs = instance.references.service_instance_properties;
     let widgets = getWidgets().reduce((acc, widget) => {
         acc[widget.type] = widget;
@@ -70,13 +70,14 @@ let PriceBreakdown = (props) => {
         return acc;
 
     }, {});
-
+    let metricTier = metricProp && metricProp.config.pricing && metricProp.config.pricing.tiers.includes(tier.name);
     let map = {
         add: "+",
         subtract: "-",
         "multiply" : "+",
         "divide": "-"
     };
+    console.log(metricProp, instance);
     let basePrice = getBasePrice(instance.references.service_instance_properties, handlers, instance.payment_plan.amount);
     let breakdown = inputs.reduce((acc, input) => {
         if (input.config && input.config.pricing && widgets[input.type] && widgets[input.type].handler && widgets[input.type].handler.priceHandler && widgets[input.type].handler.priceHandler(input.data, input.config)) {
@@ -99,12 +100,21 @@ let PriceBreakdown = (props) => {
                         <span className="_value"><Price value={basePrice} currency={instance.payment_plan.currency}/></span>
                     </span>
     </p>)]);
-    if (breakdown.length > 1 || metricProp) {
+    if(breakdown.length === 1){
+        return <div>
+            <div className="mbf-summary">
+                {metricTier && <span className="_metric">{metricProp.data.value} {metricProp.config.unit}</span>}
+                <p className="_total"><span className="_label">Total:</span><span className="_value">{getPrice(instance)}</span></p>
+
+            </div>
+        </div>
+    }
+    if (breakdown.length > 1) {
         return <div>
             <div className="mbf-summary">
                 <p className="_heading">Items</p>
 
-                {metricProp && <span className="_metric">{metricProp.data.value} {metricProp.config.unit}</span>}
+                {metricTier && <span className="_metric">{metricProp.data.value} {metricProp.config.unit} </span>}
                 <div className={`_items`}>
                     {breakdown}
                 </div>

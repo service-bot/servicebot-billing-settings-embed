@@ -93,7 +93,7 @@ let SelectWidget = (props) => {
                     { configValue && configValue.value && configValue.value.map((option, index) => {
                             let price = configValue.pricing && configValue.pricing.value && configValue.pricing.value[option];
                             return <option key={index} value={option}>
-                                {(price && configValue.pricing.operation) ? <div>{option} <PriceAdjustment price={price} operation={configValue.pricing.operation}/></div> : `${option}`}
+                                {(price && configValue.pricing.operation) ? `${option} - ${PriceAdjustment({price, operation:configValue.pricing.operation, isText:true})}`: `${option}`}
                             </option>
                         }
                     )}

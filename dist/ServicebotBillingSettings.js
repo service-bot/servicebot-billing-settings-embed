@@ -92,6 +92,24 @@ var App = function (_Component) {
                     _react2.default.createElement(
                         'div',
                         null,
+                        _react2.default.createElement(
+                            'select',
+                            null,
+                            _react2.default.createElement(
+                                'option',
+                                { value: 'doggoman' },
+                                'BAD OBJECT'
+                            ),
+                            _react2.default.createElement(
+                                'option',
+                                { value: 'cool' },
+                                _react2.default.createElement(
+                                    'span',
+                                    null,
+                                    'GREAT OBJECT'
+                                )
+                            )
+                        ),
                         _react2.default.createElement(_load2.default, null),
                         _react2.default.createElement(_managementForm2.default, this.props)
                     )
