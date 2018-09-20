@@ -1,7 +1,7 @@
 /* _section font */
 $section_heading: 16px;
 @mixin font{
-  font-family: "Open Sans", "Arial";
+  font-family: 'Open Sans', 'Arial', "sans-serif", "serif";
   color: $color-blue-gray;
 }
 
@@ -25,8 +25,11 @@ $section_heading: 16px;
   color: $color-heading;
   line-height: 22px;
   font-size: 16px;
-  font-family: "Avenir", "Arial";
+  font-family: "Avenir", "Arial", "sans-serif", "serif";
 }
 ._sub-heading{
   @include sub_heading;
 }
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700,800');
+$heading-font: 'Montserrat', sans-serif;

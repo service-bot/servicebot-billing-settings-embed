@@ -206,7 +206,8 @@ class TierSelector extends React.Component{
         currentPlans = currentPlans.filter(plan => plan.type !== "custom");
 
         return (
-            <div>
+            <div className={`servicebot-subscription`}>
+                <h3>Subscription</h3>
                 <div className="servicebot-billing-type-selector">
                     {currentInterval && currentInterval!== "custom" && <IntervalPicker changeInterval={this.changeInterval} currentInterval={currentInterval} intervals={intervalArray}/>}
                 </div>

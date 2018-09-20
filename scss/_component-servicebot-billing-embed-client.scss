@@ -4,6 +4,7 @@
 @mixin embed-text{
   @include text;
   font-size: 14px;
+  letter-spacing: 0.4px;
   color: $color-blue;
 }
 @mixin embed-label{
@@ -14,8 +15,8 @@
   border-radius: 2px;
   background-color: #F9FCFF;
   box-shadow: 0 1px 4px 0 rgba(0,0,0,0.05);
-  margin: $gutter 0;
-  padding: $gutter * 1.5 $gutter;
+  margin: $gutter / 2 0;
+  padding: $gutter;
 }
 @mixin embed-input-styles{
   @include text;
@@ -32,28 +33,56 @@
   }
 }
 
+@mixin h3-heading{
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  margin: {
+    top: $gutter * 2;
+    bottom: 24px;
+  };
+
+  &:first-child{
+    margin-top: 0;
+  }
+}
+
+@mixin pricing-font{
+  font-family: $heading-font;
+  color: $color-white;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+}
+
 .servicebot--embeddable{
+  position: relative;
   @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
+
+  *{
+    box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+  }
 
   &.servicebot--manage-billing-form-wrapper{
     @include embed-text;
-    //max-width: $gutter * 51;
+    max-width: 100%;
+    width: 816px;
     margin: auto;
+    padding: 20px 20px 80px 20px;
 
     .mbf--form-wrapper{
 
       h3{
-        text-transform: uppercase;
-        font-weight: 600;
-        letter-spacing: 0.4px;
-        margin: {
-          top: $gutter * 2;
-          bottom: $gutter;
-        };
+        @include h3-heading;
+      }
 
-        &:first-child{
-          margin-top: 0;
-        }
+      .servicebot-subscription-summary,
+      .servicebot-subscription,
+      .mbf--card-wrapper,
+      .servicebot-subscription-add-ons,
+      .servicebot-billing-invoices{
+        margin-bottom: 48px;
       }
 
 
@@ -82,12 +111,16 @@
 
           .mbf-summary{
             @include embed-content-box;
+            margin-bottom: 40px;
+            padding: $gutter * 1.5 $gutter*2;
+            padding-bottom: 6px;
 
             ._heading{
               color: #0033A0;
               font-size: 14px;
               font-weight: 600;
               line-height: 16px;
+              margin-top: 0;
               margin-bottom: $gutter*1.5;
             }
 
@@ -119,7 +152,7 @@
               ._item{
                 display: flex;
                 justify-content: space-between;
-                margin: $gutter/2.5 0;
+                margin: 3px 0;
 
                 ._label{
                   color: #6F7F9F;
@@ -131,7 +164,7 @@
                     color: #0033A0;
                     font-size: 16px;
                     font-weight: 600;
-                    padding-right: $gutter;
+                    padding-right: $gutter * 2;
                   }
                   ._value{
                     color: #0033A0;
@@ -145,7 +178,7 @@
             ._total{
               display: flex;
               justify-content: space-between;
-              border-top: 1px solid #e2e9ef;
+              border-top: 1px solid #EBF3F9;
               padding-top: $gutter;
               margin-top: $gutter*1.5;
 
@@ -165,27 +198,30 @@
             }
           }
 
-          .servicebot-billing-type-selector{
-            margin: $gutter * 2 auto;
+          .servicebot-subscription {
+            .servicebot-billing-type-selector {
+              margin: 24px auto;
 
-            ._selector{
+              ._selector {
+                margin: 0;
 
-              ._interval{
-                padding: $gutter / 4 $gutter;
-                border-radius: 12px;
-                line-height: 16px;
-                @include defaultTransition(150ms);
-
-                &:hover{
-                  background-color: $color-light-blue-gray;
+                ._interval {
+                  padding: $gutter / 4 $gutter;
+                  border-radius: 12px;
+                  line-height: 16px;
                   @include defaultTransition(150ms);
-                }
 
-                &._selected{
-
-                  &:hover{
-                    background-color: $color-blue;
+                  &:hover {
+                    background-color: $color-light-blue-gray;
                     @include defaultTransition(150ms);
+                  }
+
+                  &._selected {
+
+                    &:hover {
+                      background-color: $color-blue;
+                      @include defaultTransition(150ms);
+                    }
                   }
                 }
               }
@@ -204,16 +240,18 @@
             @include fadeInContent;
 
             ._tier{
-              @include border;
-              border-color: $color-blue;
+              //@include border;
+              //border-color: $color-blue;
               border-radius: 3px;
               overflow: hidden;
-              margin: $gutter / 2;
+              margin: 0 $gutter / 2;
               display: flex;
               flex-direction: column;
               align-items: center;
               justify-content: space-between;
               max-width: calc(100% * (1/3));
+              background-color: $color-blue;
+              color: $color-white;
 
               &:nth-child(1){
                 margin: {
@@ -223,7 +261,7 @@
 
               &:nth-child(3n){
                 margin: {
-                  left: $gutter / 2;
+                  left: $gutter;
                   right: 0;
                 }
               }
@@ -231,7 +269,7 @@
               &:nth-child(3n + 1){
                 margin: {
                   left: 0;
-                  right: $gutter / 2;
+                  right: $gutter;
                 }
               }
 
@@ -241,17 +279,21 @@
 
               &._selected{
                 color: $color-white;
-                background-color: $color-blue;
+                background-color: #EEF4FF;
                 box-shadow: none;
                 transition: all 550ms;
 
                 ._price, ._interval-name{
-                  color: $color-white;
-                  font-weight: 600;
-                  letter-spacing: 1.5px;
+                  @include pricing-font;
+                  color: $color-black;
                 }
                 ._interval-name{
-                  font-weight: 100;
+                  font-weight: 300;
+                  font-size: 13px;
+                  letter-spacing: -0.2px;
+                }
+                ._name{
+                  color: $color-blue;
                 }
               }
 
@@ -260,22 +302,40 @@
               }
 
               ._name{
+                @include pricing-font;
+                background-color: transparent;
                 width: 100%;
                 text-transform: uppercase;
                 font-weight: 600;
-                padding: $gutter * 1.25;
+                padding: $gutter * 2;
+                margin: 0;
+                color: $color-white;
               }
 
               ._price{
-                text-transform: uppercase;
+                @include pricing-font;
                 margin-bottom: $gutter * 2;
+                position: relative;
+                height: 56px;
+                width: 100%;
+                display: block;
+
+                ._metered-unit{
+                  position: absolute;
+                  bottom: -21px;
+                  left: 50%;
+                  transform: translateX(-50%);
+                  width: 100%;
+                }
               }
+
               ._billing-period {
                 display: block;
+                width: 100%;
                 font-size: 12px;
                 line-height: 18px;
                 font-weight: 100;
-                color: #0033A0;
+                color: $color-white;
                 position: absolute;
                 left: 50%;
                 margin-top: 5px;
@@ -287,16 +347,22 @@
               }
 
               ._interval-name{
-                letter-spacing: 2px;
-                font-weight: 100;
+                font-weight: 300;
+                font-size: 13px;
+                letter-spacing: -0.2px;
+                color: $color-white;
               }
 
               ._selected-label{
-                @include button(solid, $color-light-blue-gray, true, $color-black);
+                @include button(solid, transparent, false, #AEBED3);
+                border: 2.06px solid #AEBED3;
                 cursor: default;
+                box-shadow: none;
+                font-weight: 100;
                 margin: {
                   bottom: $gutter * 2;
                 };
+                padding: 10px 26px;
               }
 
               ._tier-confirm-wrapper{
@@ -308,9 +374,20 @@
               button{
                 @include defaultTransition;
                 @include button(border, $color-success, true);
+                background-color: $color-success;
+                color: $color-white;
+                border-radius: 2px;
+                box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
                 margin: {
-                  bottom: $gutter * 2;
+                  bottom: 28px;
                 };
+                padding: {
+                  top: 10px;
+                  bottom: 10px;
+                  left: 26px;
+                  right: 26px;
+                }
+                width: auto;
 
                 &._select-tier{
                   @include defaultTransition(150ms);
@@ -437,6 +514,7 @@
           height: 46px;
           position: relative;
           box-sizing: content-box;
+          margin-bottom: 40px;
 
           @include breakpoint(iPhone){
             height: auto !important;
@@ -485,9 +563,10 @@
 
               .mbf--card-date-holder {
                 padding-left: $gutter * 2;
+                letter-spacing: -0.2px;
 
                 .mbf--card-exp-month {
-                  padding-left: $gutter / 2 ;
+                  padding-left: 6px ;
                   font-weight: 600;
                 }
 
@@ -516,7 +595,7 @@
             align-items: flex-start;
 
             #card-element, .form-group{
-              flex-basis: calc( 50% - 26px );
+              flex-basis: calc( 50% - 8px );
               margin-right: $gutter;
               margin-bottom: $gutter;
 
@@ -534,6 +613,8 @@
               align-items: center;
               @include embed-input-styles;
               padding: $gutter/4 $gutter/2;
+              height: 40px;
+              margin-right: 16px;
 
               @include breakpoint(iPhone){
                 margin-right: 0;
@@ -573,7 +654,7 @@
             button{
 
               &.mbf--btn-update-funding-save{
-                padding: 11.5px $gutter;
+                padding: 7px 21px;
                 border-radius: 2px;
                 position: absolute;
                 top: $gutter * 1.5;
@@ -586,7 +667,8 @@
               }
 
               &.mf--btn-cancel-update-funding {
-                right: calc(120px + 16px);
+                right: 144px;
+                padding: 7px 21px;
               }
             }
           }
@@ -608,11 +690,11 @@
 
           button{
             &.mf--btn-cancel-update-funding {
-              padding: 11.5px $gutter;
+              right: 144px;
+              padding: 7px 21px;
               border-radius: 2px;
               position: absolute;
               top: $gutter * 1.5;
-              right: calc(120px + 16px);
 
               @include breakpoint(iPhone){
                 top: auto;
@@ -652,7 +734,7 @@
           button {
 
             &.mbf--btn-update-funding {
-              padding: 11.5px $gutter !important;
+              padding: 7px 21px !important;
               border-radius: 2px !important;
 
               @include breakpoint(iPhone) {
@@ -673,156 +755,159 @@
       };
     }
 
-    .add-on-item-widgets{
+    .servicebot-subscription-add-ons {
 
-      ._add-on-item-widget-wrapper{
-        @include embed-content-box;
-        padding: $gutter;
+      .add-on-item-widgets {
 
-        & > .form-group > .form-input-flex{
-          flex-basis: 100%;
-          flex-grow: 0;
-        }
+        ._add-on-item-widget-wrapper {
+          @include embed-content-box;
+          padding: $gutter;
 
-        &._add-on-item-0{ //specific item overrides
+          & > .form-group > .form-input-flex {
+            flex-basis: 100%;
+            flex-grow: 0;
+          }
 
-        }
+          &._add-on-item-0 { //specific item overrides
 
-        .addon-checkbox-widget-default-value-wrapper{
-          width: 100%;
+          }
 
-          .iconToggleField{
-            cursor: pointer;
-            position: relative;
-            border: 1px solid $color-blue;
-            background: white;
-            width: $gutter * 2;
-            height: $gutter * 2;
-            border-radius: 3px;
+          .addon-checkbox-widget-default-value-wrapper {
+            width: 100%;
 
-            span.itf-icon{
-              color: $color-light-blue-gray !important;
-              background: none !important;
-              position: absolute;
-              margin-left: 4px;
-              margin-top: 5px;
-              width: 21px;
-              height: 10px;
-              border-bottom: solid 3px currentColor;
-              border-left: solid 3px currentColor;
-              -webkit-transform: rotate(-45deg);
-              transform: rotate(-45deg);
-              @include defaultTransition(150ms);
-            }
+            .iconToggleField {
+              cursor: pointer;
+              position: relative;
+              border: 1px solid $color-blue;
+              background: white;
+              width: 24px;
+              height: 24px;
+              border-radius: 3px;
 
-            &:hover{
               span.itf-icon {
-                color: $color-title-container-border !important;
-                border-color: currentColor !important;
+                color: $color-light-blue-gray !important;
+                background: none !important;
+                position: absolute;
+                margin-left: 3px;
+                margin-top: 5px;
+                width: 17px;
+                height: 9px;
+                border-bottom: solid 3px currentColor;
+                border-left: solid 3px currentColor;
+                -webkit-transform: rotate(-45deg);
+                transform: rotate(-45deg);
                 @include defaultTransition(150ms);
               }
-            }
 
-            &.active{
-              span.itf-icon {
-                color: $color-blue !important;
-                @include defaultTransition(150ms);
+              &:hover {
+                span.itf-icon {
+                  color: $color-title-container-border !important;
+                  border-color: currentColor !important;
+                  @include defaultTransition(150ms);
+                }
+              }
+
+              &.active {
+                span.itf-icon {
+                  color: $color-blue !important;
+                  @include defaultTransition(150ms);
+                }
+              }
+
+              input {
+                display: none;
               }
             }
+          }
 
-            input{
-              display: none;
+          .addon-checkbox-widget-default-value { //widget by type
+            width: 100%;
+            flex-basis: 100%;
+
+            ._label_wrapper {
+              display: flex;
+              flex-direction: column;
+            }
+
+            ._price-adjustment-label {
+              margin-top: $gutter / 2;
             }
           }
-        }
 
-        .addon-checkbox-widget-default-value{ //widget by type
-          width: 100%;
-          flex-basis: 100%;
+          .addon-options-widget-default-value-wrapper {
 
-          ._label_wrapper{
-            display: flex;
-            flex-direction: column;
-          }
+            ._value-label {
 
-          ._price-adjustment-label{
-            margin-top: $gutter / 2;
-          }
-        }
+            }
 
-        .addon-options-widget-default-value-wrapper{
-
-          ._value-label{
-
-          }
-
-          ._value-input-wrapper{
-            flex-basis: 50%;
-            background: $color-white;
-
-            ._value-select{
-              width: 100%;
+            ._value-input-wrapper {
+              flex-basis: 50%;
               background: $color-white;
-              padding: 0 $gutter;
-              font-size: 0.90rem;
-              margin: 0 $gutter;
+
+              ._value-select {
+                width: 100%;
+                background: $color-white;
+                padding: 0 $gutter;
+                font-size: 0.90rem;
+                margin: 0 $gutter;
+              }
             }
-          }
 
-          &>.form-input-flex{
-            border: 1px solid $color-blue;
-            border-radius: 3px;
+            & > .form-input-flex {
+              border: 1px solid $color-blue;
+              border-radius: 1px;
 
-            select{
-              border: none;
+              select {
+                border: none;
+              }
             }
+
           }
 
-        }
-
-        .addon-options-widget-default-value-select{
-          width: 100%;
-          border-radius: 0;
-          background: rgba(255,255,255,0.5);
-        }
-
-        .form-group, .form-input-flex{
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: space-between;
-          flex-grow: 0;
-
-          label{
-            color: $color-black;
-            flex-grow: 1;
-            text-transform: capitalize;
-            margin-bottom: 0;
+          .addon-options-widget-default-value-select {
+            width: 100%;
+            border-radius: 0;
+            background: rgba(255, 255, 255, 0.5);
           }
-        }
 
-        .form-input-flex{
-          flex-basis: auto;
-
-          .request-form-toggle-option-wrapper{
+          .form-group, .form-input-flex {
             display: flex;
+            flex-direction: row;
             align-items: center;
-            justify-content: flex-end;
+            justify-content: space-between;
+            flex-grow: 0;
 
-            .form-group.form-group{
-              width: auto;
+            label {
+              color: $color-black;
+              flex-grow: 1;
+              text-transform: capitalize;
+              margin-bottom: 0;
             }
           }
 
-        }
+          .form-input-flex {
+            flex-basis: auto;
 
-        .form-error{
-          white-space: nowrap;
-          padding-left: $gutter;
+            .request-form-toggle-option-wrapper {
+              display: flex;
+              align-items: center;
+              justify-content: flex-end;
+
+              .form-group.form-group {
+                width: auto;
+              }
+            }
+
+          }
+
+          .form-error {
+            white-space: nowrap;
+            padding-left: $gutter;
+          }
+
         }
 
       }
-
     }
 
     .add-on-item-update-submit{
@@ -861,9 +946,63 @@
       }
 
       button{
-        padding: 11.5px $gutter;
+        padding: 7px 21px;
         margin-left: $gutter * 3;
       }
+    }
+
+    .servicebot-billing-invoices{
+
+      .__invoice-list-header{
+        list-style: none;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        padding: 5px 16px;
+        font-weight: 500;
+        color: #fff;
+        background-color: $blue-button;
+        font-size: 16px;
+        line-height: 24px;
+        border-radius: 2px;
+        margin-bottom: 0;
+
+        > li:first-child{ flex-grow: 1; }
+        > li:not(:first-child){ flex-basis: 20%; }
+      }
+
+      .__invoice-list{
+
+        @include list-boxes;
+
+        li.__list-items{
+          padding: 6px 16px;
+          margin: 4px 0;
+
+          span{
+            display: block;
+            height: 22px;
+            line-height: 24px;
+          }
+
+          .__invoice-id{
+            flex-grow: 1;
+          }
+          .__invoice-date, .__invoice-amount, .__invoice-button{
+            flex-basis: 20%;
+          }
+          .__invoice-amount, .__invoice-button{
+            font-weight: 600;
+          }
+          .__invoice-button{
+            text-transform: none;
+            color: $blue-button;
+            text-align: left;
+          }
+        }
+
+      }
+
     }
 
   }
@@ -875,6 +1014,7 @@
     padding: 11.5px $gutter;
     margin-top: $gutter;
     color: $color-white;
+    display: none;
   }
   .mbf--btn-cancel-service{
     background-color: $color-error;
@@ -885,6 +1025,29 @@
 
   .form-error {
     color: $color-error;
+  }
+
+  .s-alert-box {
+    position: fixed;
+    top: -50px;
+    left: 0px;
+    width: 100%;
+    max-width: 100%;
+    color: #fff;
+    @include defaultTransition(300ms);
+
+    &.s-alert-show {
+      transform: translateY(65px);
+      @include defaultTransition(300ms);
+    }
+
+    &.s-alert-error {
+      background-color: #D0021B;
+    }
+
+    &.s-alert-success {
+      background-color: #1ABE98;
+    }
   }
 
 }

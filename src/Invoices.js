@@ -5,7 +5,7 @@ import DateFormat from './utilities/date-format.js';
 
 function Invoice(props){
     let {invoice, cancel} = props;
-    return <div>
+    return <div className={`servicebot-invoice-modal`}>
         <span>Amount: <Price value={invoice.total} currency={invoice.currency}/></span>
         <span>Date: <DateFormat date={invoice.date}/></span>
         <span>Summary</span>
@@ -52,18 +52,27 @@ class Invoices extends React.Component {
         }
         console.log(invoices);
 
-        return <div>
+        return <div className={`servicebot-billing-invoices`}>
             {invoiceToShow !== null && <Invoice cancel={this.cancel} invoice={invoices[invoiceToShow]}/>}
             <h3>Billing Invoice</h3>
-            <span></span>
+            <ul className={`__invoice-list-header`}>
+                <li>Invoice ID</li>
+                <li>Date</li>
+                <li>Amount</li>
+                <li>Action</li>
+            </ul>
+            <ul className={`__invoice-list`}>
             {invoices.map((invoice, index) => {
-                return <div>
-                    <span>{invoice.invoice_id}</span>
-                    <span><DateFormat date={invoice.date}/></span>
-                    <span><Price value={invoice.total} currency={invoice.currency}/></span>
-                    <span onClick={this.viewInvoice(index)}>View Invoice</span>
-                </div>
+                return (
+                    <li className={`__list-items`}>
+                        <span className={`__invoice-id`}>{invoice.invoice_id}</span>
+                        <span className={`__invoice-date`}><DateFormat date={invoice.date}/></span>
+                        <span className={`__invoice-amount`}><Price value={invoice.total} currency={invoice.currency}/></span>
+                        <span className={`buttons __invoice-button`} onClick={this.viewInvoice(index)}>View Invoice</span>
+                    </li>
+                )
             })}
+            </ul>
         </div>
     }
 }

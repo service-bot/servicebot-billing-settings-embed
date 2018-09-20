@@ -101,10 +101,10 @@ let PriceBreakdown = (props) => {
                     </span>
     </p>)]);
     if(breakdown.length === 1){
-        return <div>
+        return <div className={`servicebot-subscription-summary`}>
             <div className="mbf-summary">
                 {metricTier && <span className="_metric">{metricProp.data.value} {metricProp.config.unit}</span>}
-                <p className="_total"><span className="_label">Total:</span><span className="_value">{getPrice(instance)}</span></p>
+                <p className="_total"><span className="_label">Total</span><span className="_value">{getPrice(instance)}</span></p>
 
             </div>
         </div>
@@ -118,7 +118,7 @@ let PriceBreakdown = (props) => {
                 <div className={`_items`}>
                     {breakdown}
                 </div>
-                <p className="_total"><span className="_label">Total:</span><span className="_value">{getPrice(instance)}</span></p>
+                <p className="_total"><span className="_label">Total</span><span className="_value">{getPrice(instance)}</span></p>
 
             </div>
         </div>
