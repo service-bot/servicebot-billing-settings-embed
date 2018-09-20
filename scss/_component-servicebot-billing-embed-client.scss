@@ -287,6 +287,9 @@
                   @include pricing-font;
                   color: $color-black;
                 }
+                ._billing-period{
+                  color: $color-black;
+                }
                 ._interval-name{
                   font-weight: 300;
                   font-size: 13px;
@@ -322,7 +325,8 @@
 
                 ._metered-unit{
                   position: absolute;
-                  bottom: -21px;
+                  bottom: -16px;
+                  font-size: 14px;
                   left: 50%;
                   transform: translateX(-50%);
                   width: 100%;
@@ -338,7 +342,7 @@
                 color: $color-white;
                 position: absolute;
                 left: 50%;
-                margin-top: 5px;
+                bottom: -21px;
                 -webkit-transform: translateX(-50%);
                 -moz-transform: translateX(-50%);
                 -ms-transform: translateX(-50%);
