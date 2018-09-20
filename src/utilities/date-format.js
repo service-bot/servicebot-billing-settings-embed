@@ -25,6 +25,9 @@ function getFormattedDate(dateString, options = {}){
     }
 
     let myDate = `${monthNames[month]} ${day}, ${year}`;
+    if(options.month){
+        return `${monthNames[month]}, ${year}`;
+    }
     if(options.weekday){
         myDate = `${dayNames[dayOfWeek]} ${monthNames[month]} ${day}, ${year}`;
     }else if(options.time){
@@ -45,7 +48,7 @@ class DateFormat extends React.Component {
     render(){
 
         return(
-            <span>{getFormattedDate(this.props.date, {weekday: this.props.weekday, time: this.props.time})}</span>
+            <span>{getFormattedDate(this.props.date, {month: this.props.month, weekday: this.props.weekday, time: this.props.time})}</span>
         );
     }
 

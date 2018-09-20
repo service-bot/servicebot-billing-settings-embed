@@ -6,12 +6,12 @@ import DateFormat from './utilities/date-format.js';
 function Invoice(props){
     let {invoice, cancel} = props;
     return <div className={`servicebot-invoice-modal`}>
+        <button onClick={cancel}>X</button>
         <span>Amount: <Price value={invoice.total} currency={invoice.currency}/></span>
         <span>Date: <DateFormat date={invoice.date}/></span>
         <span>Summary</span>
         {invoice.references.user_invoice_lines.map(line => {
             return <div>
-                <button onClick={cancel}>X</button>
                 <span>{line.description}</span>
                 <span>Amount: <Price value={line.amount} currency={line.currency}/></span>
             </div>
@@ -65,8 +65,8 @@ class Invoices extends React.Component {
             {invoices.map((invoice, index) => {
                 return (
                     <li className={`__list-items`}>
-                        <span className={`__invoice-id`}>{invoice.invoice_id}</span>
-                        <span className={`__invoice-date`}><DateFormat date={invoice.date}/></span>
+                        <span className={`__invoice-id`}>{invoice.invoice_id.slice(3)}</span>
+                        <span className={`__invoice-date`}><DateFormat month={true} date={invoice.date}/></span>
                         <span className={`__invoice-amount`}><Price value={invoice.total} currency={invoice.currency}/></span>
                         <span className={`buttons __invoice-button`} onClick={this.viewInvoice(index)}>View Invoice</span>
                     </li>
