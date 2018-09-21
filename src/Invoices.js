@@ -13,7 +13,7 @@ function Invoice(props){
                     <div className={`__inner`}>
                         <div className={`__left`}>
                             <h3>Ben Sears</h3>
-                            <span className={`__invoice-id`}>{invoice.invoice_id}</span>
+                            <span className={`__invoice-id`}>Invoice #: {invoice.invoice_id}</span>
                         </div>
                         <div className={`__right`}>
                             <span className={`__date`}><DateFormat date={invoice.date}/></span>
@@ -26,16 +26,30 @@ function Invoice(props){
                 </div>
                 <div className={`__body`}>
                     <h4 className={`__heading`}>Summary</h4>
-                    <span>Amount: <Price value={invoice.total} currency={invoice.currency}/></span>
-                    <span>Date: <DateFormat date={invoice.date}/></span>
-                    <span>Summary</span>
-                    {invoice.references.user_invoice_lines.map((line, index) => {
-                        return <div key={index}>
-                            <span>{line.description}</span>
-                            <span>Amount: <Price value={line.amount} currency={line.currency}/></span>
+                    <div className={`mbf-summary`}>
+                        <p className={`_heading`}>Items</p>
+                        <div className={`_items`}>
+                        {invoice.references.user_invoice_lines.map((line, index) => {
+                            return (
+                                <p key={index} className={`_item`}>
+                                    <span className={`_label`}>{line.description}</span>
+                                    <span className={`_value_wrap`}>
+                                        <span className={`_value`}>
+                                            <Price value={line.amount} currency={line.currency}/>
+                                        </span>
+                                    </span>
+                                </p>
+                            );
+                        })}
                         </div>
-                    })}
-                    <span>Total: <Price value={invoice.total} currency={invoice.currency}/></span>
+                        <p className={`_total`}>
+                            <span className={`_label`}>Total: </span>
+                            <span className={`_value`}><Price value={invoice.total} currency={invoice.currency}/></span>
+                        </p>
+                    </div>
+                </div>
+                <div className={`__footer`}>
+                    <button className={`buttons _primary _download-invoice`}>Download Invoice</button>
                 </div>
             </div>
             <div onClick={cancel} className={`__backdrop`}/>
