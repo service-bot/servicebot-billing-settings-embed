@@ -12,10 +12,10 @@ function Adjustment(props){
     }
     switch(operation) {
         case "add":
-            message = isText? `${currencySymbol}${price} Add-on`: <div>{currencySymbol}{price} <span class="request-form-price-adjust-discount">Add-on</span></div>;
+            message = isText? `${currencySymbol}${price} Add-on`: <div>{currencySymbol}{price} <span className="request-form-price-adjust-discount">Add-on</span></div>;
             break;
         case "subtract":
-            message = isText? `${currencySymbol}${price} Discount`:<div>${price} <span class="request-form-price-adjust-discount">Discount</span></div>;
+            message = isText? `${currencySymbol}${price} Discount`:<div>${price} <span className="request-form-price-adjust-discount">Discount</span></div>;
 
             break;
         case "multiply" :
@@ -23,7 +23,7 @@ function Adjustment(props){
 
             break;
         case "divide" :
-            message = isText? `${price}% Discount`:<div>${price}% <span class="request-form-price-adjust-decrease">Discount</span></div>;
+            message = isText? `${price}% Discount`:<div>${price}% <span className="request-form-price-adjust-decrease">Discount</span></div>;
             break;
         default :
             message = ` -- ${operation} : ${price}`;

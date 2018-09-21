@@ -58,6 +58,7 @@
 .servicebot--embeddable{
   position: relative;
   @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
+  @import url('https://fonts.googleapis.com/css?family=Heebo:300,400,500,700');
 
   *{
     box-sizing: border-box;
@@ -1009,6 +1010,96 @@
 
     }
 
+  }
+
+  .servicebot-invoice-modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8588235294117647);
+
+    .__backdrop{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: transparent;
+      z-index: 102;
+    }
+
+    .__modal{
+      position: fixed;
+      height: 704px;
+      width: 600px;
+      max-width: 100%;
+      background: white;
+      z-index: 103;
+
+      .__header {
+        height: 190px;
+        background: $color-blue;
+        color: white;
+        
+        .__inner{
+          display: flex;
+          justify-content: space-between;
+          padding: 70px 64px;
+          
+          .__left{
+            
+            h3{
+              font-family: $heading-font;
+              font-size: 25px;
+              font-weight: bold;
+              letter-spacing: 0.5px;
+              margin-bottom: 0;
+            }
+            .__invoice-id{
+                color: rgba(175, 175, 175, 0.6);
+            }
+          }
+          .__right{
+            .__date{
+              font-family: 'Heebo', 'sans-serif';
+              font-size: 12px;
+              font-weight: 500;
+              line-height: 32px;
+            }
+            .icon.close{
+              top: 20px;
+              right:20px;
+              color: white;
+              &:before, &:after{
+                height: 2px;
+                width: 15px;
+              }
+            }
+          }
+        }
+      }
+
+      .__body{
+        padding: 44px 64px;
+
+        ._summary{
+
+          ._heading{
+            color: #6F7F9F;
+            font-family: 'Heebo',
+            'sans-serif';
+            font-size: 12px;
+            font-weight: 500;
+          }
+
+        }
+      }
+    }
   }
 
   .buttons{
