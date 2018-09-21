@@ -347,7 +347,7 @@ class ServicebotManagedBilling extends React.Component {
                                 {this.getBillingForm()}
 
                                 <ModalEditProperties external={this.props.external} token={this.props.token} url={this.props.url} instance={self.state.instances[0]} refresh={this.hidePropEdit}/>
-                                <Invoices invoices={this.state.invoices}/>
+                                <Invoices user={self.state.instances[0].references.users[0]} nvoices={this.state.invoices}/>
                         </div>
                         :
                         <div className="page-loader">

@@ -4,7 +4,7 @@ import DateFormat from './utilities/date-format.js';
 
 
 function Invoice(props){
-    let {invoice, cancel} = props;
+    let {invoice, user, cancel} = props;
     return <div className={`servicebot-invoice-modal`}>
         <button onClick={cancel}>X</button>
         <span>Amount: <Price value={invoice.total} currency={invoice.currency}/></span>
@@ -45,7 +45,7 @@ class Invoices extends React.Component {
         }
     }
     render() {
-        let {invoices} = this.props;
+        let {invoices, user} = this.props;
         let {invoiceToShow} = this.state;
         if (!invoices || invoices.length === 0) {
             return <div></div>
@@ -53,7 +53,7 @@ class Invoices extends React.Component {
         console.log(invoices);
 
         return <div className={`servicebot-billing-invoices`}>
-            {invoiceToShow !== null && <Invoice cancel={this.cancel} invoice={invoices[invoiceToShow]}/>}
+            {invoiceToShow !== null && <Invoice cancel={this.cancel} user={user} invoice={invoices[invoiceToShow]}/>}
             <h3>Billing Invoice</h3>
             <ul className={`__invoice-list-header`}>
                 <li>Invoice ID</li>
