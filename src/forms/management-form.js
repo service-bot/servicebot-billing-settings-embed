@@ -283,7 +283,6 @@ class ServicebotManagedBilling extends React.Component {
             }
 
             const URL = this.props.url;
-
             self.setState({loading:true});
             let updatedInstance = await (await fetch(`${URL}/api/v1/service-instances/${id}/reactivate`, {
                 method : "POST",
@@ -317,7 +316,7 @@ class ServicebotManagedBilling extends React.Component {
                                             <div className="mbf--current-services-list">
                                                 {self.state.instances.map(service => {
                                                     let tier = self.state.template.references.tiers.find(tier => tier.id === service.references.payment_structure_templates[0].tier_id);
-                                                    console.log(tier);
+
                                                     let metricProp = service.references.service_instance_properties.find(prop => prop.type === "metric");
                                                     return(
                                                     <div className="mbf--current-services-item">
@@ -347,7 +346,7 @@ class ServicebotManagedBilling extends React.Component {
                                 {this.getBillingForm()}
 
                                 <ModalEditProperties external={this.props.external} token={this.props.token} url={this.props.url} instance={self.state.instances[0]} refresh={this.hidePropEdit}/>
-                                <Invoices user={self.state.instances[0].references.users[0]} nvoices={this.state.invoices}/>
+                            {self.state.instances[0] && <Invoices user={self.state.instances[0].references.users[0]} invoices={this.state.invoices}/>}
                         </div>
                         :
                         <div className="page-loader">

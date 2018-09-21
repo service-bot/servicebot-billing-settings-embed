@@ -50,7 +50,6 @@ class Invoices extends React.Component {
         if (!invoices || invoices.length === 0) {
             return <div></div>
         }
-        console.log(invoices);
 
         return <div className={`servicebot-billing-invoices`}>
             {invoiceToShow !== null && <Invoice cancel={this.cancel} user={user} invoice={invoices[invoiceToShow]}/>}
