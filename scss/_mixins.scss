@@ -161,6 +161,22 @@
     }
   }
 }
+@mixin fadeUpContent($top1, $top2, $time: 600ms){
+
+    animation: moveUp $time;
+    animation-fill-mode: forwards;
+
+  @keyframes moveUp {
+    0% {
+      opacity: 0;
+      top: $top1;
+    }
+    100% {
+      opacity: 1;
+      top: $top2;
+    }
+  }
+}
 
 @mixin breakpoint($point) {
   @if $point == FourK {

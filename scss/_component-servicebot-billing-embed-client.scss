@@ -1034,6 +1034,7 @@
     }
 
     .__modal{
+      @include fadeUpContent(100px, 80px, 400ms);
       position: fixed;
       height: auto;
       width: 600px;
@@ -1085,6 +1086,10 @@
               &:before, &:after{
                 height: 2px;
                 width: 15px;
+              }
+              &:hover{
+                cursor: pointer;
+                opacity: 0.5;
               }
             }
           }
