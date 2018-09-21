@@ -195,13 +195,7 @@ var SelectWidget = function SelectWidget(props) {
                     return _react2.default.createElement(
                         "option",
                         { key: index, value: option },
-                        price && configValue.pricing.operation ? _react2.default.createElement(
-                            "div",
-                            null,
-                            option,
-                            " ",
-                            _react2.default.createElement(_WidgetPriceAdjustment2.default, { price: price, operation: configValue.pricing.operation })
-                        ) : "" + option
+                        price && configValue.pricing.operation ? option + " - " + (0, _WidgetPriceAdjustment2.default)({ price: price, operation: configValue.pricing.operation, isText: true }) : "" + option
                     );
                 })
             )

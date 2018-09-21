@@ -53,6 +53,9 @@ function getFormattedDate(dateString) {
     }
 
     var myDate = monthNames[month] + ' ' + day + ', ' + year;
+    if (options.month) {
+        return monthNames[month] + ', ' + year;
+    }
     if (options.weekday) {
         myDate = dayNames[dayOfWeek] + ' ' + monthNames[month] + ' ' + day + ', ' + year;
     } else if (options.time) {
@@ -79,7 +82,7 @@ var DateFormat = function (_React$Component) {
             return _react2.default.createElement(
                 'span',
                 null,
-                getFormattedDate(this.props.date, { weekday: this.props.weekday, time: this.props.time })
+                getFormattedDate(this.props.date, { month: this.props.month, weekday: this.props.weekday, time: this.props.time })
             );
         }
     }]);

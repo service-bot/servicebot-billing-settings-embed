@@ -201,7 +201,7 @@ function ModalEditProperties(props) {
 
     return _react2.default.createElement(
         'div',
-        null,
+        { className: 'servicebot-subscription-add-ons' },
         _react2.default.createElement(_servicebotBaseForm.ServicebotBaseForm, {
             form: CustomFieldEditForm
             //todo: is there a way to not need initial values to reference a prop name? (for array of X cases)
