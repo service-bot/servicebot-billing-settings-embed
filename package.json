@@ -19,7 +19,7 @@
     "redux": "^3.7.2",
     "redux-form": "^7.3.0",
     "redux-form-validators": "^2.4.3",
-    "servicebot-base-form": "0.0.37"
+    "servicebot-base-form": "0.0.38"
   },
   "main": "./dist/index.js",
   "scripts": {
