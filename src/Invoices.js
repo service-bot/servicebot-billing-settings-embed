@@ -5,7 +5,6 @@ import DateFormat from './utilities/date-format.js';
 
 function Invoice(props){
     let {invoice, user, cancel} = props;
-    console.log("invoice", invoice);
     return (
         <div className={`servicebot-invoice-modal-container`}>
             <div className={`__modal`}>
@@ -49,7 +48,7 @@ function Invoice(props){
                     </div>
                 </div>
                 <div className={`__footer`}>
-                    <button className={`buttons _primary _download-invoice`}>Download Invoice</button>
+                    <button onClick={(e)=>{window.print();return false;} } className={`buttons _primary _download-invoice`}>Print Invoice</button>
                 </div>
             </div>
             <div onClick={cancel} className={`__backdrop`}/>
