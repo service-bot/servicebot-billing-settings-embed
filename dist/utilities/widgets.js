@@ -104,7 +104,8 @@ var RenderWidget = function RenderWidget(props) {
 
 var PriceBreakdown = function PriceBreakdown(props) {
     var metricProp = props.metricProp,
-        instance = props.instance;
+        instance = props.instance,
+        tier = props.tier;
 
     var inputs = instance.references.service_instance_properties;
     var widgets = (0, _client2.default)().reduce(function (acc, widget) {
@@ -116,13 +117,14 @@ var PriceBreakdown = function PriceBreakdown(props) {
         acc[widget.type] = widget.handler;
         return acc;
     }, {});
-
+    var metricTier = metricProp && metricProp.config.pricing && metricProp.config.pricing.tiers.includes(tier.name);
     var map = {
         add: "+",
         subtract: "-",
         "multiply": "+",
         "divide": "-"
     };
+    console.log(metricProp, instance);
     var basePrice = (0, _handleInputs.getBasePrice)(instance.references.service_instance_properties, handlers, instance.payment_plan.amount);
     var breakdown = inputs.reduce(function (acc, input) {
         if (input.config && input.config.pricing && widgets[input.type] && widgets[input.type].handler && widgets[input.type].handler.priceHandler && widgets[input.type].handler.priceHandler(input.data, input.config)) {
@@ -176,7 +178,38 @@ var PriceBreakdown = function PriceBreakdown(props) {
             )
         )
     )]);
-    if (breakdown.length > 1 || metricProp) {
+    if (breakdown.length === 1) {
+        return _react2.default.createElement(
+            "div",
+            { className: "servicebot-subscription-summary" },
+            _react2.default.createElement(
+                "div",
+                { className: "mbf-summary" },
+                metricTier && _react2.default.createElement(
+                    "span",
+                    { className: "_metric" },
+                    metricProp.data.value,
+                    " ",
+                    metricProp.config.unit
+                ),
+                _react2.default.createElement(
+                    "p",
+                    { className: "_total" },
+                    _react2.default.createElement(
+                        "span",
+                        { className: "_label" },
+                        "Total"
+                    ),
+                    _react2.default.createElement(
+                        "span",
+                        { className: "_value" },
+                        (0, _price.getPrice)(instance)
+                    )
+                )
+            )
+        );
+    }
+    if (breakdown.length > 1) {
         return _react2.default.createElement(
             "div",
             null,
@@ -188,12 +221,13 @@ var PriceBreakdown = function PriceBreakdown(props) {
                     { className: "_heading" },
                     "Items"
                 ),
-                metricProp && _react2.default.createElement(
+                metricTier && _react2.default.createElement(
                     "span",
                     { className: "_metric" },
                     metricProp.data.value,
                     " ",
-                    metricProp.config.unit
+                    metricProp.config.unit,
+                    " "
                 ),
                 _react2.default.createElement(
                     "div",
@@ -206,7 +240,7 @@ var PriceBreakdown = function PriceBreakdown(props) {
                     _react2.default.createElement(
                         "span",
                         { className: "_label" },
-                        "Total:"
+                        "Total"
                     ),
                     _react2.default.createElement(
                         "span",

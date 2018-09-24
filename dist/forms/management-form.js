@@ -58,6 +58,10 @@ var _load = require('../utilities/load.js');
 
 var _load2 = _interopRequireDefault(_load);
 
+var _Invoices = require('../Invoices');
+
+var _Invoices2 = _interopRequireDefault(_Invoices);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function PriceSummary(props) {
@@ -124,6 +128,7 @@ var ServicebotManagedBilling = function (_React$Component) {
             self.getSPK();
             self.getServicebotDetails();
             self.getFundingDetails();
+            self.getInvoices();
         }
     }, {
         key: 'handleResponse',
@@ -165,21 +170,21 @@ var ServicebotManagedBilling = function (_React$Component) {
             }();
         }
     }, {
-        key: 'getFundingDetails',
+        key: 'getInvoices',
         value: function () {
             var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
-                var funds;
+                var invoices;
                 return _regenerator2.default.wrap(function _callee2$(_context2) {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
                             case 0:
                                 _context2.next = 2;
-                                return (0, _servicebotBaseForm.Fetcher)(this.props.url + '/api/v1/funds/own', null, null, this.getRequest());
+                                return (0, _servicebotBaseForm.Fetcher)(this.props.url + '/api/v1/invoices/own', null, null, this.getRequest());
 
                             case 2:
-                                funds = _context2.sent;
+                                invoices = _context2.sent;
 
-                                this.setState({ funds: funds });
+                                this.setState({ invoices: invoices });
 
                             case 4:
                             case 'end':
@@ -189,8 +194,39 @@ var ServicebotManagedBilling = function (_React$Component) {
                 }, _callee2, this);
             }));
 
-            function getFundingDetails() {
+            function getInvoices() {
                 return _ref2.apply(this, arguments);
+            }
+
+            return getInvoices;
+        }()
+    }, {
+        key: 'getFundingDetails',
+        value: function () {
+            var _ref3 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
+                var funds;
+                return _regenerator2.default.wrap(function _callee3$(_context3) {
+                    while (1) {
+                        switch (_context3.prev = _context3.next) {
+                            case 0:
+                                _context3.next = 2;
+                                return (0, _servicebotBaseForm.Fetcher)(this.props.url + '/api/v1/funds/own', null, null, this.getRequest());
+
+                            case 2:
+                                funds = _context3.sent;
+
+                                this.setState({ funds: funds });
+
+                            case 4:
+                            case 'end':
+                                return _context3.stop();
+                        }
+                    }
+                }, _callee3, this);
+            }));
+
+            function getFundingDetails() {
+                return _ref3.apply(this, arguments);
             }
 
             return getFundingDetails;
@@ -256,32 +292,32 @@ var ServicebotManagedBilling = function (_React$Component) {
     }, {
         key: 'getServicebotDetails',
         value: function () {
-            var _ref3 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
+            var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4() {
                 var self, instances, template;
-                return _regenerator2.default.wrap(function _callee3$(_context3) {
+                return _regenerator2.default.wrap(function _callee4$(_context4) {
                     while (1) {
-                        switch (_context3.prev = _context3.next) {
+                        switch (_context4.prev = _context4.next) {
                             case 0:
                                 self = this;
-                                _context3.next = 3;
+                                _context4.next = 3;
                                 return (0, _servicebotBaseForm.Fetcher)(self.props.url + '/api/v1/service-instances/own', "GET", null, this.getRequest("GET"));
 
                             case 3:
-                                instances = _context3.sent;
+                                instances = _context4.sent;
 
                                 if (!(!instances.error && instances.length > 0)) {
-                                    _context3.next = 11;
+                                    _context4.next = 11;
                                     break;
                                 }
 
-                                _context3.next = 7;
+                                _context4.next = 7;
                                 return (0, _servicebotBaseForm.Fetcher)(self.props.url + '/api/v1/service-templates/' + instances[0].service_id + '/request', "GET", null, this.getRequest("GET"));
 
                             case 7:
-                                template = _context3.sent;
+                                template = _context4.sent;
 
                                 self.setState({ instances: instances, template: template });
-                                _context3.next = 12;
+                                _context4.next = 12;
                                 break;
 
                             case 11:
@@ -289,14 +325,14 @@ var ServicebotManagedBilling = function (_React$Component) {
 
                             case 12:
                             case 'end':
-                                return _context3.stop();
+                                return _context4.stop();
                         }
                     }
-                }, _callee3, this);
+                }, _callee4, this);
             }));
 
             function getServicebotDetails() {
-                return _ref3.apply(this, arguments);
+                return _ref4.apply(this, arguments);
             }
 
             return getServicebotDetails;
@@ -456,11 +492,11 @@ var ServicebotManagedBilling = function (_React$Component) {
         value: function changePlan(paymentStructure) {
             var self = this;
             return function () {
-                var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4(e) {
+                var _ref5 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5(e) {
                     var headers, request, updatedInstance;
-                    return _regenerator2.default.wrap(function _callee4$(_context4) {
+                    return _regenerator2.default.wrap(function _callee5$(_context5) {
                         while (1) {
-                            switch (_context4.prev = _context4.next) {
+                            switch (_context5.prev = _context5.next) {
                                 case 0:
                                     headers = {
                                         "Content-Type": "application/json",
@@ -479,20 +515,20 @@ var ServicebotManagedBilling = function (_React$Component) {
 
                                     self.props.setLoading(true);
                                     // self.setState({loading: true});
-                                    _context4.next = 6;
+                                    _context5.next = 6;
                                     return fetch(self.props.url + '/api/v1/service-instances/' + self.state.instances[0].id + '/apply-payment-structure/' + paymentStructure, request);
 
                                 case 6:
-                                    _context4.next = 8;
-                                    return _context4.sent.json();
+                                    _context5.next = 8;
+                                    return _context5.sent.json();
 
                                 case 8:
-                                    updatedInstance = _context4.sent;
+                                    updatedInstance = _context5.sent;
 
                                     if (updatedInstance.error === "This customer has no attached payment source") {
                                         self.setState({ formError: "Credit/debit card required to switch from free tier to a paid tier" });
                                     }
-                                    _context4.next = 12;
+                                    _context5.next = 12;
                                     return self.getServicebotDetails();
 
                                 case 12:
@@ -501,14 +537,14 @@ var ServicebotManagedBilling = function (_React$Component) {
 
                                 case 13:
                                 case 'end':
-                                    return _context4.stop();
+                                    return _context5.stop();
                             }
                         }
-                    }, _callee4, this);
+                    }, _callee5, this);
                 }));
 
                 return function (_x3) {
-                    return _ref4.apply(this, arguments);
+                    return _ref5.apply(this, arguments);
                 };
             }();
         }
@@ -517,11 +553,11 @@ var ServicebotManagedBilling = function (_React$Component) {
         value: function resubscribe(id) {
             var _this3 = this;
 
-            return (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5() {
+            return (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee6() {
                 var self, headers, URL, updatedInstance;
-                return _regenerator2.default.wrap(function _callee5$(_context5) {
+                return _regenerator2.default.wrap(function _callee6$(_context6) {
                     while (1) {
-                        switch (_context5.prev = _context5.next) {
+                        switch (_context6.prev = _context6.next) {
                             case 0:
                                 self = _this3;
 
@@ -537,21 +573,20 @@ var ServicebotManagedBilling = function (_React$Component) {
 
                                 URL = _this3.props.url;
 
-
                                 self.setState({ loading: true });
-                                _context5.next = 8;
+                                _context6.next = 8;
                                 return fetch(URL + '/api/v1/service-instances/' + id + '/reactivate', {
                                     method: "POST",
                                     headers: headers
                                 });
 
                             case 8:
-                                _context5.next = 10;
-                                return _context5.sent.json();
+                                _context6.next = 10;
+                                return _context6.sent.json();
 
                             case 10:
-                                updatedInstance = _context5.sent;
-                                _context5.next = 13;
+                                updatedInstance = _context6.sent;
+                                _context6.next = 13;
                                 return self.getServicebotDetails();
 
                             case 13:
@@ -560,10 +595,10 @@ var ServicebotManagedBilling = function (_React$Component) {
 
                             case 15:
                             case 'end':
-                                return _context5.stop();
+                                return _context6.stop();
                         }
                     }
-                }, _callee5, _this3);
+                }, _callee6, _this3);
             }));
         }
     }, {
@@ -603,6 +638,10 @@ var ServicebotManagedBilling = function (_React$Component) {
                                 'div',
                                 { className: 'mbf--current-services-list' },
                                 self.state.instances.map(function (service) {
+                                    var tier = self.state.template.references.tiers.find(function (tier) {
+                                        return tier.id === service.references.payment_structure_templates[0].tier_id;
+                                    });
+
                                     var metricProp = service.references.service_instance_properties.find(function (prop) {
                                         return prop.type === "metric";
                                     });
@@ -611,7 +650,7 @@ var ServicebotManagedBilling = function (_React$Component) {
                                         { className: 'mbf--current-services-item' },
                                         _this4.getSubscriptionStatus(),
                                         _this4.getTrialStatus(),
-                                        _react2.default.createElement(_widgets.PriceBreakdown, { metricProp: metricProp, instance: service }),
+                                        _react2.default.createElement(_widgets.PriceBreakdown, { tier: tier, metricProp: metricProp, instance: service }),
                                         _react2.default.createElement(_TierChooser2.default, { key: "t-" + service.payment_structure_template_id, changePlan: self.changePlan, currentPlan: service.payment_structure_template_id, template: self.state.template }),
                                         _react2.default.createElement(
                                             'div',
@@ -653,7 +692,8 @@ var ServicebotManagedBilling = function (_React$Component) {
                             'Payment Information'
                         ),
                         this.getBillingForm(),
-                        _react2.default.createElement(_editPropertiesForm.ModalEditProperties, { external: this.props.external, token: this.props.token, url: this.props.url, instance: self.state.instances[0], refresh: this.hidePropEdit })
+                        _react2.default.createElement(_editPropertiesForm.ModalEditProperties, { external: this.props.external, token: this.props.token, url: this.props.url, instance: self.state.instances[0], refresh: this.hidePropEdit }),
+                        self.state.instances[0] && _react2.default.createElement(_Invoices2.default, { user: self.state.instances[0].references.users[0], invoices: this.state.invoices })
                     ) : _react2.default.createElement(
                         'div',
                         { className: 'page-loader' },

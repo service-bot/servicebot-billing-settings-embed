@@ -368,7 +368,12 @@ var TierSelector = function (_React$Component) {
 
             return _react2.default.createElement(
                 'div',
-                null,
+                { className: 'servicebot-subscription' },
+                _react2.default.createElement(
+                    'h3',
+                    null,
+                    'Subscription'
+                ),
                 _react2.default.createElement(
                     'div',
                     { className: 'servicebot-billing-type-selector' },
