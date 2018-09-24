@@ -12,7 +12,7 @@ function Invoice(props){
                 <div className={`__header`}>
                     <div className={`__inner`}>
                         <div className={`__left`}>
-                            <h3>Ben Sears</h3>
+                            <h3>{user.name || user.email}</h3>
                             <span className={`__invoice-id`}>Invoice #: {invoice.invoice_id}</span>
                         </div>
                         <div className={`__right`}>
