@@ -13,9 +13,9 @@ function Invoice(props){
                         <div className={`__left`}>
                             <h3>{user.name || user.email}</h3>
                             <span className={`__invoice-id`}>Invoice #: {invoice.invoice_id}</span>
+                            <span className={`__date`}><DateFormat date={invoice.date}/></span>
                         </div>
                         <div className={`__right`}>
-                            <span className={`__date`}><DateFormat date={invoice.date}/></span>
                             <span role={`button`}
                                   aria-label={`close invoice modal`}
                                   className={`icon close`}
