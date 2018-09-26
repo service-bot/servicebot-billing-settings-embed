@@ -15,6 +15,7 @@
     "react-sticky": "^6.0.2",
     "react-stripe-elements": "^1.6.0",
     "react-tagsinput": "^3.19.0",
+    "react-to-print": "^2.0.0-alpha-3",
     "react-tooltip": "^3.5.0",
     "redux": "^3.7.2",
     "redux-form": "^7.3.0",
