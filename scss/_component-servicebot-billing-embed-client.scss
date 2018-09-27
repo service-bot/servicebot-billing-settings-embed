@@ -55,6 +55,98 @@
   letter-spacing: 1.5px;
 }
 
+@mixin mbf-summary{
+  .mbf-summary{
+    @include embed-content-box;
+    margin-bottom: 40px;
+    padding: $gutter * 1.5 $gutter*2;
+    padding-bottom: 6px;
+
+    ._heading{
+      color: #0033A0;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 16px;
+      margin-top: 0;
+      margin-bottom: $gutter*1.5;
+    }
+
+    ._metric{
+      border-radius: 2px;
+      background-color: #CEDEFF;
+      padding: $gutter/4 $gutter/1.5;
+      color: #0033A0;
+      font-size: 16px;
+      line-height: 24px;
+      text-align: center;
+    }
+
+    ._items{
+      display: flex;
+      flex-direction: column;
+      margin-top: $gutter;
+      border-bottom: 1px solid #EBF3F9;
+      padding-bottom: $gutter;
+
+      &>div{
+        border-bottom: 1px solid #ebebeb;
+        padding: $gutter 0;
+      }
+
+      & *{
+        line-height: 25px;
+        align-items: center;
+      }
+
+      ._item{
+        display: flex;
+        justify-content: space-between;
+        margin: 3px 0;
+
+        ._label{
+          color: #6F7F9F;
+          font-size: 16px;
+        }
+        ._value_wrap{
+
+          ._prefix{
+            color: #0033A0;
+            font-size: 16px;
+            font-weight: 600;
+            padding-right: $gutter * 2;
+          }
+          ._value{
+            color: #0033A0;
+            font-size: 20px;
+            font-weight: 600;
+          }
+
+        }
+      }
+    }
+    ._total{
+      display: flex;
+      justify-content: space-between;
+      padding-top: $gutter;
+      margin-top: 0;
+
+      ._label{
+        font-weight: 600;
+        font-size: 14px;
+      }
+      ._value{
+        font-size: 20px;
+        font-weight: 300;
+        text-transform: capitalize;
+
+        ._price-value{
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}
+
 .servicebot--embeddable{
   position: relative;
   @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
@@ -106,95 +198,7 @@
 
       }
 
-      .mbf-summary{
-        @include embed-content-box;
-        margin-bottom: 40px;
-        padding: $gutter * 1.5 $gutter*2;
-        padding-bottom: 6px;
-
-        ._heading{
-          color: #0033A0;
-          font-size: 14px;
-          font-weight: 600;
-          line-height: 16px;
-          margin-top: 0;
-          margin-bottom: $gutter*1.5;
-        }
-
-        ._metric{
-          border-radius: 2px;
-          background-color: #CEDEFF;
-          padding: $gutter/4 $gutter/1.5;
-          color: #0033A0;
-          font-size: 16px;
-          line-height: 24px;
-          text-align: center;
-        }
-
-        ._items{
-          display: flex;
-          flex-direction: column;
-          margin-top: $gutter;
-          border-bottom: 1px solid #EBF3F9;
-          padding-bottom: $gutter;
-
-          &>div{
-            border-bottom: 1px solid #ebebeb;
-            padding: $gutter 0;
-          }
-
-          & *{
-            line-height: 25px;
-            align-items: center;
-          }
-
-          ._item{
-            display: flex;
-            justify-content: space-between;
-            margin: 3px 0;
-
-            ._label{
-              color: #6F7F9F;
-              font-size: 16px;
-            }
-            ._value_wrap{
-
-              ._prefix{
-                color: #0033A0;
-                font-size: 16px;
-                font-weight: 600;
-                padding-right: $gutter * 2;
-              }
-              ._value{
-                color: #0033A0;
-                font-size: 20px;
-                font-weight: 600;
-              }
-
-            }
-          }
-        }
-        ._total{
-          display: flex;
-          justify-content: space-between;
-          padding-top: $gutter;
-          margin-top: 0;
-
-          ._label{
-            font-weight: 600;
-            font-size: 14px;
-          }
-          ._value{
-            font-size: 20px;
-            font-weight: 300;
-            text-transform: capitalize;
-
-            ._price-value{
-              font-weight: 600;
-            }
-          }
-        }
-      }
+      @include mbf-summary;
 
       .mbf--current-services-list{
 
@@ -1196,6 +1200,41 @@
           margin: 30px 30px 0px;
         }
       }
+    }
+
+    @media print {
+      display: block;
+      width: 100%;
+      height: auto;
+
+      .__modal{
+        position: relative;
+        left: auto;
+        margin: auto;
+        width: auto;
+        box-shadow: none;
+        animation: none;
+
+        .__header{
+          background-color: white;
+          background-image: none;
+
+          & *{
+            color: black !important;
+          }
+
+          .icon.close{
+            display: none;
+          }
+        }
+        .__body{
+          @include mbf-summary;
+        }
+        .__footer{
+          display: none;
+        }
+      }
+
     }
   }
 
