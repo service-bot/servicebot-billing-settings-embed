@@ -638,7 +638,7 @@ var ServicebotManagedBilling = function (_React$Component) {
                                 'div',
                                 { className: 'mbf--current-services-list' },
                                 self.state.instances.map(function (service) {
-                                    var tier = self.state.template.references.tiers.find(function (tier) {
+                                    var tier = service.references.payment_structure_templates[0] && self.state.template.references.tiers.find(function (tier) {
                                         return tier.id === service.references.payment_structure_templates[0].tier_id;
                                     });
 
