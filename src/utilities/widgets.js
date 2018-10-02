@@ -70,7 +70,7 @@ let PriceBreakdown = (props) => {
         return acc;
 
     }, {});
-    let metricTier = metricProp && metricProp.config.pricing && metricProp.config.pricing.tiers.includes(tier.name);
+    let metricTier = metricProp && tier && metricProp.config.pricing && metricProp.config.pricing.tiers.includes(tier.name);
     let map = {
         add: "+",
         subtract: "-",

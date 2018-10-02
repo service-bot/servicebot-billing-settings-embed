@@ -315,7 +315,7 @@ class ServicebotManagedBilling extends React.Component {
                                         <h3>Subscription Summary</h3>
                                             <div className="mbf--current-services-list">
                                                 {self.state.instances.map(service => {
-                                                    let tier = self.state.template.references.tiers.find(tier => tier.id === service.references.payment_structure_templates[0].tier_id);
+                                                    let tier = service.references.payment_structure_templates[0] && self.state.template.references.tiers.find(tier => tier.id === service.references.payment_structure_templates[0].tier_id);
 
                                                     let metricProp = service.references.service_instance_properties.find(prop => prop.type === "metric");
                                                     return(
