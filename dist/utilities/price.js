@@ -1,17 +1,13 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.getPriceValue = exports.serviceTypeFormatter = exports.getBillingType = exports.getPrice = exports.Price = undefined;
 
-var _react = require('react');
+var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
-
-var _currencySymbolMap = require('currency-symbol-map');
-
-var _currencySymbolMap2 = _interopRequireDefault(_currencySymbolMap);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20,7 +16,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Since Stripe takes amount in cents, we want to convert it and display dollar value.
  */
 function getPriceValue(value) {
-    return '$' + (value / 100).toFixed(2);
+    return "$" + (value / 100).toFixed(2);
 }
 
 function formatMoney(price, c, d, t) {
@@ -35,12 +31,13 @@ function formatMoney(price, c, d, t) {
 };
 
 var Price = function Price(props) {
-    var price = formatMoney((props.value / 100).toFixed(2), ',', '.');
-    var prefix = props.prefix || props.currency && (0, _currencySymbolMap2.default)(props.currency) || '$';
+    var price = formatMoney(props.value / 100);
+    var formatter = new Intl.NumberFormat("en-US", { style: 'currency', currency: props.currency || "USD" }).format;
+
     return _react2.default.createElement(
-        'span',
-        { className: '_price-value' },
-        prefix + price
+        "span",
+        { className: "_price-value" },
+        formatter(price)
     );
 };
 
@@ -48,34 +45,33 @@ var getPrice = function getPrice(myService) {
     var serviceType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
     var serType = myService.type || serviceType;
-    var prefix = (0, _currencySymbolMap2.default)(myService.payment_plan.currency);
-
+    var currency = myService.payment_plan && myService.payment_plan.currency || "USD";
     if (serType === "subscription") {
         return _react2.default.createElement(
-            'span',
-            { className: '_unit' },
-            _react2.default.createElement(Price, { value: myService.payment_plan.amount, prefix: prefix }),
+            "span",
+            { className: "_unit" },
+            _react2.default.createElement(Price, { value: myService.payment_plan.amount, currency: currency }),
             _react2.default.createElement(
-                'span',
+                "span",
                 null,
                 myService.payment_plan.interval_count === 1 ? ' /' : ' / ' + myService.payment_plan.interval_count,
-                ' ',
+                " ",
                 ' ' + myService.payment_plan.interval
             )
         );
     } else if (serType === "one_time") {
         return _react2.default.createElement(
-            'span',
+            "span",
             null,
-            _react2.default.createElement(Price, { value: myService.amount, prefix: prefix })
+            _react2.default.createElement(Price, { value: myService.amount, currency: currency })
         );
     } else if (serType === "custom") {
         return false;
     } else {
         return _react2.default.createElement(
-            'span',
+            "span",
             null,
-            _react2.default.createElement(Price, { value: myService.amount, prefix: prefix })
+            _react2.default.createElement(Price, { value: myService.amount, currency: currency })
         );
     }
 };

@@ -8,10 +8,6 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _currencySymbolMap = require("currency-symbol-map");
-
-var _currencySymbolMap2 = _interopRequireDefault(_currencySymbolMap);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Adjustment(props) {
@@ -20,18 +16,18 @@ function Adjustment(props) {
         isText = props.isText,
         currency = props.currency;
 
-    var currencySymbol = currency ? (0, _currencySymbolMap2.default)(currency) : "$";
+    var formatter = new Intl.NumberFormat("en-US", { style: 'currency', currency: currency || "USD" }).format;
+
     //todo: make this less hardcoded.
     var message = "";
     if (operation === "add" || operation === "subtract") {
-        price = (price / 100).toFixed(2);
+        price = formatter(price / 100);
     }
     switch (operation) {
         case "add":
-            message = isText ? "" + currencySymbol + price + " Add-on" : _react2.default.createElement(
+            message = isText ? price + " Add-on" : _react2.default.createElement(
                 "div",
                 null,
-                currencySymbol,
                 price,
                 " ",
                 _react2.default.createElement(
@@ -42,7 +38,7 @@ function Adjustment(props) {
             );
             break;
         case "subtract":
-            message = isText ? "" + currencySymbol + price + " Discount" : _react2.default.createElement(
+            message = isText ? price + " Discount" : _react2.default.createElement(
                 "div",
                 null,
                 "$",
@@ -60,7 +56,6 @@ function Adjustment(props) {
             message = isText ? price + "% Increase" : _react2.default.createElement(
                 "div",
                 null,
-                "$",
                 price,
                 "% ",
                 _react2.default.createElement(
@@ -75,7 +70,6 @@ function Adjustment(props) {
             message = isText ? price + "% Discount" : _react2.default.createElement(
                 "div",
                 null,
-                "$",
                 price,
                 "% ",
                 _react2.default.createElement(

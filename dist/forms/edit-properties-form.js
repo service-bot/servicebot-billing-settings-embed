@@ -68,6 +68,7 @@ var renderCustomProperty = function renderCustomProperty(props) {
                         { className: '_add-on-item-widget-wrapper _add-on-item-' + index },
                         _react2.default.createElement(_reduxForm.Field, {
                             key: index,
+                            currency: props.currency,
                             name: customProperty + '.data.value',
                             type: prop.type,
                             widget: property.widget,
@@ -125,7 +126,7 @@ function CustomFieldEditForm(props) {
     var properties = props.formJSON.service_instance_properties.filter(function (prop) {
         return prop.type !== "select" || selectAffectPricing(prop);
     });
-    var basePrice = (0, _handleInputs.getBasePrice)(props.instance.references.service_instance_properties, handlers, props.instance.payment_plan.amount);
+    var basePrice = (0, _handleInputs.getBasePrice)(props.instance.references.service_instance_properties, handlers, props.instance.payment_plan && props.instance.payment_plan.amount || 0);
     var priceData = (0, _client.getPriceData)(basePrice, properties);
     return _react2.default.createElement(
         'form',
@@ -138,7 +139,9 @@ function CustomFieldEditForm(props) {
                 null,
                 'Subscription Add Ons'
             ),
-            _react2.default.createElement(_reduxForm.FieldArray, { name: 'service_instance_properties', component: renderCustomProperty,
+            _react2.default.createElement(_reduxForm.FieldArray, {
+                currency: props.instance.payment_plan && props.instance.payment_plan.currency || "USD",
+                name: 'service_instance_properties', component: renderCustomProperty,
                 formJSON: properties }),
             _react2.default.createElement(
                 'div',
@@ -155,7 +158,7 @@ function CustomFieldEditForm(props) {
                 _react2.default.createElement(
                     'p',
                     null,
-                    _react2.default.createElement(_price.Price, { className: '_total-price', value: priceData.total }),
+                    _react2.default.createElement(_price.Price, { className: '_total-price', currency: props.instance.payment_plan && props.instance.payment_plan.currency || "USD", value: priceData.total }),
                     _react2.default.createElement(
                         'span',
                         { className: '_unit' },

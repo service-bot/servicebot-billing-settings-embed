@@ -166,6 +166,7 @@ var SelectWidget = function SelectWidget(props) {
     var input = props.input,
         configValue = props.configValue,
         label = props.label,
+        currency = props.currency,
         _props$meta = props.meta,
         touched = _props$meta.touched,
         error = _props$meta.error,
@@ -195,7 +196,7 @@ var SelectWidget = function SelectWidget(props) {
                     return _react2.default.createElement(
                         "option",
                         { key: index, value: option },
-                        price && configValue.pricing.operation ? option + " - " + (0, _WidgetPriceAdjustment2.default)({ price: price, operation: configValue.pricing.operation, isText: true }) : "" + option
+                        price && configValue.pricing.operation ? option + " - " + (0, _WidgetPriceAdjustment2.default)({ currency: currency, price: price, operation: configValue.pricing.operation, isText: true }) : "" + option
                     );
                 })
             )

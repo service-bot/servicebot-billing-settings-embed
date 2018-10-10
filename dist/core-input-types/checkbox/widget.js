@@ -26,6 +26,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Checkbox = function Checkbox(props) {
     var input = props.input,
+        currency = props.currency,
         configValue = props.configValue,
         label = props.label,
         _props$meta = props.meta,
@@ -47,7 +48,7 @@ var Checkbox = function Checkbox(props) {
                     { className: "control-label form-label-flex-md addon-checkbox-widget-default-value-label" },
                     label
                 ),
-                configValue && configValue.pricing && configValue.pricing.value && _react2.default.createElement(_WidgetPriceAdjustment2.default, { price: configValue.pricing.value, operation: configValue.pricing.operation })
+                configValue && configValue.pricing && configValue.pricing.value && _react2.default.createElement(_WidgetPriceAdjustment2.default, { currency: currency, price: configValue.pricing.value, operation: configValue.pricing.operation })
             ),
             _react2.default.createElement(
                 "div",
@@ -69,7 +70,7 @@ var Price = function Price(props) {
         _react2.default.createElement(
             "div",
             { className: "form-group form-group-flex checkbox-checkbox-widget-price-inputs" },
-            _react2.default.createElement(_WidgetPricingInput2.default, { input: props.input, operation: config && config.pricing && config.pricing.operation })
+            _react2.default.createElement(_WidgetPricingInput2.default, { currency: props.currency, input: props.input, operation: config && config.pricing && config.pricing.operation })
         )
     );
 };

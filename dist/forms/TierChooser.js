@@ -32,10 +32,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _currencySymbolMap = require('currency-symbol-map');
-
-var _currencySymbolMap2 = _interopRequireDefault(_currencySymbolMap);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _ = require('lodash');
@@ -74,8 +70,9 @@ var Tier = function Tier(props) {
 
     var tierContent = void 0,
         tierButton = void 0;
-    var currency = (0, _currencySymbolMap2.default)(plan.currency);
-    var tierPrice = numberWithCommas(findMonthlyPrice(plan.amount, plan.interval) / 100);
+    var formatter = new Intl.NumberFormat("en-US", { style: 'currency', currency: plan.currency || "USD" }).format;
+
+    var tierPrice = formatter(findMonthlyPrice(plan.amount, plan.interval) / 100);
     if (plan.trial_period_days > 0) {
         tierButton = "Try for Free";
     } else {
@@ -86,7 +83,6 @@ var Tier = function Tier(props) {
             tierContent = _react2.default.createElement(
                 'span',
                 null,
-                currency,
                 tierPrice,
                 _react2.default.createElement(
                     'span',
@@ -111,7 +107,6 @@ var Tier = function Tier(props) {
             tierContent = _react2.default.createElement(
                 'span',
                 null,
-                currency,
                 tierPrice,
                 _react2.default.createElement(
                     'span',
@@ -135,7 +130,7 @@ var Tier = function Tier(props) {
         if (plan.amount == 0) {
             tierContent = "Free";
         } else {
-            tierContent = '' + currency + tierPrice;
+            tierContent = '' + tierPrice;
         }
     }
     if (plan.type === "custom") {
