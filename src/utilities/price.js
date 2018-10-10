@@ -1,5 +1,4 @@
 import React from 'react';
-import getSymbolFromCurrency from 'currency-symbol-map'
 
 
 /**
@@ -22,30 +21,30 @@ function formatMoney(price, c, d, t){
 };
 
 let Price = function(props){
-    let price = formatMoney((props.value/100).toFixed(2),',','.');
-    let prefix = props.prefix || (props.currency && getSymbolFromCurrency(props.currency)) || '$';
+    let price = formatMoney((props.value/100));
+    let formatter = new Intl.NumberFormat("en-US", { style: 'currency', currency: props.currency || "USD" }).format;
+
     return(
-        <span className="_price-value">{prefix + price}</span>
+        <span className="_price-value">{ formatter(price)}</span>
     );
 };
 
 let getPrice = (myService, serviceType = null)=>{
     let serType = myService.type || serviceType;
-    let prefix = getSymbolFromCurrency(myService.payment_plan.currency);
-
+let currency = (myService.payment_plan && myService.payment_plan.currency) || "USD"
     if (serType === "subscription"){
         return (
             <span className="_unit">
-                <Price value={myService.payment_plan.amount} prefix={prefix}/>
+                <Price value={myService.payment_plan.amount} currency={currency}/>
                 <span>{myService.payment_plan.interval_count === 1 ? ' /' : ' / ' + myService.payment_plan.interval_count} {' '+myService.payment_plan.interval}</span>
             </span>
         );
     }else if (serType === "one_time"){
-        return (<span><Price value={myService.amount} prefix={prefix}/></span>);
+        return (<span><Price value={myService.amount} currency={currency}/></span>);
     }else if (serType === "custom"){
         return false;
     } else{
-        return (<span><Price value={myService.amount} prefix={prefix}/></span>)
+        return (<span><Price value={myService.amount} currency={currency}/></span>)
     }
 };
 /**

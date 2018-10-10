@@ -83,7 +83,7 @@ class SelectPricing extends React.Component {
 }
 
 let SelectWidget = (props) => {
-    let {input, configValue, label, meta: {touched, error, warning}} = props;
+    let {input, configValue, label, currency, meta: {touched, error, warning}} = props;
     return (
         <div className={`form-group form-group-flex addon-options-widget-default-value-wrapper`}>
             {label && <label className="control-label _value-label">{label}</label>}
@@ -93,7 +93,7 @@ let SelectWidget = (props) => {
                     { configValue && configValue.value && configValue.value.map((option, index) => {
                             let price = configValue.pricing && configValue.pricing.value && configValue.pricing.value[option];
                             return <option key={index} value={option}>
-                                {(price && configValue.pricing.operation) ? `${option} - ${PriceAdjustment({price, operation:configValue.pricing.operation, isText:true})}`: `${option}`}
+                                {(price && configValue.pricing.operation) ? `${option} - ${PriceAdjustment({currency, price, operation:configValue.pricing.operation, isText:true})}`: `${option}`}
                             </option>
                         }
                     )}

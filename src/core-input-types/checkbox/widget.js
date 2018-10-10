@@ -4,13 +4,13 @@ import PriceAdjustment from '../../widget-inputs/WidgetPriceAdjustment';
 import WidgetPricingInput from '../../widget-inputs/WidgetPricingInput.js';
 import {OnOffToggleField} from "servicebot-base-form";
 let Checkbox = (props) => {
-    let {input, configValue, label, meta: {touched, error, warning}} = props;
+    let {input, currency, configValue, label, meta: {touched, error, warning}} = props;
     return (
         <div className={`addon-checkbox-widget-default-value-wrapper${error && touched ? " has-error" : ""}`}>
             <div className="form-group form-group-flex addon-checkbox-widget-default-value">
                 <div className="_label_wrapper">
                     {label && <label className="control-label form-label-flex-md addon-checkbox-widget-default-value-label">{label}</label>}
-                    {configValue && configValue.pricing && configValue.pricing.value && <PriceAdjustment price={configValue.pricing.value} operation={configValue.pricing.operation}/>}
+                    {configValue && configValue.pricing && configValue.pricing.value && <PriceAdjustment currency={currency} price={configValue.pricing.value} operation={configValue.pricing.operation}/>}
                 </div>
                 <div className="form-input-flex">
                     <div className="request-form-toggle-option-wrapper">
@@ -27,7 +27,7 @@ let Price = (props) => {
     return (
         <div className={`addon-checkbox-widget-price-inputs-wrapper`}>
             <div className="form-group form-group-flex checkbox-checkbox-widget-price-inputs">
-                <WidgetPricingInput input={props.input} operation={config && config.pricing && config.pricing.operation}/>
+                <WidgetPricingInput currency={props.currency} input={props.input} operation={config && config.pricing && config.pricing.operation}/>
                 {/*<CurrencyInput {...props.input} className="form-control addon-checkbox-widget-price-input"*/}
                                {/*prefix="$" decimalSeparator="." thousandSeparator="," precision="2"*/}
                 {/*/>*/}

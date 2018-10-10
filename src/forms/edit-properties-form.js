@@ -38,6 +38,7 @@ let renderCustomProperty = (props) => {
                             <div className={`_add-on-item-widget-wrapper _add-on-item-${index}`}>
                                 <Field
                                     key={index}
+                                    currency={props.currency}
                                     name={`${customProperty}.data.value`}
                                     type={prop.type}
                                     widget={property.widget}
@@ -93,14 +94,16 @@ function CustomFieldEditForm(props) {
     let properties = props.formJSON.service_instance_properties.filter(prop => {
         return prop.type !== "select" || selectAffectPricing(prop)
     });
-    let basePrice = getBasePrice(props.instance.references.service_instance_properties, handlers, props.instance.payment_plan.amount);
+    let basePrice = getBasePrice(props.instance.references.service_instance_properties, handlers, (props.instance.payment_plan && props.instance.payment_plan.amount) || 0);
     let priceData = getPriceData(basePrice, properties);
     return (
         <form>
             {priceData && priceData.adjustments && priceData.adjustments.length > 0 && <div>
             <h3>Subscription Add Ons</h3>
 
-            <FieldArray name="service_instance_properties" component={renderCustomProperty}
+            <FieldArray
+                currency={(props.instance.payment_plan && props.instance.payment_plan.currency) || "USD"}
+                name="service_instance_properties" component={renderCustomProperty}
                         formJSON={properties}/>
 
             <div className="add-on-item-update-submit">
@@ -108,7 +111,7 @@ function CustomFieldEditForm(props) {
                     <label>Total Cost:</label>
                 </p>
                <p>
-                    <Price className="_total-price" value={priceData.total} />
+                    <Price className="_total-price" currency={(props.instance.payment_plan && props.instance.payment_plan.currency) || "USD"} value={priceData.total} />
                     <span className="_unit"><span className="_per">/</span>{props.instance.payment_plan.interval}</span>
                     <button disabled={invalid|| submitting || pristine} className="buttons _primary" onClick={props.handleSubmit} type="submit" value="submit">Submit</button>
                 </p>

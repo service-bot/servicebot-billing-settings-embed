@@ -1,29 +1,28 @@
 import React from "react";
-import getSymbolFromCurrency from 'currency-symbol-map'
-
 
 function Adjustment(props){
     let {operation, price, isText, currency} = props;
-    let currencySymbol = currency ? getSymbolFromCurrency(currency) : "$";
+    let formatter = new Intl.NumberFormat("en-US", { style: 'currency', currency: currency || "USD" }).format;
+
     //todo: make this less hardcoded.
     let message = "";
     if(operation === "add" || operation === "subtract") {
-        price = (price / 100).toFixed(2)
+        price = formatter((price / 100));
     }
     switch(operation) {
         case "add":
-            message = isText? `${currencySymbol}${price} Add-on`: <div>{currencySymbol}{price} <span className="request-form-price-adjust-discount">Add-on</span></div>;
+            message = isText? `${price} Add-on`: <div>{price} <span className="request-form-price-adjust-discount">Add-on</span></div>;
             break;
         case "subtract":
-            message = isText? `${currencySymbol}${price} Discount`:<div>${price} <span className="request-form-price-adjust-discount">Discount</span></div>;
+            message = isText? `${price} Discount`:<div>${price} <span className="request-form-price-adjust-discount">Discount</span></div>;
 
             break;
         case "multiply" :
-            message = isText? `${price}% Increase`:<div>${price}% <span className="request-form-price-adjust-increase">Increase</span></div>;
+            message = isText? `${price}% Increase`:<div>{price}% <span className="request-form-price-adjust-increase">Increase</span></div>;
 
             break;
         case "divide" :
-            message = isText? `${price}% Discount`:<div>${price}% <span className="request-form-price-adjust-decrease">Discount</span></div>;
+            message = isText? `${price}% Discount`:<div>{price}% <span className="request-form-price-adjust-decrease">Discount</span></div>;
             break;
         default :
             message = ` -- ${operation} : ${price}`;
