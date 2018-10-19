@@ -145,7 +145,7 @@ var ServicebotManagedBilling = function (_React$Component) {
                                     self.props.handleResponse && self.props.handleResponse({ event: "add_fund", response: response });
 
                                     if (!(instance.status === "cancelled")) {
-                                        _context.next = 4;
+                                        _context.next = 6;
                                         break;
                                     }
 
@@ -153,10 +153,19 @@ var ServicebotManagedBilling = function (_React$Component) {
                                     return self.resubscribe(instance.id)();
 
                                 case 4:
+                                    _context.next = 7;
+                                    break;
+
+                                case 6:
+                                    if (self.state.formError || self.state.resubscribeError) {
+                                        self.setState({ formError: null, resubscribeError: null });
+                                    }
+
+                                case 7:
                                     self.getFundingDetails();
                                     self.props.setLoading(false);
 
-                                case 6:
+                                case 9:
                                 case 'end':
                                     return _context.stop();
                             }
@@ -530,14 +539,17 @@ var ServicebotManagedBilling = function (_React$Component) {
                                     } else if (updatedInstance.error) {
                                         self.setState({ formError: updatedInstance.error });
                                     }
-                                    _context5.next = 12;
+                                    if (!updatedInstance.error && self.state.formError) {
+                                        self.setState({ formError: null });
+                                    }
+                                    _context5.next = 13;
                                     return self.getServicebotDetails();
 
-                                case 12:
+                                case 13:
                                     // self.setState({loading: false});
                                     self.props.setLoading(false);
 
-                                case 13:
+                                case 14:
                                 case 'end':
                                     return _context5.stop();
                             }
@@ -591,8 +603,8 @@ var ServicebotManagedBilling = function (_React$Component) {
 
                                 if (updatedInstance.error) {
                                     self.setState({ resubscribeError: updatedInstance.error });
-                                } else if (self.state.resubscribeError) {
-                                    self.setState({ resubscribeError: null });
+                                } else if (self.state.resubscribeError || self.state.formError) {
+                                    self.setState({ resubscribeError: null, formError: null });
                                 }
                                 _context6.next = 14;
                                 return self.getServicebotDetails();
