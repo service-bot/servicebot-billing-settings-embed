@@ -61,7 +61,10 @@ class ServicebotManagedBilling extends React.Component {
             self.props.handleResponse && self.props.handleResponse({event: "add_fund",response});
             if(instance.status === "cancelled"){
                 await self.resubscribe(instance.id)();
+            }else if(self.state.formError || self.state.resubscribeError){
+                self.setState({formError: null, resubscribeError: null});
             }
+
             self.getFundingDetails();
             self.props.setLoading(false);
 
@@ -265,6 +268,9 @@ class ServicebotManagedBilling extends React.Component {
             }else if(updatedInstance.error){
                 self.setState({formError: updatedInstance.error});
             }
+            if(!updatedInstance.error && self.state.formError){
+                self.setState({formError: null})
+            }
             await self.getServicebotDetails();
             // self.setState({loading: false});
             self.props.setLoading(false);
@@ -292,8 +298,8 @@ class ServicebotManagedBilling extends React.Component {
             })).json();
             if(updatedInstance.error){
                 self.setState({resubscribeError: updatedInstance.error});
-            }else if(self.state.resubscribeError){
-                self.setState({resubscribeError: null});
+            }else if(self.state.resubscribeError || self.state.formError){
+                self.setState({resubscribeError: null, formError: null});
             }
             await self.getServicebotDetails();
             self.props.handleResponse && self.props.handleResponse({event: "resubscribe", response: updatedInstance});
