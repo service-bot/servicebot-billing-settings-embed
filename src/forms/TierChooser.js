@@ -149,7 +149,7 @@ class TierSelector extends React.Component{
         let tiers = template.references.tiers;
         if(metricProp) {
             tiers = template.references.tiers.map(tier => {
-                if (metricProp.config.pricing.tiers.includes(tier.name)) {
+                if (metricProp.config.pricing.tiers && metricProp.config.pricing.tiers.includes(tier.name)) {
                     tier.unit = metricProp.config.unit;
                 }
                 return tier

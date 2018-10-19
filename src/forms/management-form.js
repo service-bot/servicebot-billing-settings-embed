@@ -262,6 +262,8 @@ class ServicebotManagedBilling extends React.Component {
             let updatedInstance = await(await fetch(`${self.props.url}/api/v1/service-instances/${self.state.instances[0].id}/apply-payment-structure/${paymentStructure}`,request)).json();
             if(updatedInstance.error === "This customer has no attached payment source"){
                 self.setState({formError: "Credit/debit card required to switch from free tier to a paid tier"});
+            }else if(updatedInstance.error){
+                self.setState({formError: updatedInstance.error});
             }
             await self.getServicebotDetails();
             // self.setState({loading: false});
@@ -323,9 +325,9 @@ class ServicebotManagedBilling extends React.Component {
                                                         {this.getSubscriptionStatus()}
                                                         {this.getTrialStatus()}
                                                         <PriceBreakdown tier={tier} metricProp={metricProp} instance={service}/>
+                                                        {this.state.formError && <h3 style={{color:"red"}}>{this.state.formError}</h3>}
                                                         <TierChoose key={"t-" + service.payment_structure_template_id} changePlan={self.changePlan} currentPlan={service.payment_structure_template_id} template={self.state.template}/>
                                                         <div className="mbf--current-services-item-buttons">
-                                                            <span>{this.state.formError}</span>
                                                             {(service.status === "running" || service.status === "requested" || service.status === "in_progress") &&
                                                             <button className="buttons _right _rounded mbf--btn-cancel-service"
                                                                     onClick={this.requestCancellation.bind(this, service.id)}>Cancel Service</button>
