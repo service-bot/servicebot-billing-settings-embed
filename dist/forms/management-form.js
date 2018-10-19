@@ -144,7 +144,7 @@ var ServicebotManagedBilling = function (_React$Component) {
                                 case 0:
                                     self.props.handleResponse && self.props.handleResponse({ event: "add_fund", response: response });
 
-                                    if (!(instance.status === "cancelled")) {
+                                    if (!(instance.status === "cancelled" && self.state.instances.length === 1)) {
                                         _context.next = 6;
                                         break;
                                     }
@@ -262,8 +262,7 @@ var ServicebotManagedBilling = function (_React$Component) {
         }
     }, {
         key: 'getSubscriptionStatus',
-        value: function getSubscriptionStatus() {
-            var instance = this.state.instances[0];
+        value: function getSubscriptionStatus(instance) {
             if (instance.status === "cancelled") {
                 if (this.state.funds.length === 0 && instance.payment_plan && instance.payment_plan.amount > 0) {
                     return _react2.default.createElement(
@@ -302,42 +301,108 @@ var ServicebotManagedBilling = function (_React$Component) {
         key: 'getServicebotDetails',
         value: function () {
             var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4() {
-                var self, instances, template;
+                var self, url, instances, templates, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, instance;
+
                 return _regenerator2.default.wrap(function _callee4$(_context4) {
                     while (1) {
                         switch (_context4.prev = _context4.next) {
                             case 0:
                                 self = this;
-                                _context4.next = 3;
-                                return (0, _servicebotBaseForm.Fetcher)(self.props.url + '/api/v1/service-instances/own', "GET", null, this.getRequest("GET"));
+                                url = this.props.serviceInstanceId ? self.props.url + '/api/v1/service-instances/' + this.props.serviceInstanceId : self.props.url + '/api/v1/service-instances/own';
+                                _context4.next = 4;
+                                return (0, _servicebotBaseForm.Fetcher)(url, "GET", null, this.getRequest("GET"));
 
-                            case 3:
+                            case 4:
                                 instances = _context4.sent;
 
+                                if (this.props.serviceInstanceId) {
+                                    instances = [instances];
+                                }
+
                                 if (!(!instances.error && instances.length > 0)) {
-                                    _context4.next = 11;
+                                    _context4.next = 39;
                                     break;
                                 }
 
-                                _context4.next = 7;
-                                return (0, _servicebotBaseForm.Fetcher)(self.props.url + '/api/v1/service-templates/' + instances[0].service_id + '/request', "GET", null, this.getRequest("GET"));
+                                templates = {};
+                                _iteratorNormalCompletion = true;
+                                _didIteratorError = false;
+                                _iteratorError = undefined;
+                                _context4.prev = 11;
+                                _iterator = instances[Symbol.iterator]();
 
-                            case 7:
-                                template = _context4.sent;
+                            case 13:
+                                if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+                                    _context4.next = 22;
+                                    break;
+                                }
 
-                                self.setState({ instances: instances, template: template });
-                                _context4.next = 12;
+                                instance = _step.value;
+
+                                if (templates[instance.service_id]) {
+                                    _context4.next = 19;
+                                    break;
+                                }
+
+                                _context4.next = 18;
+                                return (0, _servicebotBaseForm.Fetcher)(self.props.url + '/api/v1/service-templates/' + instance.service_id + '/request', "GET", null, this.getRequest("GET"));
+
+                            case 18:
+                                templates[instance.service_id] = _context4.sent;
+
+                            case 19:
+                                _iteratorNormalCompletion = true;
+                                _context4.next = 13;
                                 break;
 
-                            case 11:
+                            case 22:
+                                _context4.next = 28;
+                                break;
+
+                            case 24:
+                                _context4.prev = 24;
+                                _context4.t0 = _context4['catch'](11);
+                                _didIteratorError = true;
+                                _iteratorError = _context4.t0;
+
+                            case 28:
+                                _context4.prev = 28;
+                                _context4.prev = 29;
+
+                                if (!_iteratorNormalCompletion && _iterator.return) {
+                                    _iterator.return();
+                                }
+
+                            case 31:
+                                _context4.prev = 31;
+
+                                if (!_didIteratorError) {
+                                    _context4.next = 34;
+                                    break;
+                                }
+
+                                throw _iteratorError;
+
+                            case 34:
+                                return _context4.finish(31);
+
+                            case 35:
+                                return _context4.finish(28);
+
+                            case 36:
+                                self.setState({ instances: instances, templates: templates });
+                                _context4.next = 40;
+                                break;
+
+                            case 39:
                                 self.setState({ error: instances.error });
 
-                            case 12:
+                            case 40:
                             case 'end':
                                 return _context4.stop();
                         }
                     }
-                }, _callee4, this);
+                }, _callee4, this, [[11, 24, 28, 36], [29,, 31, 35]]);
             }));
 
             function getServicebotDetails() {
@@ -377,13 +442,12 @@ var ServicebotManagedBilling = function (_React$Component) {
         }
     }, {
         key: 'getTrialStatus',
-        value: function getTrialStatus() {
+        value: function getTrialStatus(instance) {
             var self = this;
             //Get service trial status
-            if (self.state.instances.length > 0) {
+            if (instance) {
                 var inTrial = false;
                 var trialExpires = '';
-                var instance = self.state.instances[0];
                 if (!instance.trial_end) {
                     return null;
                 }
@@ -444,14 +508,14 @@ var ServicebotManagedBilling = function (_React$Component) {
         }
     }, {
         key: 'getBillingForm',
-        value: function getBillingForm() {
+        value: function getBillingForm(instance) {
             var self = this;
             var fund = self.state.funds[0];
             var buttonText = "Subscribe";
             if (fund) {
                 buttonText = "Update Card";
             }
-            if (self.state.instances[0].status === "cancelled") {
+            if (instance.status === "cancelled" && self.state.instances.length === 1) {
                 buttonText = "Resubscribe";
             }
             return _react2.default.createElement(
@@ -466,14 +530,14 @@ var ServicebotManagedBilling = function (_React$Component) {
                         'Add your funding credit/debit card.'
                     ),
                     _react2.default.createElement(_billingSettingsForm.BillingForm, { buttonText: buttonText,
-                        handleResponse: self.handleResponse(self.state.instances[0]),
+                        handleResponse: self.handleResponse(instance),
                         token: self.props.token, spk: self.state.spk,
                         external: self.props.external,
                         submitAPI: self.props.url + '/' + self.state.fund_url })
                 ) : _react2.default.createElement(
                     'div',
                     null,
-                    _react2.default.createElement(_billingSettingsForm.BillingForm, { handleResponse: self.handleResponse(self.state.instances[0]),
+                    _react2.default.createElement(_billingSettingsForm.BillingForm, { handleResponse: self.handleResponse(instance),
                         buttonText: buttonText,
                         token: self.props.token,
                         spk: self.state.spk,
@@ -658,7 +722,8 @@ var ServicebotManagedBilling = function (_React$Component) {
                                 'div',
                                 { className: 'mbf--current-services-list' },
                                 self.state.instances.map(function (service) {
-                                    var tier = service.references.payment_structure_templates[0] && self.state.template.references.tiers.find(function (tier) {
+                                    var template = self.state.templates[service.service_id];
+                                    var tier = service.references.payment_structure_templates[0] && template.references.tiers.find(function (tier) {
                                         return tier.id === service.references.payment_structure_templates[0].tier_id;
                                     });
 
@@ -668,15 +733,15 @@ var ServicebotManagedBilling = function (_React$Component) {
                                     return _react2.default.createElement(
                                         'div',
                                         { className: 'mbf--current-services-item' },
-                                        _this4.getSubscriptionStatus(),
-                                        _this4.getTrialStatus(),
+                                        _this4.getSubscriptionStatus(service),
+                                        _this4.getTrialStatus(service),
                                         _react2.default.createElement(_widgets.PriceBreakdown, { tier: tier, metricProp: metricProp, instance: service }),
                                         _this4.state.formError && _react2.default.createElement(
                                             'h3',
                                             { style: { color: "red" } },
                                             _this4.state.formError
                                         ),
-                                        _react2.default.createElement(_TierChooser2.default, { key: "t-" + service.payment_structure_template_id, changePlan: self.changePlan, currentPlan: service.payment_structure_template_id, template: self.state.template }),
+                                        _react2.default.createElement(_TierChooser2.default, { key: "t-" + service.payment_structure_template_id, changePlan: self.changePlan, currentPlan: service.payment_structure_template_id, template: template }),
                                         _react2.default.createElement(
                                             'div',
                                             { className: 'mbf--current-services-item-buttons' },
@@ -716,7 +781,7 @@ var ServicebotManagedBilling = function (_React$Component) {
                             null,
                             'Payment Information'
                         ),
-                        this.getBillingForm(),
+                        this.getBillingForm(self.state.instances[0]),
                         _react2.default.createElement(_editPropertiesForm.ModalEditProperties, { external: this.props.external, token: this.props.token, url: this.props.url, instance: self.state.instances[0], refresh: this.hidePropEdit }),
                         self.state.instances[0] && _react2.default.createElement(_Invoices2.default, { user: self.state.instances[0].references.users[0], invoices: this.state.invoices })
                     ) : _react2.default.createElement(
