@@ -117,7 +117,7 @@ var PriceBreakdown = function PriceBreakdown(props) {
         acc[widget.type] = widget.handler;
         return acc;
     }, {});
-    var metricTier = metricProp && tier && metricProp.config.pricing && metricProp.config.pricing.tiers.includes(tier.name);
+    var metricTier = metricProp && tier && metricProp.config.pricing && metricProp.config.pricing.tiers && metricProp.config.pricing.tiers && metricProp.config.pricing.tiers.includes(tier.name);
     var map = {
         add: "+",
         subtract: "-",
