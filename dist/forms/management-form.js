@@ -588,14 +588,20 @@ var ServicebotManagedBilling = function (_React$Component) {
 
                             case 10:
                                 updatedInstance = _context6.sent;
-                                _context6.next = 13;
+
+                                if (updatedInstance.error) {
+                                    self.setState({ resubscribeError: updatedInstance.error });
+                                } else if (self.state.resubscribeError) {
+                                    self.setState({ resubscribeError: null });
+                                }
+                                _context6.next = 14;
                                 return self.getServicebotDetails();
 
-                            case 13:
+                            case 14:
                                 self.props.handleResponse && self.props.handleResponse({ event: "resubscribe", response: updatedInstance });
                                 self.props.setLoading(false);
 
-                            case 15:
+                            case 16:
                             case 'end':
                                 return _context6.stop();
                         }
@@ -662,6 +668,11 @@ var ServicebotManagedBilling = function (_React$Component) {
                                         _react2.default.createElement(
                                             'div',
                                             { className: 'mbf--current-services-item-buttons' },
+                                            _this4.state.resubscribeError && _react2.default.createElement(
+                                                'span',
+                                                { style: { color: "red" } },
+                                                _this4.state.resubscribeError
+                                            ),
                                             (service.status === "running" || service.status === "requested" || service.status === "in_progress") && _react2.default.createElement(
                                                 'button',
                                                 { className: 'buttons _right _rounded mbf--btn-cancel-service',
