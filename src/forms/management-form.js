@@ -59,7 +59,7 @@ class ServicebotManagedBilling extends React.Component {
         let self = this;
         return async (response)=> {
             self.props.handleResponse && self.props.handleResponse({event: "add_fund",response});
-            if(instance.status === "cancelled"){
+            if(instance.status === "cancelled" && self.state.instances.length === 1){
                 await self.resubscribe(instance.id)();
             }else if(self.state.formError || self.state.resubscribeError){
                 self.setState({formError: null, resubscribeError: null});
@@ -95,8 +95,7 @@ class ServicebotManagedBilling extends React.Component {
         }
         return request;
     }
-    getSubscriptionStatus(){
-        let instance = this.state.instances[0];
+    getSubscriptionStatus(instance){
         if(instance.status === "cancelled"){
             if(this.state.funds.length === 0 && instance.payment_plan && instance.payment_plan.amount > 0) {
                 return <div>
@@ -115,10 +114,19 @@ class ServicebotManagedBilling extends React.Component {
     }
     async getServicebotDetails() {
         let self = this;
-        let instances = await Fetcher(`${self.props.url}/api/v1/service-instances/own`, "GET", null, this.getRequest("GET"));
+        let url = this.props.serviceInstanceId ? `${self.props.url}/api/v1/service-instances/${this.props.serviceInstanceId}` : `${self.props.url}/api/v1/service-instances/own`
+        let instances = await Fetcher(url, "GET", null, this.getRequest("GET"));
+        if(this.props.serviceInstanceId){
+            instances = [instances];
+        }
         if(!instances.error && instances.length > 0){
-            let template = await Fetcher(`${self.props.url}/api/v1/service-templates/${instances[0].service_id}/request`, "GET", null, this.getRequest("GET"))
-            self.setState({instances, template});
+            let templates = {}
+            for(let instance of instances){
+                if(!templates[instance.service_id]){
+                    templates[instance.service_id] = await Fetcher(`${self.props.url}/api/v1/service-templates/${instance.service_id}/request`, "GET", null, this.getRequest("GET"))
+                }
+            }
+            self.setState({instances, templates});
         }else{
             self.setState({error: instances.error})
 
@@ -151,13 +159,12 @@ class ServicebotManagedBilling extends React.Component {
         });
     }
 
-    getTrialStatus(){
+    getTrialStatus(instance){
         let self = this;
         //Get service trial status
-        if(self.state.instances.length > 0) {
+        if(instance) {
             let inTrial = false;
             let trialExpires = '';
-            let instance = self.state.instances[0];
             if(!instance.trial_end){
                 return null;
             }
@@ -197,14 +204,14 @@ class ServicebotManagedBilling extends React.Component {
         }
     }
 
-    getBillingForm(){
+    getBillingForm(instance){
         let self = this;
         let fund = self.state.funds[0];
         let buttonText = "Subscribe";
         if(fund){
             buttonText ="Update Card";
         }
-        if(self.state.instances[0].status === "cancelled"){
+        if(instance.status === "cancelled" && self.state.instances.length === 1){
             buttonText="Resubscribe"
         }
         return (
@@ -213,14 +220,14 @@ class ServicebotManagedBilling extends React.Component {
                     <div className="mbf--funding-card-wrapper">
                         <h5 className="form-help-text">Add your funding credit/debit card.</h5>
                         <BillingForm buttonText={buttonText}
-                                     handleResponse={self.handleResponse(self.state.instances[0])}
+                                     handleResponse={self.handleResponse(instance)}
                                      token={self.props.token} spk={self.state.spk}
                                      external={self.props.external}
                                      submitAPI={`${self.props.url}/${self.state.fund_url}`} />
                     </div>
                     :
                     <div>
-                        <BillingForm handleResponse={self.handleResponse(self.state.instances[0])}
+                        <BillingForm handleResponse={self.handleResponse(instance)}
                                      buttonText={buttonText}
                                      token={self.props.token}
                                      spk={self.state.spk}
@@ -328,16 +335,17 @@ class ServicebotManagedBilling extends React.Component {
                                         <h3>Subscription Summary</h3>
                                             <div className="mbf--current-services-list">
                                                 {self.state.instances.map(service => {
-                                                    let tier = service.references.payment_structure_templates[0] && self.state.template.references.tiers.find(tier => tier.id === service.references.payment_structure_templates[0].tier_id);
+                                                    let template = self.state.templates[service.service_id];
+                                                    let tier = service.references.payment_structure_templates[0] && template.references.tiers.find(tier => tier.id === service.references.payment_structure_templates[0].tier_id);
 
                                                     let metricProp = service.references.service_instance_properties.find(prop => prop.type === "metric");
                                                     return(
                                                     <div className="mbf--current-services-item">
-                                                        {this.getSubscriptionStatus()}
-                                                        {this.getTrialStatus()}
+                                                        {this.getSubscriptionStatus(service)}
+                                                        {this.getTrialStatus(service)}
                                                         <PriceBreakdown tier={tier} metricProp={metricProp} instance={service}/>
                                                         {this.state.formError && <h3 style={{color:"red"}}>{this.state.formError}</h3>}
-                                                        <TierChoose key={"t-" + service.payment_structure_template_id} changePlan={self.changePlan} currentPlan={service.payment_structure_template_id} template={self.state.template}/>
+                                                        <TierChoose key={"t-" + service.payment_structure_template_id} changePlan={self.changePlan} currentPlan={service.payment_structure_template_id} template={template}/>
                                                         <div className="mbf--current-services-item-buttons">
                                                             {this.state.resubscribeError && <span style={{color:"red"}}>{this.state.resubscribeError}</span>}
 
@@ -358,7 +366,7 @@ class ServicebotManagedBilling extends React.Component {
                                     <div><p>You currently don't have any subscriptions.</p></div>
                                 }
                                 <h3>Payment Information</h3>
-                                {this.getBillingForm()}
+                                {this.getBillingForm(self.state.instances[0])}
 
                                 <ModalEditProperties external={this.props.external} token={this.props.token} url={this.props.url} instance={self.state.instances[0]} refresh={this.hidePropEdit}/>
                             {self.state.instances[0] && <Invoices user={self.state.instances[0].references.users[0]} invoices={this.state.invoices}/>}
