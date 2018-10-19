@@ -290,6 +290,11 @@ class ServicebotManagedBilling extends React.Component {
                 method : "POST",
                 headers
             })).json();
+            if(updatedInstance.error){
+                self.setState({resubscribeError: updatedInstance.error});
+            }else if(self.state.resubscribeError){
+                self.setState({resubscribeError: null});
+            }
             await self.getServicebotDetails();
             self.props.handleResponse && self.props.handleResponse({event: "resubscribe", response: updatedInstance});
             self.props.setLoading(false);
@@ -328,6 +333,8 @@ class ServicebotManagedBilling extends React.Component {
                                                         {this.state.formError && <h3 style={{color:"red"}}>{this.state.formError}</h3>}
                                                         <TierChoose key={"t-" + service.payment_structure_template_id} changePlan={self.changePlan} currentPlan={service.payment_structure_template_id} template={self.state.template}/>
                                                         <div className="mbf--current-services-item-buttons">
+                                                            {this.state.resubscribeError && <span style={{color:"red"}}>{this.state.resubscribeError}</span>}
+
                                                             {(service.status === "running" || service.status === "requested" || service.status === "in_progress") &&
                                                             <button className="buttons _right _rounded mbf--btn-cancel-service"
                                                                     onClick={this.requestCancellation.bind(this, service.id)}>Cancel Service</button>
