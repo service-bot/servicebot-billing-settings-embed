@@ -527,6 +527,8 @@ var ServicebotManagedBilling = function (_React$Component) {
 
                                     if (updatedInstance.error === "This customer has no attached payment source") {
                                         self.setState({ formError: "Credit/debit card required to switch from free tier to a paid tier" });
+                                    } else if (updatedInstance.error) {
+                                        self.setState({ formError: updatedInstance.error });
                                     }
                                     _context5.next = 12;
                                     return self.getServicebotDetails();
@@ -651,15 +653,15 @@ var ServicebotManagedBilling = function (_React$Component) {
                                         _this4.getSubscriptionStatus(),
                                         _this4.getTrialStatus(),
                                         _react2.default.createElement(_widgets.PriceBreakdown, { tier: tier, metricProp: metricProp, instance: service }),
+                                        _this4.state.formError && _react2.default.createElement(
+                                            'h3',
+                                            { style: { color: "red" } },
+                                            _this4.state.formError
+                                        ),
                                         _react2.default.createElement(_TierChooser2.default, { key: "t-" + service.payment_structure_template_id, changePlan: self.changePlan, currentPlan: service.payment_structure_template_id, template: self.state.template }),
                                         _react2.default.createElement(
                                             'div',
                                             { className: 'mbf--current-services-item-buttons' },
-                                            _react2.default.createElement(
-                                                'span',
-                                                null,
-                                                _this4.state.formError
-                                            ),
                                             (service.status === "running" || service.status === "requested" || service.status === "in_progress") && _react2.default.createElement(
                                                 'button',
                                                 { className: 'buttons _right _rounded mbf--btn-cancel-service',

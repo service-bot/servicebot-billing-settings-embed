@@ -275,7 +275,7 @@ var TierSelector = function (_React$Component) {
 
                                 if (metricProp) {
                                     tiers = template.references.tiers.map(function (tier) {
-                                        if (metricProp.config.pricing.tiers.includes(tier.name)) {
+                                        if (metricProp.config.pricing.tiers && metricProp.config.pricing.tiers.includes(tier.name)) {
                                             tier.unit = metricProp.config.unit;
                                         }
                                         return tier;
