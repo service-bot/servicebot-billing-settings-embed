@@ -611,7 +611,7 @@
             justify-content: flex-start;
             align-items: flex-start;
 
-            #card-element, .form-group{
+            #card-element, .sb-form-group{
               flex-basis: calc( 50% - 8px );
               margin-right: $gutter;
               margin-bottom: $gutter;
@@ -621,7 +621,7 @@
               }
             }
 
-            .form-group:nth-child(2){
+            .sb-form-group:nth-child(2){
               //padding-left: $gutter;
             }
 
@@ -651,7 +651,7 @@
               }
             }
 
-            .form-group{
+            .sb-form-group{
 
               &:nth-child(2) {
                 margin-right: $gutter;
@@ -780,7 +780,11 @@
           @include embed-content-box;
           padding: $gutter;
 
-          & > .form-group > .form-input-flex {
+          .sb-form-group{
+            padding: 0;
+          }
+
+          & > .sb-form-group > ._input-container- {
             flex-basis: 100%;
             flex-grow: 0;
           }
@@ -789,7 +793,7 @@
 
           }
 
-          .addon-checkbox-widget-default-value-wrapper {
+          ._addon-checkbox-widget {
             width: 100%;
 
             .iconToggleField {
@@ -851,7 +855,7 @@
             }
           }
 
-          .addon-options-widget-default-value-wrapper {
+          ._addon-options-widget {
 
             ._value-label {
 
@@ -861,16 +865,17 @@
               flex-basis: 50%;
               background: $color-white;
 
-              ._value-select {
+              select._value-select {
                 width: 100%;
                 background: $color-white;
                 padding: 0 $gutter;
                 font-size: 0.90rem;
-                margin: 0 $gutter;
+                margin: 0;
+                height: 32px;
               }
             }
 
-            & > .form-input-flex {
+            & > ._input-container- {
               border: 1px solid $color-blue;
               border-radius: 1px;
 
@@ -887,7 +892,7 @@
             background: rgba(255, 255, 255, 0.5);
           }
 
-          .form-group, .form-input-flex {
+          .sb-form-group, ._input-container- {
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -902,7 +907,7 @@
             }
           }
 
-          .form-input-flex {
+          ._input-container- {
             flex-basis: auto;
 
             .request-form-toggle-option-wrapper {
@@ -910,7 +915,7 @@
               align-items: center;
               justify-content: flex-end;
 
-              .form-group.form-group {
+              .sb-form-group.sb-form-group {
                 width: auto;
               }
             }

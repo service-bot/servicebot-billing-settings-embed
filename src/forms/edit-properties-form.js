@@ -55,10 +55,10 @@ let renderCustomProperty = (props) => {
                         if(prop.data && prop.data.value){
                             return (
                                 <div className={`_add-on-item-widget-wrapper _add-on-item-${index}`}>
-                                    <div className={`form-group form-group-flex`}>
+                                    <div className={`sb-form-group`}>
                                         {(prop.prop_label && prop.type !== 'hidden') &&
-                                        <label className="control-label form-label-flex-md">{prop.prop_label}</label>}
-                                        <div className="form-input-flex">
+                                        <label className="_label-">{prop.prop_label}</label>}
+                                        <div className="_input-container-">
                                             <p>{prop.data.value}</p>
                                         </div>
                                     </div>

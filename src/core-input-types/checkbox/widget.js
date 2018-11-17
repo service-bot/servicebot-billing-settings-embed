@@ -6,18 +6,13 @@ import {OnOffToggleField} from "servicebot-base-form";
 let Checkbox = (props) => {
     let {input, currency, configValue, label, meta: {touched, error, warning}} = props;
     return (
-        <div className={`addon-checkbox-widget-default-value-wrapper${error && touched ? " has-error" : ""}`}>
-            <div className="form-group form-group-flex addon-checkbox-widget-default-value">
-                <div className="_label_wrapper">
-                    {label && <label className="control-label form-label-flex-md addon-checkbox-widget-default-value-label">{label}</label>}
-                    {configValue && configValue.pricing && configValue.pricing.value && <PriceAdjustment currency={currency} price={configValue.pricing.value} operation={configValue.pricing.operation}/>}
-                </div>
-                <div className="form-input-flex">
-                    <div className="request-form-toggle-option-wrapper">
-                    <OnOffToggleField faIcon="check" color="#0091EA" input={input} type="checkbox"/>
-                    </div>
-                    {/*<input className="form-control addon-checkbox-widget-default-value-input" {...props.input} type="checkbox"/>*/}
-                </div>
+        <div className={`sb-form-group _addon-checkbox-widget${error && touched ? " has-error" : ""}`}>
+            <div className="_label-wrapper">
+                {label && <label className="_label-">{label}</label>}
+                {configValue && configValue.pricing && configValue.pricing.value && <PriceAdjustment currency={currency} price={configValue.pricing.value} operation={configValue.pricing.operation}/>}
+            </div>
+            <div className="_input-container-">
+                <OnOffToggleField faIcon="check" color="#0091EA" input={input} type="checkbox"/>
             </div>
         </div>
     );
@@ -26,7 +21,7 @@ let Price = (props) => {
     let config = props.configValue;
     return (
         <div className={`addon-checkbox-widget-price-inputs-wrapper`}>
-            <div className="form-group form-group-flex checkbox-checkbox-widget-price-inputs">
+            <div className="sb-form-group _addon-checkbox-widget-price">
                 <WidgetPricingInput currency={props.currency} input={props.input} operation={config && config.pricing && config.pricing.operation}/>
                 {/*<CurrencyInput {...props.input} className="form-control addon-checkbox-widget-price-input"*/}
                                {/*prefix="$" decimalSeparator="." thousandSeparator="," precision="2"*/}
