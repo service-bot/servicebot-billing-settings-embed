@@ -73,9 +73,9 @@ class SelectPricing extends React.Component {
                         value :  pricingValue && pricingValue[option]
                     };
 
-                    return (<div>{option} : <WidgetPricingInput input={input} operation={operation}/></div>);
+                    return (<div key={`addon-option-${option.value}`}>{option} : <WidgetPricingInput input={input} operation={operation}/></div>);
                 }):
-                    <span className="addon-widget-price-tip">Add some available options above</span>
+                    <span key={`key-${option.value}`} className="addon-widget-price-tip">Add some available options above</span>
                 }
             </div>
         );
@@ -92,7 +92,7 @@ let SelectWidget = (props) => {
                     <option key="0-default" value="">Choose One</option>
                     { configValue && configValue.value && configValue.value.map((option, index) => {
                             let price = configValue.pricing && configValue.pricing.value && configValue.pricing.value[option];
-                            return <option key={index} value={option}>
+                            return <option key={`addon-option-${index}`} value={option}>
                                 {(price && configValue.pricing.operation) ? `${option} - ${PriceAdjustment({currency, price, operation:configValue.pricing.operation, isText:true})}`: `${option}`}
                             </option>
                         }
