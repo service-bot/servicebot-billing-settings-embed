@@ -128,8 +128,13 @@ class ServicebotManagedBilling extends React.Component {
             }
             self.setState({instances, templates});
         }else{
-            self.setState({error: instances.error})
-
+            if(instances.length === 0){
+                self.setState({error: "You do not have any subscriptions"});
+            }else if(instances.error) {
+                self.setState({error: instances.error});
+            }else{
+                self.setState({error: "Error gathering billing information"});
+            }
         }
     }
 
@@ -318,7 +323,17 @@ class ServicebotManagedBilling extends React.Component {
 
         let self = this;
         if(this.state.error){
-            return <p>{this.state.error}</p>
+            return <div className="servicebot--embeddable servicebot--manage-billing-form-wrapper custom">
+
+                <div className="mbf--form-wrapper">
+                    <div className="app-content">
+                        <div className="mbf--subscription-summary-wrapper">
+                            <h3>Subscription Summary</h3>
+                            <div className="mbf--current-services-list">
+                    <p>{this.state.error}</p>
+                            </div></div></div>
+                </div></div>
+
         }
 
         // let metricProp = self.state.template && self.state.template.references.service_template_properties.find(prop => prop.type === "metric");
