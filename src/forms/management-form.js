@@ -107,7 +107,13 @@ class ServicebotManagedBilling extends React.Component {
                     <p className={"form-help-text"}><strong>Status: cancelled</strong></p>
                 </div>
             }
-        }else{
+        }else if(instance.status === "cancellation_pending"){
+            return <div>
+                <p className={"form-help-text"}><strong>Status: Subscription will not renew after this billing cycle</strong></p>
+            </div>
+
+        }
+        else{
             return <div/>
         }
 
@@ -368,7 +374,7 @@ class ServicebotManagedBilling extends React.Component {
                                                             <button className="buttons _right _rounded mbf--btn-cancel-service"
                                                                     onClick={this.requestCancellation.bind(this, service.id)}>Cancel Service</button>
                                                             }
-                                                            {service.status === "cancelled" && self.state.funds[0] &&
+                                                            {(service.status === "cancelled" || service.status === "cancellation_pending") && self.state.funds[0] &&
                                                             <button className="buttons _right _rounded mbf--btn-resubscribe-service"
                                                                     onClick={self.resubscribe(service.id)}>Resubscribe</button>}
                                                             <div className={`clear`}/>
