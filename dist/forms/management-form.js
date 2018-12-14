@@ -293,6 +293,20 @@ var ServicebotManagedBilling = function (_React$Component) {
                         )
                     );
                 }
+            } else if (instance.status === "cancellation_pending") {
+                return _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(
+                        'p',
+                        { className: "form-help-text" },
+                        _react2.default.createElement(
+                            'strong',
+                            null,
+                            'Status: Subscription will not renew after this billing cycle'
+                        )
+                    )
+                );
             } else {
                 return _react2.default.createElement('div', null);
             }
@@ -787,7 +801,7 @@ var ServicebotManagedBilling = function (_React$Component) {
                                                     onClick: _this4.requestCancellation.bind(_this4, service.id) },
                                                 'Cancel Service'
                                             ),
-                                            service.status === "cancelled" && self.state.funds[0] && _react2.default.createElement(
+                                            (service.status === "cancelled" || service.status === "cancellation_pending") && self.state.funds[0] && _react2.default.createElement(
                                                 'button',
                                                 { className: 'buttons _right _rounded mbf--btn-resubscribe-service',
                                                     onClick: self.resubscribe(service.id) },
