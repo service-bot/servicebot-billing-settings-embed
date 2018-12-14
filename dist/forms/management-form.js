@@ -395,7 +395,13 @@ var ServicebotManagedBilling = function (_React$Component) {
                                 break;
 
                             case 39:
-                                self.setState({ error: instances.error });
+                                if (instances.length === 0) {
+                                    self.setState({ error: "You do not have any subscriptions" });
+                                } else if (instances.error) {
+                                    self.setState({ error: instances.error });
+                                } else {
+                                    self.setState({ error: "Error gathering billing information" });
+                                }
 
                             case 40:
                             case 'end':
@@ -693,9 +699,34 @@ var ServicebotManagedBilling = function (_React$Component) {
             var self = this;
             if (this.state.error) {
                 return _react2.default.createElement(
-                    'p',
-                    null,
-                    this.state.error
+                    'div',
+                    { className: 'servicebot--embeddable servicebot--manage-billing-form-wrapper custom' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'mbf--form-wrapper' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'app-content' },
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'mbf--subscription-summary-wrapper' },
+                                _react2.default.createElement(
+                                    'h3',
+                                    null,
+                                    'Subscription Summary'
+                                ),
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'mbf--current-services-list' },
+                                    _react2.default.createElement(
+                                        'p',
+                                        null,
+                                        this.state.error
+                                    )
+                                )
+                            )
+                        )
+                    )
                 );
             }
 
