@@ -34,7 +34,6 @@ let currency = (myService.payment_plan && myService.payment_plan.currency) || "U
     if (serType === "subscription"){
         return (
             <span className="_unit">
-                XXX
                 <Price value={myService.payment_plan.amount} currency={currency}/>
                 <span>{myService.payment_plan.interval_count === 1 ? ' /' : ' / ' + myService.payment_plan.interval_count} {' '+myService.payment_plan.interval}</span>
             </span>
