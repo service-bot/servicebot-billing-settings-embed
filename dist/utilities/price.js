@@ -31,9 +31,8 @@ function formatMoney(price, c, d, t) {
 };
 
 var Price = function Price(props) {
-    var price = formatMoney(props.value / 100);
-    var formatter = new Intl.NumberFormat("en-US", { style: 'currency', currency: props.currency || "USD" }).format;
-
+    var price = props.value / 100;
+    var formatter = new Intl.NumberFormat("en-US", { style: 'currency', currency: props.currency && props.currency.toUpperCase() || "USD" }).format;
     return _react2.default.createElement(
         "span",
         { className: "_price-value" },
