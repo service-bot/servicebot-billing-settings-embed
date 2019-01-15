@@ -21,9 +21,8 @@ function formatMoney(price, c, d, t){
 };
 
 let Price = function(props){
-    let price = formatMoney((props.value/100));
-    let formatter = new Intl.NumberFormat("en-US", { style: 'currency', currency: props.currency || "USD" }).format;
-
+    let price = props.value/100;
+    let formatter = new Intl.NumberFormat("en-US", { style: 'currency', currency: (props.currency && props.currency.toUpperCase()) || "USD" }).format;
     return(
         <span className="_price-value">{ formatter(price)}</span>
     );
@@ -35,6 +34,7 @@ let currency = (myService.payment_plan && myService.payment_plan.currency) || "U
     if (serType === "subscription"){
         return (
             <span className="_unit">
+                XXX
                 <Price value={myService.payment_plan.amount} currency={currency}/>
                 <span>{myService.payment_plan.interval_count === 1 ? ' /' : ' / ' + myService.payment_plan.interval_count} {' '+myService.payment_plan.interval}</span>
             </span>
