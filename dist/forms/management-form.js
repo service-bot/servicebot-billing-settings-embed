@@ -630,10 +630,13 @@ var ServicebotManagedBilling = function (_React$Component) {
                                     return self.getServicebotDetails();
 
                                 case 13:
+                                    if (self.props.handleResponse) {
+                                        self.props.handleResponse({ event: "change_plan", response: self.state.instances[0] });
+                                    }
                                     // self.setState({loading: false});
                                     self.props.setLoading(false);
 
-                                case 14:
+                                case 15:
                                 case 'end':
                                     return _context5.stop();
                             }
