@@ -7,6 +7,7 @@ import Buttons from "../utilities/buttons.js";
 import {connect} from "react-redux";
 import creditCardIcon from "../utilities/credit-card-icons.js";
 import Alerts from "../utilities/alerts.js"
+import Load from "../utilities/load";
 
 class CardSection extends React.Component {
     render() {
@@ -242,6 +243,7 @@ class CreditCardForm extends React.Component {
                                         submissionPrep={this.submissionPrep}
                                         submissionRequest={submissionRequest}
                                         successMessage={"Fund added successfully"}
+                                        customLoader={()=> {console.log("Calling checkout loader"); return <Load className={`servicebot-embed-custom-loader __form`}/>}}
                                         handleResponse={this.handleSuccessResponse}
                                         handleFailure={this.handleFailureResponse}
                                         reShowForm={true}

@@ -159,6 +159,7 @@
 
   &.servicebot--manage-billing-form-wrapper{
     @include embed-text;
+    position: relative;
     max-width: 100%;
     width: 816px;
     margin: auto;
@@ -1285,4 +1286,46 @@
     }
   }
 
+}
+
+
+@mixin noSelect() {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+@mixin transparentSelect() {
+  &::-moz-selection { background: transparent; }
+  &::selection { background: transparent; }
+}
+
+.servicebot-billing-type-selector{
+  @include noSelect;
+  @include transparentSelect;
+
+  & *{
+    @include noSelect;
+    @include transparentSelect;
+  }
+}
+
+.page-loader{
+
+  &.servicebot-embed-custom-loader{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: white;
+    top: 0px;
+    left: 0px;
+
+    &.__form{
+      //background: red;
+      display: none;
+    }
+  }
 }

@@ -59,6 +59,10 @@ var _alerts = require('../utilities/alerts.js');
 
 var _alerts2 = _interopRequireDefault(_alerts);
 
+var _load = require('../utilities/load');
+
+var _load2 = _interopRequireDefault(_load);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var CardSection = function (_React$Component) {
@@ -408,6 +412,9 @@ var CreditCardForm = function (_React$Component3) {
                                     submissionPrep: _this4.submissionPrep,
                                     submissionRequest: submissionRequest,
                                     successMessage: "Fund added successfully",
+                                    customLoader: function customLoader() {
+                                        console.log("Calling checkout loader");return _react2.default.createElement(_load2.default, { className: 'servicebot-embed-custom-loader __form' });
+                                    },
                                     handleResponse: _this4.handleSuccessResponse,
                                     handleFailure: _this4.handleFailureResponse,
                                     reShowForm: true,

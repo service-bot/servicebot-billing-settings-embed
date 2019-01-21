@@ -89,12 +89,7 @@ var App = function (_Component) {
                 _react2.default.createElement(
                     _reactRedux.Provider,
                     { store: store },
-                    _react2.default.createElement(
-                        'div',
-                        null,
-                        _react2.default.createElement(_load2.default, null),
-                        _react2.default.createElement(_managementForm2.default, this.props)
-                    )
+                    _react2.default.createElement(_managementForm2.default, this.props)
                 )
             );
         }

@@ -57,15 +57,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Tags = function Tags(props) {
     return _react2.default.createElement(
         "div",
-        { className: "form-group form-group-flex addon-options-widget-config-input-wrapper" },
+        { className: "sb-form-group addon-options-widget-config-input-wrapper" },
         _react2.default.createElement(
             "label",
-            { className: "control-label form-label-flex-md addon-options-widget-config-input-label" },
+            { className: "_label- addon-options-widget-config-input-label" },
             "Available Options"
         ),
         _react2.default.createElement(
             "div",
-            { className: "form-input-flex" },
+            { className: "_input-container-" },
             _react2.default.createElement(_reactTagsinput2.default, (0, _extends3.default)({ className: "addon-options-widget-config-input react-tagsinput",
                 inputProps: { placeholder: 'Add Options' } }, props.input, { value: props.input.value || [] }))
         )
@@ -146,14 +146,14 @@ var SelectPricing = function (_React$Component) {
 
                     return _react2.default.createElement(
                         "div",
-                        null,
+                        { key: "addon-option-" + option.value },
                         option,
                         " : ",
                         _react2.default.createElement(_WidgetPricingInput2.default, { input: input, operation: operation })
                     );
                 }) : _react2.default.createElement(
                     "span",
-                    { className: "addon-widget-price-tip" },
+                    { key: "key-" + option.value, className: "addon-widget-price-tip" },
                     "Add some available options above"
                 )
             );
@@ -174,15 +174,15 @@ var SelectWidget = function SelectWidget(props) {
 
     return _react2.default.createElement(
         "div",
-        { className: "form-group form-group-flex addon-options-widget-default-value-wrapper" },
+        { className: "sb-form-group _addon-options-widget" },
         label && _react2.default.createElement(
             "label",
-            { className: "control-label _value-label" },
+            { className: "_label- _value-label" },
             label
         ),
         _react2.default.createElement(
             "div",
-            { className: "form-input-flex _value-input-wrapper" },
+            { className: "_input-container- _value-input-wrapper" },
             _react2.default.createElement(
                 "select",
                 (0, _extends3.default)({ className: "form-control _value-select" + (error && touched ? " has-error" : "") }, input),
@@ -195,7 +195,7 @@ var SelectWidget = function SelectWidget(props) {
                     var price = configValue.pricing && configValue.pricing.value && configValue.pricing.value[option];
                     return _react2.default.createElement(
                         "option",
-                        { key: index, value: option },
+                        { key: "addon-option-" + index, value: option },
                         price && configValue.pricing.operation ? option + " - " + (0, _WidgetPriceAdjustment2.default)({ currency: currency, price: price, operation: configValue.pricing.operation, isText: true }) : "" + option
                     );
                 })

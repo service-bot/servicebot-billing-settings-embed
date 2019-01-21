@@ -349,7 +349,7 @@ class ServicebotManagedBilling extends React.Component {
 
         return (
             <div className="servicebot--embeddable servicebot--manage-billing-form-wrapper custom">
-
+                <Load className={`servicebot-embed-custom-loader`}/>
                 <div className="mbf--form-wrapper">
                     {self.state.instances.length > 0 ?
                         <div className="app-content">

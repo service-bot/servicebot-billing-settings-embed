@@ -14,8 +14,6 @@ var CreditCardIcon = function CreditCardIcon(brand) {
 
     brand = brand.toLowerCase();
 
-    console.log("brand", brand);
-
     switch (brand) {
 
         case 'visa':

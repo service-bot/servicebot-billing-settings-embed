@@ -58,14 +58,14 @@ var renderCustomProperty = function renderCustomProperty(props) {
             fields.map(function (customProperty, index) {
                 var prop = fields.get(index);
                 if (!prop.config || !prop.config.pricing || prop.type === "metric" || prop.type === "select" && !selectAffectPricing(prop)) {
-                    return _react2.default.createElement('div', null);
+                    return _react2.default.createElement('div', { key: 'custom-props-' + index });
                 }
                 var property = widgets[prop.type];
                 if (prop.prompt_user) {
 
                     return _react2.default.createElement(
                         'div',
-                        { className: '_add-on-item-widget-wrapper _add-on-item-' + index },
+                        { key: 'custom-props-' + index, className: '_add-on-item-widget-wrapper _add-on-item-' + index },
                         _react2.default.createElement(_reduxForm.Field, {
                             key: index,
                             currency: props.currency,
@@ -84,18 +84,18 @@ var renderCustomProperty = function renderCustomProperty(props) {
                     if (prop.data && prop.data.value) {
                         return _react2.default.createElement(
                             'div',
-                            { className: '_add-on-item-widget-wrapper _add-on-item-' + index },
+                            { key: 'custom-props-' + index, className: '_add-on-item-widget-wrapper _add-on-item-' + index },
                             _react2.default.createElement(
                                 'div',
-                                { className: 'form-group form-group-flex' },
+                                { className: 'sb-form-group' },
                                 prop.prop_label && prop.type !== 'hidden' && _react2.default.createElement(
                                     'label',
-                                    { className: 'control-label form-label-flex-md' },
+                                    { className: '_label-' },
                                     prop.prop_label
                                 ),
                                 _react2.default.createElement(
                                     'div',
-                                    { className: 'form-input-flex' },
+                                    { className: '_input-container-' },
                                     _react2.default.createElement(
                                         'p',
                                         null,
@@ -105,7 +105,7 @@ var renderCustomProperty = function renderCustomProperty(props) {
                             )
                         );
                     } else {
-                        return _react2.default.createElement('span', null);
+                        return _react2.default.createElement('span', { key: 'custom-props-' + index });
                     }
                 }
             })

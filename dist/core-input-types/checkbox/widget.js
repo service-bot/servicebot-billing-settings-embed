@@ -36,29 +36,21 @@ var Checkbox = function Checkbox(props) {
 
     return _react2.default.createElement(
         "div",
-        { className: "addon-checkbox-widget-default-value-wrapper" + (error && touched ? " has-error" : "") },
+        { className: "sb-form-group _addon-checkbox-widget" + (error && touched ? " has-error" : "") },
         _react2.default.createElement(
             "div",
-            { className: "form-group form-group-flex addon-checkbox-widget-default-value" },
-            _react2.default.createElement(
-                "div",
-                { className: "_label_wrapper" },
-                label && _react2.default.createElement(
-                    "label",
-                    { className: "control-label form-label-flex-md addon-checkbox-widget-default-value-label" },
-                    label
-                ),
-                configValue && configValue.pricing && configValue.pricing.value && _react2.default.createElement(_WidgetPriceAdjustment2.default, { currency: currency, price: configValue.pricing.value, operation: configValue.pricing.operation })
+            { className: "_label-wrapper" },
+            label && _react2.default.createElement(
+                "label",
+                { className: "_label-" },
+                label
             ),
-            _react2.default.createElement(
-                "div",
-                { className: "form-input-flex" },
-                _react2.default.createElement(
-                    "div",
-                    { className: "request-form-toggle-option-wrapper" },
-                    _react2.default.createElement(_servicebotBaseForm.OnOffToggleField, { faIcon: "check", color: "#0091EA", input: input, type: "checkbox" })
-                )
-            )
+            configValue && configValue.pricing && configValue.pricing.value && _react2.default.createElement(_WidgetPriceAdjustment2.default, { currency: currency, price: configValue.pricing.value, operation: configValue.pricing.operation })
+        ),
+        _react2.default.createElement(
+            "div",
+            { className: "_input-container-" },
+            _react2.default.createElement(_servicebotBaseForm.OnOffToggleField, { faIcon: "check", color: "#0091EA", input: input, type: "checkbox" })
         )
     );
 };
@@ -69,7 +61,7 @@ var Price = function Price(props) {
         { className: "addon-checkbox-widget-price-inputs-wrapper" },
         _react2.default.createElement(
             "div",
-            { className: "form-group form-group-flex checkbox-checkbox-widget-price-inputs" },
+            { className: "sb-form-group _addon-checkbox-widget-price" },
             _react2.default.createElement(_WidgetPricingInput2.default, { currency: props.currency, input: props.input, operation: config && config.pricing && config.pricing.operation })
         )
     );

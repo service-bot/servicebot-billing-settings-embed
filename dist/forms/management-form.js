@@ -752,6 +752,7 @@ var ServicebotManagedBilling = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 { className: 'servicebot--embeddable servicebot--manage-billing-form-wrapper custom' },
+                _react2.default.createElement(_load2.default, { className: 'servicebot-embed-custom-loader' }),
                 _react2.default.createElement(
                     'div',
                     { className: 'mbf--form-wrapper' },
@@ -780,7 +781,7 @@ var ServicebotManagedBilling = function (_React$Component) {
                                     });
                                     return _react2.default.createElement(
                                         'div',
-                                        { className: 'mbf--current-services-item' },
+                                        { key: 'service-list-' + service.service_id, className: 'mbf--current-services-item' },
                                         _this4.getSubscriptionStatus(service),
                                         _this4.getTrialStatus(service),
                                         _react2.default.createElement(_widgets.PriceBreakdown, { tier: tier, metricProp: metricProp, instance: service }),

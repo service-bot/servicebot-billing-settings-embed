@@ -90,7 +90,7 @@ var RenderWidget = function RenderWidget(props) {
                         { className: "addon-widget-pricing-inputs-wrapper" },
                         _react2.default.createElement(
                             "label",
-                            { className: "control-label form-label-flex-md addon-widget-pricing-input-label" },
+                            { className: "_label- addon-widget-pricing-input-label" },
                             "Add-On Pricing"
                         ),
                         _react2.default.createElement(_reduxForm.Field, { name: "value", configValue: configValue, component: widget.pricing })
@@ -124,7 +124,7 @@ var PriceBreakdown = function PriceBreakdown(props) {
         "multiply": "+",
         "divide": "-"
     };
-    console.log(metricProp, instance);
+    // console.log(metricProp, instance);
     var basePrice = (0, _handleInputs.getBasePrice)(instance.references.service_instance_properties, handlers, instance.payment_plan.amount);
     var breakdown = inputs.reduce(function (acc, input) {
         if (input.config && input.config.pricing && widgets[input.type] && widgets[input.type].handler && widgets[input.type].handler.priceHandler && widgets[input.type].handler.priceHandler(input.data, input.config)) {
@@ -132,7 +132,7 @@ var PriceBreakdown = function PriceBreakdown(props) {
 
             acc.push(_react2.default.createElement(
                 "p",
-                { className: "_item" },
+                { key: "item-" + input.id, className: "_item" },
                 _react2.default.createElement(
                     "span",
                     { className: "_label" },
@@ -157,7 +157,7 @@ var PriceBreakdown = function PriceBreakdown(props) {
         return acc;
     }, [_react2.default.createElement(
         "p",
-        { className: "_item" },
+        { key: "item-" + instance.payment_plan.id, className: "_item" },
         _react2.default.createElement(
             "span",
             { className: "_label" },

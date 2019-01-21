@@ -34,11 +34,8 @@ class App extends Component {
       }));
       return (
       <div className="App">
-      <Provider store={store}>
-          <div>
-              <Load/>
-              <ServicebotManage {...this.props}/>
-          </div>
+        <Provider store={store}>
+          <ServicebotManage {...this.props}/>
         </Provider>
       </div>
     );

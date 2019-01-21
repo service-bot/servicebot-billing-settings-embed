@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _regenerator = require('babel-runtime/regenerator');
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
@@ -174,17 +178,6 @@ var Tier = function Tier(props) {
                 { onClick: pickTier(currentPlan), className: '_confirm-tier _cancel-tier buttons rounded', 'aria-label': 'cancel change plan' },
                 _react2.default.createElement('span', { className: 'icon close' })
             )
-        ),
-        _react2.default.createElement(
-            'ul',
-            { className: '_feature-list' },
-            tier.features.map(function (feature) {
-                return _react2.default.createElement(
-                    'li',
-                    { className: '_item' },
-                    feature
-                );
-            })
         )
     );
 };
@@ -221,7 +214,7 @@ var IntervalPicker = function IntervalPicker(props) {
 
             return _react2.default.createElement(
                 'li',
-                { className: intervalClass, onClick: props.changeInterval(interval) },
+                { key: 'interval-' + intervalNames[interval], className: intervalClass, onClick: props.changeInterval(interval) },
                 intervalNames[interval]
             );
         })
@@ -274,7 +267,7 @@ var TierSelector = function (_React$Component) {
                                 tiers = template.references.tiers;
 
                                 if (metricProp) {
-                                    tiers = template.references.tiers.map(function (tier) {
+                                    tiers = template.references.tiers.map(function (tier, index) {
                                         if (metricProp.config.pricing.tiers && metricProp.config.pricing.tiers.includes(tier.name)) {
                                             tier.unit = metricProp.config.unit;
                                         }
@@ -285,7 +278,7 @@ var TierSelector = function (_React$Component) {
                                 paymentPlans = tiers.reduce(function (acc, tier) {
                                     return acc.concat(tier.references.payment_structure_templates);
                                 }, []).reduce(function (acc, plan) {
-                                    if (plan.id == currentPlan) {
+                                    if (plan.id === currentPlan) {
                                         currentInterval = plan.interval;
                                     }
                                     acc[plan.type] = [plan].concat(acc[plan.type] || []);
@@ -398,7 +391,7 @@ var TierSelector = function (_React$Component) {
                         if (plan.id === selectedPlan) {
                             props.isSelected = true;
                         }
-                        return _react2.default.createElement(Tier, props);
+                        return _react2.default.createElement(Tier, (0, _extends3.default)({ key: 'plan-' + plan.id }, props));
                     })
                 ),
                 currentInterval === "custom" && _react2.default.createElement(
