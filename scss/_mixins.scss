@@ -81,13 +81,13 @@
 /* form */
 @mixin _formGroup($direction){
 
-  .form-group.form-group-flex {
+  .sb-form-group {
     width: 100%;
     flex-direction: $direction;
     margin: 0 !important;
 
     @if($direction == 'column') {
-      .form-label-flex-md{
+      ._label-{
         flex-basis: auto;
       }
     }

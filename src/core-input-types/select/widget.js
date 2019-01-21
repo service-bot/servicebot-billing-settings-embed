@@ -9,9 +9,9 @@ import PriceAdjustment from '../../widget-inputs/WidgetPriceAdjustment';
 
 let Tags = (props) => {
     return (
-        <div className="form-group form-group-flex addon-options-widget-config-input-wrapper">
-            <label className="control-label form-label-flex-md addon-options-widget-config-input-label">Available Options</label>
-            <div className="form-input-flex">
+        <div className="sb-form-group addon-options-widget-config-input-wrapper">
+            <label className="_label- addon-options-widget-config-input-label">Available Options</label>
+            <div className="_input-container-">
                 <TagsInput className="addon-options-widget-config-input react-tagsinput"
                     inputProps={{placeholder: 'Add Options'}} {...props.input} value={props.input.value || []}/>
             </div>
@@ -73,9 +73,9 @@ class SelectPricing extends React.Component {
                         value :  pricingValue && pricingValue[option]
                     };
 
-                    return (<div>{option} : <WidgetPricingInput input={input} operation={operation}/></div>);
+                    return (<div key={`addon-option-${option.value}`}>{option} : <WidgetPricingInput input={input} operation={operation}/></div>);
                 }):
-                    <span className="addon-widget-price-tip">Add some available options above</span>
+                    <span key={`key-${option.value}`} className="addon-widget-price-tip">Add some available options above</span>
                 }
             </div>
         );
@@ -85,14 +85,14 @@ class SelectPricing extends React.Component {
 let SelectWidget = (props) => {
     let {input, configValue, label, currency, meta: {touched, error, warning}} = props;
     return (
-        <div className={`form-group form-group-flex addon-options-widget-default-value-wrapper`}>
-            {label && <label className="control-label _value-label">{label}</label>}
-            <div className="form-input-flex _value-input-wrapper">
+        <div className={`sb-form-group _addon-options-widget`}>
+            {label && <label className="_label- _value-label">{label}</label>}
+            <div className="_input-container- _value-input-wrapper">
                 <select className={`form-control _value-select${error && touched ? " has-error" : ""}`} {...input}>
                     <option key="0-default" value="">Choose One</option>
                     { configValue && configValue.value && configValue.value.map((option, index) => {
                             let price = configValue.pricing && configValue.pricing.value && configValue.pricing.value[option];
-                            return <option key={index} value={option}>
+                            return <option key={`addon-option-${index}`} value={option}>
                                 {(price && configValue.pricing.operation) ? `${option} - ${PriceAdjustment({currency, price, operation:configValue.pricing.operation, isText:true})}`: `${option}`}
                             </option>
                         }

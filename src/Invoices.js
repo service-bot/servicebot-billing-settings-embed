@@ -37,10 +37,10 @@ class Invoice extends React.Component {
                                         <p key={index} className={`_item`}>
                                             <span className={`_label`}>{line.description}</span>
                                             <span className={`_value_wrap`}>
-                                        <span className={`_value`}>
-                                            <Price value={line.amount} currency={line.currency}/>
-                                        </span>
-                                    </span>
+                                                <span className={`_value`}>
+                                                    <Price value={line.amount} currency={line.currency}/>
+                                                </span>
+                                            </span>
                                         </p>
                                     );
                                 })}
@@ -108,7 +108,7 @@ class Invoices extends React.Component {
             <ul className={`__invoice-list`}>
             {invoices.map((invoice, index) => {
                 return (
-                    <li key={index} className={`__list-items`}>
+                    <li key={`invoice-${index}`} className={`__list-items`}>
                         <span className={`__invoice-id`}>{invoice.invoice_id.slice(3)}</span>
                         <span className={`__invoice-date`}><DateFormat month={true} date={invoice.date}/></span>
                         <span className={`__invoice-amount`}><Price value={invoice.total} currency={invoice.currency}/></span>

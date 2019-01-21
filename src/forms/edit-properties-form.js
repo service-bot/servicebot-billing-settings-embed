@@ -29,13 +29,13 @@ let renderCustomProperty = (props) => {
             {fields.map((customProperty, index) => {
                 let prop = fields.get(index);
                     if(!prop.config || !prop.config.pricing || prop.type === "metric" || (prop.type === "select" && !selectAffectPricing(prop))){
-                        return <div/>
+                        return <div key={`custom-props-${index}`}/>
                     }
                     let property = widgets[prop.type];
                     if(prop.prompt_user){
 
                         return (
-                            <div className={`_add-on-item-widget-wrapper _add-on-item-${index}`}>
+                            <div key={`custom-props-${index}`} className={`_add-on-item-widget-wrapper _add-on-item-${index}`}>
                                 <Field
                                     key={index}
                                     currency={props.currency}
@@ -54,11 +54,11 @@ let renderCustomProperty = (props) => {
                     }else{
                         if(prop.data && prop.data.value){
                             return (
-                                <div className={`_add-on-item-widget-wrapper _add-on-item-${index}`}>
-                                    <div className={`form-group form-group-flex`}>
+                                <div key={`custom-props-${index}`} className={`_add-on-item-widget-wrapper _add-on-item-${index}`}>
+                                    <div className={`sb-form-group`}>
                                         {(prop.prop_label && prop.type !== 'hidden') &&
-                                        <label className="control-label form-label-flex-md">{prop.prop_label}</label>}
-                                        <div className="form-input-flex">
+                                        <label className="_label-">{prop.prop_label}</label>}
+                                        <div className="_input-container-">
                                             <p>{prop.data.value}</p>
                                         </div>
                                     </div>
@@ -66,7 +66,7 @@ let renderCustomProperty = (props) => {
                             );
                         }else{
                             return (
-                                <span/>
+                                <span key={`custom-props-${index}`}/>
                             );
                         }
 

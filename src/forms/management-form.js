@@ -364,7 +364,7 @@ class ServicebotManagedBilling extends React.Component {
 
                                                     let metricProp = service.references.service_instance_properties.find(prop => prop.type === "metric");
                                                     return(
-                                                    <div className="mbf--current-services-item">
+                                                    <div key={`service-list-${service.service_id}`} className="mbf--current-services-item">
                                                         {this.getSubscriptionStatus(service)}
                                                         {this.getTrialStatus(service)}
                                                         <PriceBreakdown tier={tier} metricProp={metricProp} instance={service}/>

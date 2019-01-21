@@ -75,11 +75,11 @@ const Tier = (props) => {
                 {isSelected && !isCurrent && <button onClick={props.changePlan} className="_confirm-tier buttons rounded" aria-label="confirm change plan"><span className="icon check"/></button>}
                 {isSelected && !isCurrent && <button onClick={pickTier(currentPlan)} className="_confirm-tier _cancel-tier buttons rounded" aria-label="cancel change plan"><span className="icon close"/></button>}
             </div>
-            <ul className="_feature-list">
-                {tier.features.map(feature=> {
-                    return (<li className="_item">{feature}</li>);
-                })}
-            </ul>
+            {/*<ul className="_feature-list">*/}
+                {/*{tier.features.map(feature => {*/}
+                    {/*return (<li className="_item">{feature}</li>);*/}
+                {/*})}*/}
+            {/*</ul>*/}
         </div>
     );
 }
@@ -116,7 +116,7 @@ const IntervalPicker = (props)=> {
                     intervalClass+=" _selected";
                 }
 
-                return (<li className={intervalClass} onClick={props.changeInterval(interval)}>{intervalNames[interval]}</li>)
+                return (<li key={`interval-${intervalNames[interval]}`} className={intervalClass} onClick={props.changeInterval(interval)}>{intervalNames[interval]}</li>)
             })
             }
         </ul>
@@ -148,7 +148,7 @@ class TierSelector extends React.Component{
         let metricProp = template.references.service_template_properties.find(prop => prop.type === "metric");
         let tiers = template.references.tiers;
         if(metricProp) {
-            tiers = template.references.tiers.map(tier => {
+            tiers = template.references.tiers.map((tier, index )=> {
                 if (metricProp.config.pricing.tiers && metricProp.config.pricing.tiers.includes(tier.name)) {
                     tier.unit = metricProp.config.unit;
                 }
@@ -159,7 +159,7 @@ class TierSelector extends React.Component{
         let paymentPlans = tiers.reduce(( acc, tier) => {
             return acc.concat(tier.references.payment_structure_templates);
         }, []).reduce((acc, plan)=> {
-            if(plan.id == currentPlan){
+            if(plan.id === currentPlan){
                 currentInterval = plan.interval;
             }
             acc[plan.type] = [plan].concat(acc[plan.type] || []);
@@ -231,7 +231,7 @@ class TierSelector extends React.Component{
                         if (plan.id === selectedPlan) {
                             props.isSelected = true;
                         }
-                        return <Tier {...props}/>
+                        return <Tier key={`plan-${plan.id}`} {...props}/>
                     })}
                 </div>
                 }

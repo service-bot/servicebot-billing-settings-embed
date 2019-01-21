@@ -44,7 +44,7 @@ let RenderWidget = (props) => {
                            ]}/>
 
                         <div className="addon-widget-pricing-inputs-wrapper">
-                            <label className="control-label form-label-flex-md addon-widget-pricing-input-label">Add-On Pricing</label>
+                            <label className="_label- addon-widget-pricing-input-label">Add-On Pricing</label>
                             <Field name={`value`} configValue={configValue} component={widget.pricing}/>
                         </div>
                     </FormSection>
@@ -77,14 +77,14 @@ let PriceBreakdown = (props) => {
         "multiply" : "+",
         "divide": "-"
     };
-    console.log(metricProp, instance);
+    // console.log(metricProp, instance);
     let basePrice = getBasePrice(instance.references.service_instance_properties, handlers, instance.payment_plan.amount);
     let breakdown = inputs.reduce((acc, input) => {
         if (input.config && input.config.pricing && widgets[input.type] && widgets[input.type].handler && widgets[input.type].handler.priceHandler && widgets[input.type].handler.priceHandler(input.data, input.config)) {
             let price = widgets[input.type].handler.priceHandler(input.data, input.config)
 
             acc.push(
-                <p className="_item">
+                <p key={`item-${input.id}`} className="_item">
                     <span className="_label">{input.prop_label}</span>
                     <span className="_value_wrap">
                         <span className="_prefix">{map[input.config.pricing.operation]}</span>
@@ -93,7 +93,7 @@ let PriceBreakdown = (props) => {
                 </p>);
         }
         return acc;
-    }, [(                <p className="_item">
+    }, [(                <p key={`item-${instance.payment_plan.id}`} className="_item">
         <span className="_label">Base price</span>
         <span className="_value_wrap">
                         <span className="_prefix">+</span>
@@ -105,7 +105,6 @@ let PriceBreakdown = (props) => {
             <div className="mbf-summary">
                 {metricTier && <span className="_metric">{metricProp.data.value} {metricProp.config.unit}</span>}
                 <p className="_total"><span className="_label">Total</span><span className="_value">{getPrice(instance)}</span></p>
-
             </div>
         </div>
     }
