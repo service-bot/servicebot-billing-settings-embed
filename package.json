@@ -1,6 +1,6 @@
 {
   "name": "servicebot-billing-settings-embed",
-  "version": "0.2.90",
+  "version": "0.2.92",
   "dependencies": {
     "currency-symbol-map": "^4.0.4",
     "lodash": "^4.17.5",
@@ -20,7 +20,7 @@
     "redux": "^3.7.2",
     "redux-form": "^7.3.0",
     "redux-form-validators": "^2.4.3",
-    "servicebot-base-form": "0.0.47"
+    "servicebot-base-form": "0.0.48"
   },
   "main": "./dist/index.js",
   "scripts": {
