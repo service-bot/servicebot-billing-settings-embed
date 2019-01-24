@@ -53,6 +53,7 @@ ul._selector{
   border: 1.2px solid $color-dark-blue;
   border-radius: 3px;
   overflow: hidden;
+  background-color: transparent;
 
   ._tier{ //each pricing column
     flex-grow: 1;
