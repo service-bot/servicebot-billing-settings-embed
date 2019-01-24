@@ -147,7 +147,7 @@
   }
 }
 
-.servicebot--embeddable{
+@mixin ServicebotEmbeddable(){
   position: relative;
   @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
   @import url('https://fonts.googleapis.com/css?family=Heebo:300,400,500,700');
@@ -595,7 +595,7 @@
             }
           }
         }
-        
+
         .add-new-card-container{
           position: relative;
         }
@@ -1095,16 +1095,16 @@
         background-color: $color-blue;
         background-size: cover;
         color: white;
-        
+
         .__inner{
           display: flex;
           justify-content: space-between;
           padding: 70px 64px;
-          
+
           .__left{
             display: flex;
             flex-direction: column;
-            
+
             h3{
               font-family: $heading-font;
               font-size: 18px;
@@ -1288,6 +1288,16 @@
 
 }
 
+.servicebot--embeddable{
+  @include ServicebotEmbeddable;
+}
+.servicebot--embeddable--print{
+  @include ServicebotEmbeddable;
+
+  //styles targeting the print window
+  //put custom print styles here.
+}
+
 
 @mixin noSelect() {
     -webkit-touch-callout: none; /* iOS Safari */
@@ -1327,5 +1337,12 @@
       //background: red;
       display: none;
     }
+  }
+}
+
+.react-printer{
+  background: red;
+  & * {
+    color: red !important;
   }
 }

@@ -55,7 +55,7 @@ class Invoice extends React.Component {
                     <div className={`__footer`}>
                         <ReactToPrint
                             copyStyles={true}
-                            bodyClass={"servicebot--embeddable"}
+                            bodyClass="servicebot--embeddable--print"
                             trigger={() => <button onClick={(e) => {
                                 window.print();
                                 return false;
