@@ -10,8 +10,6 @@ import '../scss/main.scss';
 class App extends Component {
   render() {
 
-      console.log('embed props', this.props);
-
       const options = (state = {currency : {value : "usd"}}, action) => {
           switch (action.type) {
               case 'SET_CURRENCY':
