@@ -45,12 +45,24 @@ var Load = function (_React$Component) {
     }
 
     (0, _createClass3.default)(Load, [{
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(nextProps, nextContext) {
+            if (!nextProps.loading && this.props.finishLoading) {
+                this.props.finishLoading();
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
-            var className = this.props.className;
+            var _props = this.props,
+                loading = _props.loading,
+                disableLoader = _props.disableLoader,
+                className = _props.className;
 
 
-            if (this.props.loading) {
+            if (disableLoader === true) {
+                return _react2.default.createElement('div', { className: 'page-loader-disabled' });
+            } else if (loading) {
                 return _react2.default.createElement(
                     'div',
                     { className: 'page-loader ' + (className || '') },
@@ -73,7 +85,8 @@ var Load = function (_React$Component) {
 
 function mapStateToProps(state) {
     return {
-        loading: state.loading
+        loading: state.loading,
+        disabledLoader: state.disableLoader
     };
 }
 

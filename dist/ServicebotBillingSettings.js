@@ -80,6 +80,7 @@ var App = function (_Component) {
 
             var store = (0, _redux.createStore)((0, _redux.combineReducers)({
                 options: options,
+                disableLoader: this.props.disableLoader || false,
                 loading: loadingReducer,
                 form: _reduxForm.reducer
             }));

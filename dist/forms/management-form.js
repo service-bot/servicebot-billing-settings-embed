@@ -752,7 +752,7 @@ var ServicebotManagedBilling = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 { className: 'servicebot--embeddable servicebot--manage-billing-form-wrapper custom' },
-                _react2.default.createElement(_load2.default, { className: 'servicebot-embed-custom-loader' }),
+                _react2.default.createElement(_load2.default, { className: 'servicebot-embed-custom-loader', finishLoading: this.props.finishLoading }),
                 _react2.default.createElement(
                     'div',
                     { className: 'mbf--form-wrapper' },
@@ -834,16 +834,12 @@ var ServicebotManagedBilling = function (_React$Component) {
                         _react2.default.createElement(_editPropertiesForm.ModalEditProperties, { external: this.props.external, token: this.props.token, url: this.props.url, instance: self.state.instances[0], refresh: this.hidePropEdit }),
                         self.state.instances[0] && _react2.default.createElement(_Invoices2.default, { user: self.state.instances[0].references.users[0], invoices: this.state.invoices })
                     ) : _react2.default.createElement(
-                        'div',
-                        { className: 'page-loader' },
+                        _load2.default,
+                        { finishLoading: this.props.finishLoading },
                         _react2.default.createElement(
-                            _load2.default,
-                            null,
-                            _react2.default.createElement(
-                                'p',
-                                { className: 'page-loader-text' },
-                                'Billing Management'
-                            )
+                            'p',
+                            { className: 'page-loader-text' },
+                            'Billing Management'
                         )
                     )
                 )
