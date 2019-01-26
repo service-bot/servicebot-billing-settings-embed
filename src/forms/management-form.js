@@ -67,7 +67,6 @@ class ServicebotManagedBilling extends React.Component {
 
             self.getFundingDetails();
             self.props.setLoading(false);
-
         }
 
     }
@@ -295,7 +294,6 @@ class ServicebotManagedBilling extends React.Component {
             }
             // self.setState({loading: false});
             self.props.setLoading(false);
-
         }
     }
 
@@ -349,7 +347,7 @@ class ServicebotManagedBilling extends React.Component {
 
         return (
             <div className="servicebot--embeddable servicebot--manage-billing-form-wrapper custom">
-                <Load className={`servicebot-embed-custom-loader`}/>
+                <Load className={`servicebot-embed-custom-loader`} finishLoading={this.props.finishLoading}/>
                 <div className="mbf--form-wrapper">
                     {self.state.instances.length > 0 ?
                         <div className="app-content">
@@ -396,11 +394,9 @@ class ServicebotManagedBilling extends React.Component {
                             {self.state.instances[0] && <Invoices user={self.state.instances[0].references.users[0]} invoices={this.state.invoices}/>}
                         </div>
                         :
-                        <div className="page-loader">
-                            <Load>
-                                <p className="page-loader-text">Billing Management</p>
-                            </Load>
-                        </div>
+                        <Load finishLoading={this.props.finishLoading}>
+                            <p className="page-loader-text">Billing Management</p>
+                        </Load>
                     }
                 </div>
             </div>

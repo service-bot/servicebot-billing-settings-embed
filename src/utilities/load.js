@@ -11,23 +11,35 @@ class Load extends React.Component {
         };
     }
 
-    render () {
-        let {className} = this.props;
+    componentWillReceiveProps(nextProps, nextContext) {
+        console.log("embed loader nextProps", nextProps);
+        if(!nextProps.loading && this.props.finishLoading){
+            console.log('finish laoding');
+            this.props.finishLoading();
+        }
+    }
 
-        if(this.props.loading){
-            return (
-                <div className={`page-loader ${className||''}`}>
+    render () {
+        let {loading, disableLoader, className} = this.props;
+
+        if(disableLoader === true){
+            {console.log('embed-oader-disabled')}
+            return <div className={`page-loader-disabled`}/>
+        }else if(loading){
+            {console.log('embed-loader-showing')}
+            return <div className={`page-loader ${className||''}`}>
                     <div className="lds-ellipsis"><div/><div/><div/><div/></div>
                 </div>
-            );
         }else{
-            return <div className={`page-loader-done`}/>;
+            {console.log('embed-loader-done')}
+            return <div className={`page-loader-done`}/>
         }
     }
 }
 function mapStateToProps(state) {
     return {
-        loading: state.loading
+        loading: state.loading,
+        disabledLoader: state.disableLoader
     }
 }
 

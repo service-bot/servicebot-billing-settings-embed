@@ -147,12 +147,17 @@
   }
 }
 
+#servicebot-request-form, #servicebot-request-form * {
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+}
+
 @mixin ServicebotEmbeddable(){
   position: relative;
   @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
   @import url('https://fonts.googleapis.com/css?family=Heebo:300,400,500,700');
 
-  *{
+  * {
     box-sizing: border-box;
     text-rendering: optimizeLegibility;
   }
@@ -244,6 +249,7 @@
           .servicebot-pricing-table{
             border: none;
             justify-content: center;
+            background-color: transparent;
 
             @include breakpoint(iPhone){
               flex-direction: column;
@@ -1344,9 +1350,9 @@
   }
 }
 
-.react-printer{
-  background: red;
-  & * {
-    color: red !important;
-  }
-}
+//.react-printer{
+//  background: red;
+//  & * {
+//    color: red !important;
+//  }
+//}
