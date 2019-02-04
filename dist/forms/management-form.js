@@ -418,7 +418,6 @@ var ServicebotManagedBilling = function (_React$Component) {
                                 } else if (instances.error) {
                                     self.setState({ error: instances.error });
                                     if (self.props.handleResponse) {
-
                                         self.props.handleResponse({ error: instances.error });
                                     }
                                 } else {
