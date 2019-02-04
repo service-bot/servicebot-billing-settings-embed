@@ -135,10 +135,23 @@ class ServicebotManagedBilling extends React.Component {
         }else{
             if(instances.length === 0){
                 self.setState({error: "You do not have any subscriptions"});
+                if(self.props.handleResponse){
+                    self.props.handleResponse({error: "No subscriptions"})
+                }
             }else if(instances.error) {
                 self.setState({error: instances.error});
+                if(self.props.handleResponse) {
+
+                    self.props.handleResponse({error: error})
+                }
+
             }else{
                 self.setState({error: "Error gathering billing information"});
+                if(self.props.handleResponse) {
+
+                    self.props.handleResponse({error: "Error"})
+                }
+
             }
         }
     }
