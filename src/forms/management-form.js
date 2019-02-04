@@ -143,7 +143,7 @@ class ServicebotManagedBilling extends React.Component {
                 self.setState({error: instances.error});
                 if(self.props.handleResponse) {
 
-                    self.props.handleResponse({error: error})
+                    self.props.handleResponse({error: instances.error})
                 }
 
             }else{
