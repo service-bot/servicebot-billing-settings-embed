@@ -419,7 +419,7 @@ var ServicebotManagedBilling = function (_React$Component) {
                                     self.setState({ error: instances.error });
                                     if (self.props.handleResponse) {
 
-                                        self.props.handleResponse({ error: error });
+                                        self.props.handleResponse({ error: instances.error });
                                     }
                                 } else {
                                     self.setState({ error: "Error gathering billing information" });
