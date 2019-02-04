@@ -412,6 +412,7 @@ var ServicebotManagedBilling = function (_React$Component) {
                                 if (instances.length === 0) {
                                     self.setState({ error: "You do not have any subscriptions" });
                                     if (self.props.handleResponse) {
+
                                         self.props.handleResponse({ error: "No subscriptions" });
                                     }
                                 } else if (instances.error) {
