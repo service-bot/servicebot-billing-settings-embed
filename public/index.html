@@ -29,14 +29,15 @@
   <script  type="text/javascript">
     Servicebot.BillingSettings({
         // url : "https://hub.serviceshop.io",
-        url:"http://localhost:3000",
+        // url: "https://test-upgrade-vanielle.serviceshop.io",
+        url:"http://localhost:3002",
         selector : document.getElementById('servicebot-request-form'),
         handleResponse : (response) => {
-            console.log(response);
+            console.log("DID A THING", response);
             //Response function, you can put redirect logic or app integration logic here
         },
         disablePlanChange: false,
-        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjY3LCJpYXQiOjE1NDgwODM5MjIsImV4cCI6MTU0ODA5NDcyMn0.lbsr6ReTRvsVI889IQnUbLnZHFBZRKVRVrUwIt-_N9M"
+        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjI5NiwiaWF0IjoxNTQ3NzU0NjU3LCJleHAiOjE1NDc3NjU0NTd9.g1g42_BWlEhRiWnTefV4h6w3WSbvA6spZZJPTHRn7PM"
     })
   </script>
   <noscript>
