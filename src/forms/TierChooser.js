@@ -27,7 +27,7 @@ const findMonthlyPrice = (x, interval) => {
 }
 
 const Tier = (props) => {
-    let {currentPlan, tier, plan, pickTier, isCurrent, isSelected} = props;
+    let {currentPlan, tier, plan, pickTier, isCurrent, isSelected, disablePlanChange} = props;
     let tierContent, tierButton;
     let formatter = new Intl.NumberFormat("en-US", { style: 'currency', currency: plan.currency || "USD" }).format;
 
@@ -70,7 +70,7 @@ const Tier = (props) => {
             <h2 className="_name">{tier.name}</h2>
             <span className="_price">{tierContent}</span>
             {isCurrent && <button className="_selected-label buttons rounded" disabled>Current Plan</button>}
-            {!isSelected && !isCurrent && <button onClick={pickTier(plan.id)} className="_select-tier buttons rounded">{tierButton}</button>}
+            {!disablePlanChange && !isSelected && !isCurrent && <button onClick={pickTier(plan.id)} className="_select-tier buttons rounded">{tierButton}</button>}
             <div className="_tier-confirm-wrapper">
                 {isSelected && !isCurrent && <button onClick={props.changePlan} className="_confirm-tier buttons rounded" aria-label="confirm change plan"><span className="icon check"/></button>}
                 {isSelected && !isCurrent && <button onClick={pickTier(currentPlan)} className="_confirm-tier _cancel-tier buttons rounded" aria-label="cancel change plan"><span className="icon close"/></button>}
@@ -223,6 +223,7 @@ class TierSelector extends React.Component{
                             plan: plan,
                             currentPlan,
                             changePlan: self.props.changePlan(plan.id),
+                            disablePlanChange: self.props.disablePlanChange
                         }
 
                         if (plan.id === currentPlan) {

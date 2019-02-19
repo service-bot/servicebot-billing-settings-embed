@@ -380,7 +380,7 @@ class ServicebotManagedBilling extends React.Component {
                                                         {this.getTrialStatus(service)}
                                                         <PriceBreakdown tier={tier} metricProp={metricProp} instance={service}/>
                                                         {this.state.formError && <h3 style={{color:"red"}}>{this.state.formError}</h3>}
-                                                        <TierChoose key={"t-" + service.payment_structure_template_id}  changePlan={self.changePlan} currentPlan={service.payment_structure_template_id} template={template}/>
+                                                        <TierChoose disablePlanChange={self.props.disablePlanChange} key={"t-" + service.payment_structure_template_id}  changePlan={self.changePlan} currentPlan={service.payment_structure_template_id} template={template}/>
                                                         <div className="mbf--current-services-item-buttons">
                                                             {this.state.resubscribeError && <span style={{color:"red"}}>{this.state.resubscribeError}</span>}
 
