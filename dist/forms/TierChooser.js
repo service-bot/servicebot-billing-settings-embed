@@ -70,7 +70,8 @@ var Tier = function Tier(props) {
         plan = props.plan,
         pickTier = props.pickTier,
         isCurrent = props.isCurrent,
-        isSelected = props.isSelected;
+        isSelected = props.isSelected,
+        disablePlanChange = props.disablePlanChange;
 
     var tierContent = void 0,
         tierButton = void 0;
@@ -160,7 +161,7 @@ var Tier = function Tier(props) {
             { className: '_selected-label buttons rounded', disabled: true },
             'Current Plan'
         ),
-        !isSelected && !isCurrent && _react2.default.createElement(
+        !disablePlanChange && !isSelected && !isCurrent && _react2.default.createElement(
             'button',
             { onClick: pickTier(plan.id), className: '_select-tier buttons rounded' },
             tierButton
@@ -382,7 +383,8 @@ var TierSelector = function (_React$Component) {
                             }),
                             plan: plan,
                             currentPlan: currentPlan,
-                            changePlan: self.props.changePlan(plan.id)
+                            changePlan: self.props.changePlan(plan.id),
+                            disablePlanChange: self.props.disablePlanChange
                         };
 
                         if (plan.id === currentPlan) {

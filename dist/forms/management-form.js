@@ -801,7 +801,7 @@ var ServicebotManagedBilling = function (_React$Component) {
                                             { style: { color: "red" } },
                                             _this4.state.formError
                                         ),
-                                        _react2.default.createElement(_TierChooser2.default, { key: "t-" + service.payment_structure_template_id, changePlan: self.changePlan, currentPlan: service.payment_structure_template_id, template: template }),
+                                        _react2.default.createElement(_TierChooser2.default, { disablePlanChange: self.props.disablePlanChange, key: "t-" + service.payment_structure_template_id, changePlan: self.changePlan, currentPlan: service.payment_structure_template_id, template: template }),
                                         _react2.default.createElement(
                                             'div',
                                             { className: 'mbf--current-services-item-buttons' },
